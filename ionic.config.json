@@ -1,0 +1,7 @@
+{
+  "name": "MusicMatch-Frontend",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
