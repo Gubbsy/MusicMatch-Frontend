@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css?family=Amiko&display=swap");
+
+ion-content {
+  padding: 30px;
+}
+
+.login-view {
+  height: 100%;
+  width: 100%;
+}
+
+.app-name {
+  margin: 30% 0 10% 0;
+  font-family: "Amiko", Geneva, Verdana, sans-serif;
+  text-align: center;
+  color: #434343;
+  letter-spacing: 10px;
+  font-weight: lighter;
+}
+
+.app-name h1 {
+  font-size: 36pt;
+}
+
+ion-label {
+  --color: #6461FF;
+}
+
+ion-item {
+  margin: 12px auto;
+  padding: 0;
+  max-width: 500px;
+  --background: none;
+  --background-focused: none;
+  padding: 0 20px 0 ;
+  font-size: 20px;
+}
+
+.login-text {
+  text-align: center;
+  color: purple;
+}
+
+ion-button {
+  margin: 50px auto 0px auto;
+  width: 75%;
+  height: 45px;
+  max-width: 300px;
+  font-size: 13pt;
+}
+
+.error {
+  margin: 0 auto 20px auto;
+  text-align: center;
+  font-weight: bold;
+  height: 50px;
+  width: 70%;
+}
+
+ion-note {
+  font-size: 13pt;
+}
