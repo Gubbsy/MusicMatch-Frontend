@@ -6,8 +6,13 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./create-account.page.scss"],
 })
 export class CreateAccountPage implements OnInit {
+  
+  accountRole: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmedPassword: string;
 
-  loading: boolean = false;
   genres = [];
   existingGenres = [
     "Rock",
@@ -25,7 +30,14 @@ export class CreateAccountPage implements OnInit {
     "The Pigs Nose",
     "Blue Anchor",
   ];
+
+  name: string;
+  bio: string;
+  lookingFor: string;
+  matchRadius: number;
   
+  loading: boolean = false;
+
   constructor() { }
 
   ngOnInit() {

@@ -16,12 +16,12 @@
   
       <ion-item>
         <ion-label>Artist</ion-label>
-        <ion-radio value="cord"></ion-radio>
+        <ion-radio value="Artist"></ion-radio>
       </ion-item>
   
       <ion-item>
         <ion-label>Venue Manager</ion-label>
-        <ion-radio value="duesenberg"></ion-radio>
+        <ion-radio value="Events Manager"></ion-radio>
       </ion-item>
     </ion-radio-group>
 
@@ -69,36 +69,32 @@
     <ion-item lines="inset"> 
       <ion-label color="dark" position="floating">Bio</ion-label>
       <ion-textarea auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio"
-        (ionChange)="checkChange()" required="true"></ion-textarea>
+        (ionChange)="checkChange()" required="true"  required="true"></ion-textarea>
     </ion-item>
     <ion-item lines="inset">
       <ion-label color="dark" position="floating">Looking for: </ion-label>
       <ion-textarea auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor"
-        (ionChange)="checkChange()" required="true"></ion-textarea>
+        (ionChange)="checkChange()" required="true"  required="true"></ion-textarea>
     </ion-item>
 
+    <ion-item-divider color="primary">
+      <ion-label>
+        Match Radius
+      </ion-label>
+    </ion-item-divider>
 
     <ion-item>
-      <ion-label color="dark" position="fixed">Match Radius</ion-label>
       <ion-range min="0" max="100" step="10" color="secondary" snaps="true" >
         <ion-label slot="start">0km</ion-label>
         <ion-label slot="end">100km</ion-label>
       </ion-range>
     </ion-item>
 
- 
-
-   
-      
-    
-
-    <!-- <ion-chip>
-      <ion-label>Button Chip</ion-label>
-      <ion-icon name="close-circle"></ion-icon>
-    </ion-chip> -->
-
   </ion-list>
   
-  
+  <ion-button shape="round" expand="block" (click)="createAccountPressed()" fill="clear">
+    Continue
+  </ion-button>
+
 </ion-content>
 
