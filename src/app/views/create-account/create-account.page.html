@@ -6,7 +6,7 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-list lines="inset">
     <ion-radio-group>
       <ion-item-divider color="primary">
         <ion-label>
@@ -24,7 +24,6 @@
         <ion-radio value="duesenberg"></ion-radio>
       </ion-item>
     </ion-radio-group>
-
 
     <ion-item-divider color="primary">
       <ion-label>
@@ -55,6 +54,14 @@
       </ion-label>
     </ion-item-divider>
 
+    <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Add Genre Tags" [autocomplete]="true" 
+      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" class="Tags">
+      </angular-tag-input>
+
+    <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Add Venue Tags" [autocomplete]="true" 
+    [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" class="Tags">
+    </angular-tag-input>
+
     <ion-item lines="inset">
       <ion-label color="dark" position="floating">Name</ion-label>
       <ion-input disabled={{loading}} clear-input="true" [(ngModel)]="name" placeholder="Alias" required="true"></ion-input>
@@ -70,6 +77,7 @@
         (ionChange)="checkChange()" required="true"></ion-textarea>
     </ion-item>
 
+
     <ion-item>
       <ion-label color="dark" position="fixed">Match Radius</ion-label>
       <ion-range min="0" max="100" step="10" color="secondary" snaps="true" >
@@ -77,6 +85,12 @@
         <ion-label slot="end">100km</ion-label>
       </ion-range>
     </ion-item>
+
+ 
+
+   
+      
+    
 
     <!-- <ion-chip>
       <ion-label>Button Chip</ion-label>

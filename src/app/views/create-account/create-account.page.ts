@@ -8,7 +8,24 @@ import { Component, OnInit } from "@angular/core";
 export class CreateAccountPage implements OnInit {
 
   loading: boolean = false;
-  s
+  genres = [];
+  existingGenres = [
+    "Rock",
+    "Reggea",
+    "Rasta",
+    "Metal",
+    "Punk",
+    "Screamo"
+  ];
+
+  venues = [];
+  existingVenues = [
+    "The Cavern - Exeter",
+    "New Quay Inn - Teignmouth",
+    "The Pigs Nose",
+    "Blue Anchor",
+  ];
+  
   constructor() { }
 
   ngOnInit() {
