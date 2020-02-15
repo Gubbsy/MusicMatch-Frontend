@@ -7,6 +7,8 @@ import { Component, OnInit } from "@angular/core";
 })
 export class CreateAccountPage implements OnInit {
 
+  loading: boolean = false;
+  s
   constructor() { }
 
   ngOnInit() {
