@@ -7,7 +7,7 @@
 <ion-content>
 
   <ion-list lines="inset">
-    <ion-radio-group>
+    <ion-radio-group allow-empty-selection="false" (ionSelect)="changeRole($event)" >
       <ion-item-divider color="primary">
         <ion-label>
           Select Account Type
@@ -16,11 +16,11 @@
   
       <ion-item>
         <ion-label>Artist</ion-label>
-        <ion-radio value="Artist"></ion-radio>
+        <ion-radio value="Artist" checked></ion-radio>
       </ion-item>
   
       <ion-item>
-        <ion-label>Venue Manager</ion-label>
+        <ion-label>Events Manager</ion-label>
         <ion-radio value="Events Manager"></ion-radio>
       </ion-item>
     </ion-radio-group>
@@ -45,7 +45,7 @@
     </ion-item>
     <ion-item lines="inset">
       <ion-label color="dark" position="floating">Confirm Password</ion-label>
-      <ion-input disabled={{loading}} clear-input="true" type="password" [(ngModel)]="confirmPassword" required="true"></ion-input>
+      <ion-input disabled={{loading}} clear-input="true" type="password" [(ngModel)]="confirmedPassword" required="true"></ion-input>
     </ion-item>
 
     <ion-item-divider color="primary">
@@ -69,12 +69,12 @@
     <ion-item lines="inset"> 
       <ion-label color="dark" position="floating">Bio</ion-label>
       <ion-textarea auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio"
-        (ionChange)="checkChange()" required="true"  required="true"></ion-textarea>
+        required="true"  required="true"></ion-textarea>
     </ion-item>
     <ion-item lines="inset">
       <ion-label color="dark" position="floating">Looking for: </ion-label>
       <ion-textarea auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor"
-        (ionChange)="checkChange()" required="true"  required="true"></ion-textarea>
+         required="true"  required="true"></ion-textarea>
     </ion-item>
 
     <ion-item-divider color="primary">
@@ -84,7 +84,7 @@
     </ion-item-divider>
 
     <ion-item>
-      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" >
+      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius'>
         <ion-label slot="start">0km</ion-label>
         <ion-label slot="end">100km</ion-label>
       </ion-range>

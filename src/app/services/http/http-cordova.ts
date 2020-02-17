@@ -1,4 +1,4 @@
-import HTTPAbstract from "./http-service";
+import HTTPAbstract from "./http.abstract";
 import IHTTPResponse from "./http-response.interface";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";

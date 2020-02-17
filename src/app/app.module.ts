@@ -6,24 +6,23 @@ import { IonicModule, IonicRouteStrategy, Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
-import HTTPService from "./services/api/api-service.abstarct";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HttpClient } from "@angular/common/http";
-import HTTPCordova from "./services/api/http/http-cordova";
-import HTTPWeb from "./services/api/http/http-web";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import HTTPCordova from "./services/http/http-cordova";
+import HTTPWeb from "./services/http/http-web";
+import HTTPAbstract from "./services/http/http.abstract";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
-      provide: HTTPService,
+      provide: HTTPAbstract,
       useFactory: (platform: Platform, client: HttpClient) => {
         if (platform.is("cordova")) {
           return new HTTPCordova(client);
@@ -32,7 +31,7 @@ import HTTPWeb from "./services/api/http/http-web";
         return new HTTPWeb();
       },
       deps: [ Platform, HttpClient ]
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
