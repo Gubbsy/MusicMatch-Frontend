@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import AccountAPIService from "src/app/services/api/account/account-api-service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: "app-create-account",
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class CreateAccountPage implements OnInit {
 
-  constructor(private accountAPIService: AccountAPIService, private formBuilder: FormBuilder) {}
+  constructor(private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, public toastController: ToastController) {}
 
   get username() {
     return this.createAccountForm.get("username");
@@ -93,8 +94,32 @@ export class CreateAccountPage implements OnInit {
 
   async submit() {
     console.log(this.createAccountForm.value);
+    if (this.createAccountForm.controls["password"].value !== this.createAccountForm.controls["confirmedPassword"].value) {
+      this.showMultipleToast("Passwors must match");
+    } else {
+      const result = await this.accountAPIService.createAccont(this.accountRole, this.createAccountForm.controls["username"].value, this.createAccountForm.controls["email"].value, this.createAccountForm.controls["password"].value);
+      
+      if ((result.errors !== null || result !== undefined) &&  result.errors.length > 0 ) {
+        result.errors.forEach(e => {
+          this.showMultipleToast(e);
+        });
+      } else {
+        console.log("Successsfuly created account");
+      }
+    }
+  }
 
-    await this.accountAPIService.createAccont(this.accountRole, this.createAccountForm.controls["username"].value, this.createAccountForm.controls["email"].value, this.createAccountForm.controls["password"].value);
+  showMultipleToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 30000,
+      animated: true,
+      showCloseButton: true,
+      closeButtonText: "Done",
+      color: "danger"
+    }).then((mobj) => {
+      mobj.present();
+    });
   }
 
 }

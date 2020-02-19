@@ -12,12 +12,12 @@ export default abstract class APIService {
     this.baseURI += domain;
   }
 
-  async post<T>(endpoint: string, payload: object): Promise<IAPIResponse<T>> {
-    const response: IHTTPResponse = await this.http.post(this.baseURI + endpoint, payload, this.headers);
-    return {
-      statusCode: response.statusCode,
-      errors: response.body ? response.body.errors : [],
-      payload: response.body ? response.body.payload : {}
-    };
+  protected async post<T>(endpoint: string, payload: object): Promise<IAPIResponse<T>> {
+      const response: IHTTPResponse = await this.http.post(this.baseURI + endpoint, payload, this.headers);
+      return {
+        statusCode: response.statusCode,
+        errors: response.body ? response.body.errors : [],
+        payload: response.body ? response.body.payload : {}
+      };
   }
 } 

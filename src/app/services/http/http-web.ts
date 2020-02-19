@@ -11,15 +11,18 @@ export default class HTTPWeb implements HTTPAbstract {
   async post(url: string, body: object, headers: any): Promise<IHTTPResponse> {
   
     const result = async (): Promise<IHTTPResponse> => {
-        const response = await axios.post(url, body, {
-          withCredentials: true
-        });
 
-        return {
-          body: response.data,
-          headers: response.headers,
-          statusCode: response.status
-        };
+    const response = await axios.post(url, body, {
+      withCredentials: true,
+      validateStatus: (status) => true
+    });
+
+    return {
+      body: response.data,
+      headers: response.headers,
+      statusCode: response.status
+    };
+      
     };
 
     const returnedResult = await result();
