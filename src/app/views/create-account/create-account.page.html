@@ -6,6 +6,29 @@
 
 <ion-content>
   
+  <ion-item-divider color="primary">
+    <ion-label>
+      Select Account Type
+    </ion-label>
+  </ion-item-divider>
+
+  <ion-radio-group allow-empty-selection="false" (ionSelect)="changeRole($event)" >
+    <ion-item>
+      <ion-label>Artist</ion-label>
+      <ion-radio value="Artist" checked></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Events Manager</ion-label>
+      <ion-radio value="Events Manager"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-item-divider color="primary">
+    <ion-label>
+      Enter Account Details
+    </ion-label>
+  </ion-item-divider>
 
   <form [formGroup]="createAccountForm" (ngSubmit)="submit()">
     <ion-list>
@@ -50,25 +73,8 @@
       <ion-icon slot="end" name="create"></ion-icon>
     </ion-button>
   </form>
+  
 </ion-content>
-
-<!-- <ion-radio-group allow-empty-selection="false" (ionSelect)="changeRole($event)" >
-    <ion-item-divider color="primary">
-      <ion-label>
-        Select Account Type
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-label>Artist</ion-label>
-      <ion-radio value="Artist" checked></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Events Manager</ion-label>
-      <ion-radio value="Events Manager"></ion-radio>
-    </ion-item>
-  </ion-radio-group> -->
 
 <!-- <ion-item lines="inset">
   <ion-label color="dark" position="floating">Username</ion-label>

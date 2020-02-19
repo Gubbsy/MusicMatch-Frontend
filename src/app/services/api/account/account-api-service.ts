@@ -15,22 +15,13 @@ export default class AccountAPIService extends APIService {
     super(http, "account/");
   }
 
-  async createAccont(accountRole: string, username: string, email: string, password: string, name: string, lat: number, lon: number, 
-    bio: string, lookingFor: string, genres: string[], venues: string[], matchRadius: number): Promise<IAPIResponse<ICreateAccountResponse>> {
+  async createAccont(accountRole: string, username: string, email: string, password: string): Promise<IAPIResponse<ICreateAccountResponse>> {
       const payload: ICreateAccountRequest = {
         accountRole: accountRole,
         username: username,
         email: email,
         password: password,
-        name: name,
-        lat: lat,
-        lon: lon,
-        bio: bio,
-        lookingFor: lookingFor,
-        genres: genres,
-        venues: venues,
-        matchRadius: matchRadius
-      }
+      };
     return await this.post<ICreateAccountResponse>("createaccount", payload);
   }
 }
