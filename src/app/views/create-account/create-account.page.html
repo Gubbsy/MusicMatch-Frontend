@@ -5,48 +5,97 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list lines="inset">
-    <ion-radio-group allow-empty-selection="false" (ionSelect)="changeRole($event)" >
-      <ion-item-divider color="primary">
-        <ion-label>
-          Select Account Type
-        </ion-label>
-      </ion-item-divider>
   
-      <ion-item>
-        <ion-label>Artist</ion-label>
-        <ion-radio value="Artist" checked></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Events Manager</ion-label>
-        <ion-radio value="Events Manager"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
 
+  <form [formGroup]="createAccountForm" (ngSubmit)="submit()">
+    <ion-list>
+      <ion-item lines="inset">
+        <ion-label color="dark" position="floating">Username</ion-label>
+        <ion-input inputmode="text" type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.username">
+        <ng-container *ngIf="email.hasError(error.type) && (username.dirty || username.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines="inset">
+        <ion-label color="dark" position="floating">Email</ion-label>
+        <ion-input inputmode="email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.email">
+        <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines="inset">
+        <ion-label color="dark" position="floating">Password</ion-label>
+        <ion-input inputmode="password" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.password">
+        <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines="inset">
+        <ion-label color="dark" position="floating">Confrim Password</ion-label>
+        <ion-input inputmode="password" type="password" formControlName="confirmedPassword"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.confirmedPassword">
+        <ng-container *ngIf="confirmedPassword.hasError(error.type) && (confirmedPassword.dirty || confirmedPassword.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </ion-list>
+    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block"> submit
+      <ion-icon slot="end" name="create"></ion-icon>
+    </ion-button>
+  </form>
+</ion-content>
+
+<!-- <ion-radio-group allow-empty-selection="false" (ionSelect)="changeRole($event)" >
+    <ion-item-divider color="primary">
+      <ion-label>
+        Select Account Type
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>Artist</ion-label>
+      <ion-radio value="Artist" checked></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Events Manager</ion-label>
+      <ion-radio value="Events Manager"></ion-radio>
+    </ion-item>
+  </ion-radio-group> -->
+
+<!-- <ion-item lines="inset">
+  <ion-label color="dark" position="floating">Username</ion-label>
+  <ion-input disabled={{loading}} clear-input="true" inputmode="text" type="text"  formControlName="name" required="true"></ion-input>
+</ion-item>
+<ion-item lines="inset">
+  <ion-label color="dark" position="floating">Email</ion-label>
+  <ion-input disabled={{loading}} inputmode="email" clear-input="true" type="email" formControlName="email" required="true"></ion-input>
+</ion-item>
+<ion-item lines="inset">
+  <ion-label color="dark" position="floating">Password</ion-label>
+  <ion-input disabled={{loading}} clear-input="true" type="password" formControlName="password" required="true"></ion-input>
+</ion-item>
+<ion-item lines="inset">
+  <ion-label color="dark" position="floating">Confirm Password</ion-label>
+  <ion-input disabled={{loading}} clear-input="true" type="password" confirmedPassword="confirmedPassword" required="true"></ion-input>
+</ion-item>
+<ion-button shape="round" expand="block" (click)="createAccountPressed()" fill="clear">
+  Continue
+</ion-button> -->
+
+  <!-- <ion-list lines="inset">
     <ion-item-divider color="primary">
       <ion-label>
         Account Setup
       </ion-label>
     </ion-item-divider>
-
-    <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Username</ion-label>
-      <ion-input disabled={{loading}} clear-input="true" inputmode="text" type="text"  [(ngModel)]="username" required="true"></ion-input>
-    </ion-item>
-    <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Email</ion-label>
-      <ion-input disabled={{loading}} inputmode="email" clear-input="true" type="email" [(ngModel)]="email" required="true"></ion-input>
-    </ion-item>
-    <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Password</ion-label>
-      <ion-input disabled={{loading}} clear-input="true" type="password" [(ngModel)]="password" required="true"></ion-input>
-    </ion-item>
-    <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Confirm Password</ion-label>
-      <ion-input disabled={{loading}} clear-input="true" type="password" [(ngModel)]="confirmedPassword" required="true"></ion-input>
-    </ion-item>
 
     <ion-item-divider color="primary">
       <ion-label>
@@ -90,11 +139,7 @@
       </ion-range>
     </ion-item>
 
-  </ion-list>
-  
-  <ion-button shape="round" expand="block" (click)="createAccountPressed()" fill="clear">
-    Continue
-  </ion-button>
+  </ion-list> -->
 
-</ion-content>
+
 
