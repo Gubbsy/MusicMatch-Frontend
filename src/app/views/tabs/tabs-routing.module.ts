@@ -13,7 +13,7 @@ const routes: Routes = [
           {
             path: "",
             loadChildren: () =>
-              import("../suggestion-feed/suggesion-feed.module").then(m => m.SuggestionFeedModule)
+              import("../suggestion-feed/suggestions-feed.module").then(m => m.SuggestionFeedModule)
           }
         ]
       },

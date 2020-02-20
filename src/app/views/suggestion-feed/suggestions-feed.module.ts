@@ -3,10 +3,13 @@ import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { SuggestionFeedPage } from "./suggesion-feed.page";
+import { SuggestionFeedPage } from "./suggestions-feed.page";
+import { PageHeaderModule } from "src/app/components/page-header/page-header.module";
+
 
 @NgModule({
   imports: [
+    PageHeaderModule,
     IonicModule,
     CommonModule,
     FormsModule,

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";
 
-import { SuggestionFeedPage } from "./suggesion-feed.page";
+import { SuggestionFeedPage } from "./suggestions-feed.page";
 
 describe("SuggestionFeedPage", () => {
   let component: SuggestionFeedPage;
