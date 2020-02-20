@@ -7,15 +7,15 @@
     <ion-note color="danger" *ngIf="loginError">{{ loginError }}</ion-note>
   </div>
   <ion-item lines="inset">
-    <ion-label color="dark" position="floating">Email</ion-label>
-    <ion-input disabled={{loading}} inputmode="email" clear-input="true" type="email" [(ngModel)]="email"></ion-input>
+    <ion-label color="dark" position="floating">Username or Email</ion-label>
+    <ion-input disabled={{loading}} inputmode="text" clear-input="true" type="text" [(ngModel)]="credential"></ion-input>
   </ion-item>
   <ion-item lines="inset">
     <ion-label color="dark" position="floating">Password</ion-label>
     <ion-input disabled={{loading}} clear-input="true" type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
 
-  <ion-button shape="round" expand="block" (click)="loginPressed()">
+  <ion-button shape="round" expand="block" (click)="signInPressed()">
       <div *ngIf="loading === false" id="button-text">
         Continue
       </div>

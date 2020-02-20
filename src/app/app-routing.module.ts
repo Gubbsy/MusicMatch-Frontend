@@ -9,7 +9,12 @@ const routes: Routes = [
   {
     path: "create-account",
     loadChildren: () => import("./views/create-account/create-account.module").then(m => m.CreateAccountPageModule)
+  },
+  {
+    path: "tabs",
+    loadChildren: () => import("./views/tabs/tabs.module").then(m => m.TabsPageModule)
   }
+  
 ];
 
 @NgModule({
