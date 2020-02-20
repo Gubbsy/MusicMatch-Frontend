@@ -25,7 +25,7 @@ import HTTPAbstract from "./services/http/http.abstract";
       provide: HTTPAbstract,
       useFactory: (platform: Platform, client: HttpClient) => {
         if (platform.is("cordova")) {
-          return new HTTPCordova(client);
+          return new HTTPWeb();
         }
         
         return new HTTPWeb();
