@@ -5,7 +5,8 @@ import IHTTPResponse from "../http/http-response.interface";
 export default abstract class APIService {
   protected baseURI = "https://localhost:44382/api/v1/";
   protected headers = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin" : "*"
   };
 
   constructor(private http: HTTPAbstract, domain: string) {

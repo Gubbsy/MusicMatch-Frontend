@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import AccountAPIService from "src/app/services/api/account/account-api-service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ToastController } from '@ionic/angular';
+import { ToastController } from "@ionic/angular";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-create-account",
@@ -10,7 +11,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class CreateAccountPage implements OnInit {
 
-  constructor(private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, public toastController: ToastController) {}
+  constructor(private router: Router, private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, public toastController: ToastController) {}
 
   get username() {
     return this.createAccountForm.get("username");
@@ -104,6 +105,7 @@ export class CreateAccountPage implements OnInit {
           this.showMultipleToast(e);
         });
       } else {
+        this.router.navigate(["/tabs"]);
         console.log("Successsfuly created account");
       }
     }
