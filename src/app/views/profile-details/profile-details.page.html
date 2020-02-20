@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-button color="dark" slot="start" fill="clear" (click)="routeBack()" size="large">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item-divider color="primary">
+      <ion-label>
+        About You
+      </ion-label>
+    </ion-item-divider>
+
+    <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Add Genre Tags" [autocomplete]="true" 
+      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" class="Tags">
+      </angular-tag-input>
+
+    <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Add Venue Tags" [autocomplete]="true" 
+    [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" class="Tags">
+    </angular-tag-input>
+
+    <ion-item lines="inset">
+      <ion-label color="dark" position="floating">Name</ion-label>
+      <ion-input disabled={{loading}} clear-input="true" [(ngModel)]="name" placeholder="Alias" required="true"></ion-input>
+    </ion-item>
+    <ion-item lines="inset"> 
+      <ion-label color="dark" position="floating">Bio</ion-label>
+      <ion-textarea auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio"
+        required="true"  required="true"></ion-textarea>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label color="dark" position="floating">Looking for: </ion-label>
+      <ion-textarea auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor"
+         required="true"  required="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider color="primary">
+      <ion-label>
+        Match Radius
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius'>
+        <ion-label slot="start">0km</ion-label>
+        <ion-label slot="end">100km</ion-label>
+      </ion-range>
+    </ion-item>
+</ion-content>

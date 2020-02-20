@@ -11,10 +11,13 @@ const routes: Routes = [
     loadChildren: () => import("./views/create-account/create-account.module").then(m => m.CreateAccountPageModule)
   },
   {
+    path: "profile-details",
+    loadChildren: () => import("./views/profile-details/profile-details.module").then( m => m.ProfileDetailsPageModule)
+  },
+  {
     path: "tabs",
     loadChildren: () => import("./views/tabs/tabs.module").then(m => m.TabsPageModule)
   }
-  
 ];
 
 @NgModule({

@@ -30,31 +30,6 @@ export class CreateAccountPage implements OnInit {
   }
   
   accountRole: string = "Artist";
-
-  // genres: string[] = [] ;
-  // existingGenres: string[] = [
-  //   "Rock",
-  //   "Reggea",
-  //   "Rasta",
-  //   "Metal",
-  //   "Punk",
-  //   "Screamo"
-  // ];
-
-  // venues: string[] = [];
-  // existingVenues: string[] = [
-  //   "The Cavern - Exeter",
-  //   "New Quay Inn - Teignmouth",
-  //   "The Pigs Nose",
-  //   "Blue Anchor",
-  // ];
-
-  // lat: number = 10.123;
-  // lon: number = 100.123;
-  // name: string;
-  // bio: string;
-  // lookingFor: string;
-  // matchRadius: number;
   
   loading: boolean = false;
   
