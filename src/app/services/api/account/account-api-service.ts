@@ -7,6 +7,7 @@ import { ICreateAccountResponse } from "src/app/models/response/account/ICreateA
 import { ICreateAccountRequest } from "src/app/models/request/account/ICreateAccountRequest";
 import { ISignInRequest } from "src/app/models/request/account/ISignInRequest";
 import { ISignInResponse } from "src/app/models/response/account/ISignInRespone";
+import IAccountDetailsRequest from 'src/app/models/request/account/IAccountDetailsRequest';
 
 @Injectable({
   providedIn: "root"
@@ -31,8 +32,16 @@ export default class AccountAPIService extends APIService {
     const payload: ISignInRequest = {
       credential: credential,
       password: password
-    }
+    } 
     
     return await this.post<ISignInResponse>("signin", payload);
+  }
+
+  async getCountDetails(username: string): Promise<IAPIResponse<ICreateAccountResponse>> {
+    const payload: IAccountDetailsRequest = {
+      username: username
+    }
+    
+    return await this.post<ICreateAccountResponse>("getaccountdetails", payload);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
+import AccountAPIService from "src/app/services/api/account/account-api-service";
 
 @Component({
   selector: "app-profile-details",
@@ -10,7 +11,7 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@io
 })
 export class ProfileDetailsPage implements OnInit {
 
-  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder) { }
+  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder, private accountAPIService: AccountAPIService ) { }
 
   locationLoading: boolean = false;
 
@@ -47,6 +48,7 @@ export class ProfileDetailsPage implements OnInit {
 };
 
   ngOnInit() {
+    accountDetails = this.accountAPIService.getCountDetails();
   }
 
   routeBack() {
