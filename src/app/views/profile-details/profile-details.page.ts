@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
+import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
 
 @Component({
   selector: "app-profile-details",
@@ -8,9 +10,11 @@ import { Location } from "@angular/common";
 })
 export class ProfileDetailsPage implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder) { }
 
-   genres: string[] = [] ;
+  locationLoading: boolean = false;
+
+  genres: string[] = [] ;
   existingGenres: string[] = [
     "Rock",
     "Reggea",
@@ -35,11 +39,33 @@ export class ProfileDetailsPage implements OnInit {
   lookingFor: string;
   matchRadius: number;
 
+  postcode: string;
+
+  options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+};
+
   ngOnInit() {
   }
 
   routeBack() {
     this.location.back();
+  }
+
+  getCurrentLocation() {
+    this.locationLoading = true;
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat = resp.coords.latitude;
+      this.lon = resp.coords.longitude;
+      this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.options)
+        .then((result: NativeGeocoderResult[]) => this.postcode = result[0].postalCode)
+          .catch((error: any) => console.log(error));
+      this.locationLoading = false;
+     }).catch((error) => {
+       console.log("Error getting location", error);
+     });
+     
   }
   
 }

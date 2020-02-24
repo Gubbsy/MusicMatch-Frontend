@@ -69,6 +69,7 @@ export class CreateAccountPage implements OnInit {
   }
 
   async submit() {
+    this.loading = true;
     console.log(this.createAccountForm.value);
     if (this.createAccountForm.controls["password"].value !== this.createAccountForm.controls["confirmedPassword"].value) {
       this.showMultipleToast("Passwors must match");
@@ -84,6 +85,7 @@ export class CreateAccountPage implements OnInit {
         console.log("Successsfuly created account");
       }
     }
+    this.loading = false;
   }
 
   showMultipleToast(msg) {

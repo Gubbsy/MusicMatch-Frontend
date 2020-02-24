@@ -69,8 +69,15 @@
         </ng-container>
       </div>
     </ion-list>
-    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block"> submit
-      <ion-icon slot="end" name="create"></ion-icon>
+    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block"> 
+      <div *ngIf="loading === false" id="button-text">
+        Submit
+        <ion-icon slot="end" name="create"></ion-icon>
+      </div>
+      <div *ngIf="loading === true" id="button-spinner">
+          <ion-spinner></ion-spinner>
+      </div>
+     
     </ion-button>
   </form>
   

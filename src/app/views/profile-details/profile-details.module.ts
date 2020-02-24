@@ -7,6 +7,8 @@ import { IonicModule } from "@ionic/angular";
 import { ProfileDetailsPage } from "./profile-details.page";
 import { RouterModule } from "@angular/router";
 import { AngularTagInputModule } from "angular-tag-input";
+import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { NativeGeocoder } from "@ionic-native/native-geocoder/ngx";
 
 @NgModule({
   imports: [
@@ -16,6 +18,7 @@ import { AngularTagInputModule } from "angular-tag-input";
     IonicModule,
     RouterModule.forChild([{ path: "", component: ProfileDetailsPage }])
   ],
-  declarations: [ProfileDetailsPage]
+  declarations: [ProfileDetailsPage],
+  providers: [ Geolocation,  NativeGeocoder ]
 })
 export class ProfileDetailsPageModule {}
