@@ -48,7 +48,7 @@ export class ProfileDetailsPage implements OnInit {
 };
 
   ngOnInit() {
-    accountDetails = this.accountAPIService.getCountDetails();
+   // accountDetails = this.accountAPIService.getCountDetails();
   }
 
   routeBack() {

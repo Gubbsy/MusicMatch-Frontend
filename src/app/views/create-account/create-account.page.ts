@@ -70,19 +70,38 @@ export class CreateAccountPage implements OnInit {
 
   async submit() {
     this.loading = true;
-    console.log(this.createAccountForm.value);
-    if (this.createAccountForm.controls["password"].value !== this.createAccountForm.controls["confirmedPassword"].value) {
-      this.showMultipleToast("Passwors must match");
+
+    const eml = this.createAccountForm.controls["email"].value;
+    const usrn = this.createAccountForm.controls["username"].value;
+    const pswd = this.createAccountForm.controls["password"].value;
+    const confPswd = this.createAccountForm.controls["confirmedPassword"].value;
+    
+
+    if (pswd !== confPswd) {
+      this.showMultipleToast("Passwords must match");
     } else {
-      const result = await this.accountAPIService.createAccont(this.accountRole, this.createAccountForm.controls["username"].value, this.createAccountForm.controls["email"].value, this.createAccountForm.controls["password"].value);
+      const result = await this.accountAPIService.createAccont(this.accountRole, usrn, eml, pswd);
       
       if ((result.errors !== null || result !== undefined) &&  result.errors.length > 0 ) {
         result.errors.forEach(e => {
           this.showMultipleToast(e);
         });
       } else {
-        this.router.navigate(["/tabs"]);
-        console.log("Successsfuly created account");
+        try {
+          const res = await this.accountAPIService.signIn(usrn, pswd);
+        
+          if ((res.errors !== null || res !== undefined) &&  result.errors.length > 0 ) {
+            res.errors.forEach(e => {
+              this.showMultipleToast(e);
+            });
+          } else {
+            this.router.navigate(["/tabs"]);
+          }
+        } catch {
+            this.showMultipleToast("Unable to sign-in new user");
+        } finally {
+          this.loading = false;
+        }
       }
     }
     this.loading = false;

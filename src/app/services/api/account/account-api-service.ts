@@ -8,6 +8,7 @@ import { ICreateAccountRequest } from "src/app/models/request/account/ICreateAcc
 import { ISignInRequest } from "src/app/models/request/account/ISignInRequest";
 import { ISignInResponse } from "src/app/models/response/account/ISignInRespone";
 import IAccountDetailsRequest from 'src/app/models/request/account/IAccountDetailsRequest';
+import IEmptyResponse from 'src/app/models/response/IEmptyResponse';
 
 @Injectable({
   providedIn: "root"
@@ -18,23 +19,23 @@ export default class AccountAPIService extends APIService {
     super(http, "account/");
   }
 
-  async createAccont(accountRole: string, username: string, email: string, password: string): Promise<IAPIResponse<ICreateAccountResponse>> {
+  async createAccont(accountRole: string, username: string, email: string, password: string): Promise<IAPIResponse<IEmptyResponse>> {
       const payload: ICreateAccountRequest = {
         accountRole: accountRole,
         username: username,
         email: email,
         password: password,
       };
-    return await this.post<ICreateAccountResponse>("createaccount", payload);
+    return await this.post<IEmptyResponse>("createaccount", payload);
   }
 
-  async signIn(credential: string, password: string): Promise<IAPIResponse<ISignInResponse>> {
+  async signIn(credential: string, password: string): Promise<IAPIResponse<IEmptyResponse>> {
     const payload: ISignInRequest = {
       credential: credential,
       password: password
     } 
     
-    return await this.post<ISignInResponse>("signin", payload);
+    return await this.post<IEmptyResponse>("signin", payload);
   }
 
   async getCountDetails(username: string): Promise<IAPIResponse<ICreateAccountResponse>> {
