@@ -3,12 +3,11 @@ import { Injectable, Inject } from "@angular/core";
 import HTTPAbstract from "../../http/http.abstract";
 import APIService from "../api-service.abstarct";
 import { IAPIResponse } from "src/app/models/response/api-response.interface";
-import { ICreateAccountResponse } from "src/app/models/response/account/ICreateAccountResponse";
 import { ICreateAccountRequest } from "src/app/models/request/account/ICreateAccountRequest";
 import { ISignInRequest } from "src/app/models/request/account/ISignInRequest";
-import { ISignInResponse } from "src/app/models/response/account/ISignInRespone";
-import IAccountDetailsRequest from 'src/app/models/request/account/IAccountDetailsRequest';
-import IEmptyResponse from 'src/app/models/response/IEmptyResponse';
+import IAccountDetailsRequest from "src/app/models/request/account/IAccountDetailsRequest";
+import IEmptyResponse from "src/app/models/response/IEmptyResponse";
+import IAccountDetailsResponse from "src/app/models/response/account/IAccountDetailsResponse";
 
 @Injectable({
   providedIn: "root"
@@ -38,11 +37,8 @@ export default class AccountAPIService extends APIService {
     return await this.post<IEmptyResponse>("signin", payload);
   }
 
-  async getCountDetails(username: string): Promise<IAPIResponse<ICreateAccountResponse>> {
-    const payload: IAccountDetailsRequest = {
-      username: username
-    }
+  async getAcountDetails(): Promise<IAPIResponse<IAccountDetailsResponse>> {
     
-    return await this.post<ICreateAccountResponse>("getaccountdetails", payload);
+    return await this.post<IAccountDetailsResponse>("getaccountdetails", null);
   }
 }

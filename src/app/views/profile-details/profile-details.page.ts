@@ -3,6 +3,7 @@ import { Location } from "@angular/common";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
 import AccountAPIService from "src/app/services/api/account/account-api-service";
+import IAccountDetailsResponse from 'src/app/models/response/account/IAccountDetailsResponse';
 
 @Component({
   selector: "app-profile-details",
@@ -13,6 +14,7 @@ export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder, private accountAPIService: AccountAPIService ) { }
 
+  details: IAccountDetailsResponse;
   locationLoading: boolean = false;
 
   genres: string[] = [] ;
@@ -47,8 +49,19 @@ export class ProfileDetailsPage implements OnInit {
     maxResults: 5
 };
 
-  ngOnInit() {
-   // accountDetails = this.accountAPIService.getCountDetails();
+  async ngOnInit() {
+ 
+  const details = await this.accountAPIService.getAcountDetails();
+
+  this.lat = details.payload.lat;
+  this.lon = details.payload.lon;
+  this.name = details.payload.name;
+  this.bio = details.payload.bio;
+  this.lookingFor = details.payload.lookingFor;
+  
+  this.genres = details.payload.genres;
+  this.venues = details.payload.venues;
+ 
   }
 
   routeBack() {
