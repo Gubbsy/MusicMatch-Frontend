@@ -72,8 +72,13 @@
     </ion-item>
 
     <ion-button shape="round" expand="block" (click)="saveChanges()">
-      Save Changes  
-      <ion-icon name="brush"></ion-icon>
+      <div *ngIf="saving === false" id="button-text">
+        Save Changes  
+        <ion-icon name="brush"></ion-icon>
+      </div>
+      <div *ngIf="saving === true" id="button-spinner">
+          <ion-spinner></ion-spinner>
+      </div>
     </ion-button>
   </div>
 

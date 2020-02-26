@@ -23,6 +23,7 @@ export class ProfileDetailsPage implements OnInit {
   details: IAccountDetailsResponse;
   loading: boolean = true;
   locationLoading: boolean = false;
+  saving: boolean = false;
 
   genres: string[] = [] ;
   existingGenres: string[] = [
@@ -113,7 +114,7 @@ export class ProfileDetailsPage implements OnInit {
   }
 
   async saveChanges() {
-    console.log("Match Radius", this.matchRadius);
+    this.saving = true;
 
     try {
       const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
@@ -126,6 +127,8 @@ export class ProfileDetailsPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
+
+    this.saving = false;
     
   }
   
