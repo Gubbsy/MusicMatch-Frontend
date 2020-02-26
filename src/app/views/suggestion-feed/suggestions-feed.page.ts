@@ -9,6 +9,8 @@ export class SuggestionFeedPage {
 
   private pageTitle = "Suggested Matches";
 
+  suggestions: number = 5;
+
   constructor() {}
 
 }

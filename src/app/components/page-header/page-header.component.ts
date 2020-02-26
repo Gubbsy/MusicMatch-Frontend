@@ -15,7 +15,7 @@ export class PageHeaderComponent implements OnInit {
 
   ngOnInit() {}
 
-  selectHouse() {
+  viewProfile() {
     this.router.navigate(["profile-details"]);
     console.log("navigating to accout details");
   }
