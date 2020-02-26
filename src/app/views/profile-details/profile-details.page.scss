@@ -1,0 +1,21 @@
+.TageHeader {
+  font-size: small;
+  margin-bottom: 12px;
+}
+
+.Tags {
+  padding-left: 12px;
+  padding-top: 12px;
+}
+
+#no-shadow {
+  box-shadow: none;
+}
+
+.custom-skeleton ion-skeleton-text {
+  line-height: 13px;
+}
+
+.custom-skeleton ion-skeleton-text:last-child {
+  margin-bottom: 5px;
+}

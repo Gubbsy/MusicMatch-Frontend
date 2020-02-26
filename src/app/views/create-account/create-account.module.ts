@@ -7,12 +7,9 @@ import { IonicModule } from "@ionic/angular";
 import { CreateAccountPage } from "./create-account.page";
 import { RouterModule } from "@angular/router";
 
-import { AngularTagInputModule } from "angular-tag-input";
-
 
 @NgModule({
   imports: [
-    AngularTagInputModule,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,

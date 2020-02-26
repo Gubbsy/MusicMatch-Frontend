@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import AccountAPIService from 'src/app/services/api/account/account-api-service';
+import AccountAPIService from 'src/app/services/api/account/account-api.service';
 
 @Component({
   selector: "app-login",
@@ -34,35 +34,17 @@ export class LoginComponent implements OnInit {
       this.loading = true;
 
       try {
-        const response = await this.accountAPIService.signIn(this.credential, this.password);
-
-        if (response.statusCode !== 200) {
-          this.loginError = "Server error.";
-          return;
-        } 
-
-        if (response.payload.role.length !== 1) {
-          this.loginError = "Error, please contact application administrator.";
-          return;
-        }
-
-        this.loginError = null;
-        switch (response.payload.role[0]) {
-          case "artist":
-              localStorage.setItem("userEmail", this.credential);
-              this.router.navigate(["/tabs"]);
-              console.log("artist logged in");
-            break;
-            case "events manager":
-              localStorage.setItem("userEmail", this.credential);
-              this.router.navigate(["/tabs"]);
-              console.log("evens manager logged in");
-            break;
-          default:
-            this.loginError = "Error, role not recognised. Please contact application administrator";
+        const result = await this.accountAPIService.signIn(this.credential, this.password);
+      
+        if ((result.errors !== null || result !== undefined) &&  result.errors.length > 0 ) {
+          result.errors.forEach(e => {
+            this.loginError = e;
+          });
+        } else {
+          this.router.navigate(["/tabs"]);
         }
       } catch {
-        this.loginError = "No account exists with these credentials";
+        this.loginError = "Unable to sign-in user";
       } finally {
         this.loading = false;
       }

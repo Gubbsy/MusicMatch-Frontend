@@ -3,7 +3,7 @@ import HTTPAbstract from "../http/http.abstract";
 import IHTTPResponse from "../http/http-response.interface";
 
 export default abstract class APIService {
-  protected baseURI = "https://00a7a03e.ngrok.io/api/v1/";
+  protected baseURI = "https://da237f28.ngrok.io/api/v1/";
   protected headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin" : "*"

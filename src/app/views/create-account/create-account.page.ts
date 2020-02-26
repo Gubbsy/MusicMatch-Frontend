@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import AccountAPIService from "src/app/services/api/account/account-api-service";
+import AccountAPIService from "src/app/services/api/account/account-api.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ToastController } from "@ionic/angular";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
+import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 
 @Component({
   selector: "app-create-account",
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountPage implements OnInit {
 
-  constructor(private router: Router, private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, public toastController: ToastController) {}
+  constructor(private router: Router, private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, public errorToastService: ErrorToastService) {}
 
   get username() {
     return this.createAccountForm.get("username");
@@ -30,31 +30,6 @@ export class CreateAccountPage implements OnInit {
   }
   
   accountRole: string = "Artist";
-
-  // genres: string[] = [] ;
-  // existingGenres: string[] = [
-  //   "Rock",
-  //   "Reggea",
-  //   "Rasta",
-  //   "Metal",
-  //   "Punk",
-  //   "Screamo"
-  // ];
-
-  // venues: string[] = [];
-  // existingVenues: string[] = [
-  //   "The Cavern - Exeter",
-  //   "New Quay Inn - Teignmouth",
-  //   "The Pigs Nose",
-  //   "Blue Anchor",
-  // ];
-
-  // lat: number = 10.123;
-  // lon: number = 100.123;
-  // name: string;
-  // bio: string;
-  // lookingFor: string;
-  // matchRadius: number;
   
   loading: boolean = false;
   
@@ -94,34 +69,41 @@ export class CreateAccountPage implements OnInit {
   }
 
   async submit() {
-    console.log(this.createAccountForm.value);
-    if (this.createAccountForm.controls["password"].value !== this.createAccountForm.controls["confirmedPassword"].value) {
-      this.showMultipleToast("Passwors must match");
+    this.loading = true;
+
+    const eml = this.createAccountForm.controls["email"].value;
+    const usrn = this.createAccountForm.controls["username"].value;
+    const pswd = this.createAccountForm.controls["password"].value;
+    const confPswd = this.createAccountForm.controls["confirmedPassword"].value;
+    
+    if (pswd !== confPswd) {
+      this.errorToastService.showMultipleToast("Passwords must match");
     } else {
-      const result = await this.accountAPIService.createAccont(this.accountRole, this.createAccountForm.controls["username"].value, this.createAccountForm.controls["email"].value, this.createAccountForm.controls["password"].value);
+      const result = await this.accountAPIService.createAccont(this.accountRole, usrn, eml, pswd);
       
       if ((result.errors !== null || result !== undefined) &&  result.errors.length > 0 ) {
         result.errors.forEach(e => {
-          this.showMultipleToast(e);
+          this.errorToastService.showMultipleToast(e);
         });
       } else {
-        this.router.navigate(["/tabs"]);
-        console.log("Successsfuly created account");
+        try {
+          const res = await this.accountAPIService.signIn(usrn, pswd);
+        
+          if ((res.errors !== null || res !== undefined) &&  result.errors.length > 0 ) {
+            res.errors.forEach(e => {
+              this.errorToastService.showMultipleToast(e);
+            });
+          } else {
+            this.router.navigate(["/tabs"]);
+          }
+        } catch {
+            this.errorToastService.showMultipleToast("Unable to sign-in new user");
+        } finally {
+          this.loading = false;
+        }
       }
     }
-  }
-
-  showMultipleToast(msg) {
-    this.toastController.create({
-      message: msg,
-      duration: 30000,
-      animated: true,
-      showCloseButton: true,
-      closeButtonText: "Done",
-      color: "danger"
-    }).then((mobj) => {
-      mobj.present();
-    });
+    this.loading = false;
   }
 
 }
