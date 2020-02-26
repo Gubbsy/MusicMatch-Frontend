@@ -15,19 +15,20 @@
       </ion-label>
     </ion-item-divider>
 
-    <ion-item>
+
+    <div class="Tags">
       <ion-label color="dark" position="floating" class="TageHeader">Associated Genres</ion-label>
-      <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Add Genre Tags" [autocomplete]="true" 
-      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset">
+      <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Click to Add a Genre" [autocomplete]="true" 
+      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" id="no-shadow">
       </angular-tag-input>
-    </ion-item>
+    </div>
     
-    <ion-item>
+    <div class="Tags"> 
       <ion-label color="dark" position="floating" class="TageHeader">Associated Venues</ion-label>
-      <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Add Venue Tags" [autocomplete]="true" 
-      [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false">
+      <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Click to Add Venue" [autocomplete]="true" 
+      [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" id="no-shadow">
       </angular-tag-input>
-    </ion-item>
+    </div>
 
 
     <ion-item lines="inset">

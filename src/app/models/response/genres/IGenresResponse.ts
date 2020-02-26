@@ -1,0 +1,3 @@
+interface IGenresResponse {
+  genres: string[];
+}

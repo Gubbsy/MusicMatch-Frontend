@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
-import AccountAPIService from "src/app/services/api/account/account-api-service";
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
+import AccountAPIService from "src/app/services/api/account/account-api.service";
 import IAccountDetailsResponse from "src/app/models/response/account/IAccountDetailsResponse";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
+import VenuesAPIService from "src/app/services/api/venues/venues-api.service";
+import GenresAPIService from "src/app/services/api/genres/genres-api.service";
 
 @Component({
   selector: "app-profile-details",
@@ -14,7 +16,9 @@ import ErrorToastService from "src/app/services/error-handling/error-toast.servi
 export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
-    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService) { }
+    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
+    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService) { 
+    }
 
   details: IAccountDetailsResponse;
   loading: boolean = true;
@@ -57,6 +61,11 @@ export class ProfileDetailsPage implements OnInit {
     try {
 
       const details = await this.accountAPIService.getAcountDetails();
+      const existingGenresRes = await this.genreAPIServce.GetAllGenres();
+      const existingVenuesRes = await this.venuesAPIService.GetAllGenres();
+
+      this.existingGenres = existingGenresRes.payload.genres;
+      this.existingVenues = existingVenuesRes.payload.venues;
 
       if ((details.errors !== null || details !== undefined) &&  details.errors.length > 0 ) {
         details.errors.forEach(e => {

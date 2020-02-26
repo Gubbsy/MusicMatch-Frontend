@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import AccountAPIService from "src/app/services/api/account/account-api-service";
+import AccountAPIService from "src/app/services/api/account/account-api.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
