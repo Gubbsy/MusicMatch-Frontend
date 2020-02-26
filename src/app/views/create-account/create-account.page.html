@@ -69,83 +69,19 @@
         </ng-container>
       </div>
     </ion-list>
-    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block"> submit
-      <ion-icon slot="end" name="create"></ion-icon>
+    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block"> 
+      <div *ngIf="loading === false" id="button-text">
+        Submit
+        <ion-icon slot="end" name="create"></ion-icon>
+      </div>
+      <div *ngIf="loading === true" id="button-spinner">
+          <ion-spinner></ion-spinner>
+      </div>
+     
     </ion-button>
   </form>
   
 </ion-content>
-
-<!-- <ion-item lines="inset">
-  <ion-label color="dark" position="floating">Username</ion-label>
-  <ion-input disabled={{loading}} clear-input="true" inputmode="text" type="text"  formControlName="name" required="true"></ion-input>
-</ion-item>
-<ion-item lines="inset">
-  <ion-label color="dark" position="floating">Email</ion-label>
-  <ion-input disabled={{loading}} inputmode="email" clear-input="true" type="email" formControlName="email" required="true"></ion-input>
-</ion-item>
-<ion-item lines="inset">
-  <ion-label color="dark" position="floating">Password</ion-label>
-  <ion-input disabled={{loading}} clear-input="true" type="password" formControlName="password" required="true"></ion-input>
-</ion-item>
-<ion-item lines="inset">
-  <ion-label color="dark" position="floating">Confirm Password</ion-label>
-  <ion-input disabled={{loading}} clear-input="true" type="password" confirmedPassword="confirmedPassword" required="true"></ion-input>
-</ion-item>
-<ion-button shape="round" expand="block" (click)="createAccountPressed()" fill="clear">
-  Continue
-</ion-button> -->
-
-  <!-- <ion-list lines="inset">
-    <ion-item-divider color="primary">
-      <ion-label>
-        Account Setup
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item-divider color="primary">
-      <ion-label>
-        About You
-      </ion-label>
-    </ion-item-divider>
-
-    <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Add Genre Tags" [autocomplete]="true" 
-      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" class="Tags">
-      </angular-tag-input>
-
-    <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Add Venue Tags" [autocomplete]="true" 
-    [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" class="Tags">
-    </angular-tag-input>
-
-    <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Name</ion-label>
-      <ion-input disabled={{loading}} clear-input="true" [(ngModel)]="name" placeholder="Alias" required="true"></ion-input>
-    </ion-item>
-    <ion-item lines="inset"> 
-      <ion-label color="dark" position="floating">Bio</ion-label>
-      <ion-textarea auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio"
-        required="true"  required="true"></ion-textarea>
-    </ion-item>
-    <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Looking for: </ion-label>
-      <ion-textarea auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor"
-         required="true"  required="true"></ion-textarea>
-    </ion-item>
-
-    <ion-item-divider color="primary">
-      <ion-label>
-        Match Radius
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius'>
-        <ion-label slot="start">0km</ion-label>
-        <ion-label slot="end">100km</ion-label>
-      </ion-range>
-    </ion-item>
-
-  </ion-list> -->
 
 
 
