@@ -2,3 +2,11 @@
   font-size: small;
   margin-bottom: 12px;
 }
+
+.custom-skeleton ion-skeleton-text {
+  line-height: 13px;
+}
+
+.custom-skeleton ion-skeleton-text:last-child {
+  margin-bottom: 5px;
+}

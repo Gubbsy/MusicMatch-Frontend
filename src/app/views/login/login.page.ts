@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/tabs"]);
         }
       } catch {
-        this.loginError = "No account exists with these credentials";
+        this.loginError = "Unable to sign-in user";
       } finally {
         this.loading = false;
       }

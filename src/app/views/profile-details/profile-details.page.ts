@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import AccountAPIService from "src/app/services/api/account/account-api-service";
-import IAccountDetailsResponse from 'src/app/models/response/account/IAccountDetailsResponse';
+import IAccountDetailsResponse from "src/app/models/response/account/IAccountDetailsResponse";
+import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 
 @Component({
   selector: "app-profile-details",
@@ -12,9 +13,11 @@ import IAccountDetailsResponse from 'src/app/models/response/account/IAccountDet
 })
 export class ProfileDetailsPage implements OnInit {
 
-  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder, private accountAPIService: AccountAPIService ) { }
+  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
+    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService) { }
 
   details: IAccountDetailsResponse;
+  loading: boolean = true;
   locationLoading: boolean = false;
 
   genres: string[] = [] ;
@@ -47,21 +50,35 @@ export class ProfileDetailsPage implements OnInit {
   options: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
-};
+  };
 
   async ngOnInit() {
- 
-  const details = await this.accountAPIService.getAcountDetails();
+    
+    try {
 
-  this.lat = details.payload.lat;
-  this.lon = details.payload.lon;
-  this.name = details.payload.name;
-  this.bio = details.payload.bio;
-  this.lookingFor = details.payload.lookingFor;
+      const details = await this.accountAPIService.getAcountDetails();
+
+      if ((details.errors !== null || details !== undefined) &&  details.errors.length > 0 ) {
+        details.errors.forEach(e => {
+          this.errorToastService.showMultipleToast(e);
+        });
+      } else {
+        this.lat = details.payload.lat;
+        this.lon = details.payload.lon;
+        this.name = details.payload.name;
+        this.bio = details.payload.bio;
+        this.lookingFor = details.payload.lookingFor;
+        this.matchRadius = details.payload.matchRadius;
+        
+        this.genres = details.payload.genres;
+        this.venues = details.payload.venues;
+        this.loading = false;
+      }
+    } catch {
+      this.errorToastService.showMultipleToast("Oops something went wrong");
+    }
   
-  this.genres = details.payload.genres;
-  this.venues = details.payload.venues;
- 
+    this.postCodeFromLatLon();
   }
 
   routeBack() {
@@ -73,14 +90,34 @@ export class ProfileDetailsPage implements OnInit {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.lat = resp.coords.latitude;
       this.lon = resp.coords.longitude;
-      this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.options)
-        .then((result: NativeGeocoderResult[]) => this.postcode = result[0].postalCode)
-          .catch((error: any) => console.log(error));
+      this.postCodeFromLatLon();
       this.locationLoading = false;
      }).catch((error) => {
        console.log("Error getting location", error);
      });
-     
+  }
+
+  postCodeFromLatLon() {
+    this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.options)
+    .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
+      .catch((error: any) => console.log(error));
+  }
+
+  async saveChanges() {
+    console.log("Match Radius", this.matchRadius);
+
+    try {
+      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+
+      if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
+        response.errors.forEach(e => {
+          this.errorToastService.showMultipleToast(e);
+        });
+      }
+    } catch {
+      this.errorToastService.showMultipleToast("Oops something went wrong");
+    }
+    
   }
   
 }
