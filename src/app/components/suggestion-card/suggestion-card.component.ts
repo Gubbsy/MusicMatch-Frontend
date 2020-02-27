@@ -28,16 +28,16 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
 
   userClickedButton(event, heart) {
     event.preventDefault();
-    if (!this.cards.length) return false;
+    if (!this.cards.length) { return false; }
     if (heart) {
-      this.renderer.setStyle(this.suggestionCardsArray[0].nativeElement, 'transform', 'translate(' + this.moveOutWidth + 'px, -100px) rotate(-30deg)');
-      this.toggleChoiceIndicator(false,true);
+      this.renderer.setStyle(this.suggestionCardsArray[0].nativeElement, "transform", "translate(" + this.moveOutWidth + "px, -100px) rotate(-30deg)");
+      this.toggleChoiceIndicator(false, true);
       this.emitChoice(heart, this.cards[0]);
     } else {
-      this.renderer.setStyle(this.suggestionCardsArray[0].nativeElement, 'transform', 'translate(-' + this.moveOutWidth + 'px, -100px) rotate(30deg)');
-      this.toggleChoiceIndicator(true,false);
+      this.renderer.setStyle(this.suggestionCardsArray[0].nativeElement, "transform", "translate(-" + this.moveOutWidth + "px, -100px) rotate(30deg)");
+      this.toggleChoiceIndicator(true, false);
       this.emitChoice(heart, this.cards[0]);
-    };
+    }
     this.shiftRequired = true;
     this.transitionInProgress = true;
   }
@@ -62,6 +62,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
     this.renderer.setStyle(this.suggestionCardsArray[0].nativeElement, "transform", "translate(" + event.deltaX + "px, " + event.deltaY + "px) rotate(" + rotate + "deg)");
 
     this.shiftRequired = true;
+
   }
 
   handlePanEnd(event) {
@@ -113,7 +114,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
 
   emitChoice(heart, card) {
     this.choiceMade.emit({
-      choice: heart,
+      liked: heart,
       payload: card
     });
   }
@@ -125,7 +126,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
       this.suggestionCardsArray = this.suggestionCards.toArray();
     });
   }
-  
+
   ngOnInit() {}
 
 }

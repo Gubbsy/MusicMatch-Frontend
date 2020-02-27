@@ -41,4 +41,9 @@ export class SuggestionFeedPage {
     ]
   }
 
+  logChoice(event){
+    console.log(event);
+  
+  }
+
 }
