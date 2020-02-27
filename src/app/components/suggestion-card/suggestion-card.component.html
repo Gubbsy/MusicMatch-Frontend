@@ -27,13 +27,15 @@
       <ion-card >
         <img src="/assets/shapes.svg" alt="" />
         <ion-card-header>
-          <ion-card-subtitle>Venues</ion-card-subtitle>
-          <ion-card-subtitle>Genres</ion-card-subtitle>
           <ion-card-title>{{ card.name }} </ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <ion-card-content>{{card.bio}}
+          <ion-card-subtitle>Venues</ion-card-subtitle>
+          <ion-badge *ngFor="let venue of card.venues" color="primary">{{venue}}</ion-badge>
+          <ion-card-subtitle>Genres</ion-card-subtitle>
+          <ion-badge *ngFor="let genre of card.genres" color="primary">{{genre}}</ion-badge>
         </ion-card-content>
+       
       </ion-card>
     </div>
     

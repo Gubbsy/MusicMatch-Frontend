@@ -8,6 +8,21 @@
   top: 0;
 }
 
+ion-badge {
+  margin-right: 2px;
+  margin-bottom: 2px;
+  padding: 3px;
+}
+
+ion-card-subtitle {
+  font-weight: bold;
+  margin: 3px;
+}
+
+ion-card-content {
+  font-size: small;
+}
+
 .suggestions--status {
   position: absolute;
   top: 50%;
@@ -19,12 +34,12 @@
 }
 
 .suggestions--cards {
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
   position: fixed;
-  margin-top: 30px;
-  justify-content: flex-start;
+  margin-top: -40px;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
