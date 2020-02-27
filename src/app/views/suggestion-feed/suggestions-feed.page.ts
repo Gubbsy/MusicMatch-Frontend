@@ -9,8 +9,36 @@ export class SuggestionFeedPage {
 
   private pageTitle = "Suggested Matches";
 
-  suggestions: number = 5;
+  cards = [];
 
-  constructor() {}
+  constructor() {
+    this.loadSuggestionCards();
+  }
+
+  loadSuggestionCards() {
+    this.cards = [
+      {
+        name: "Boris"
+      },
+      {
+        name: "Bill"
+      },
+      {
+        name: "Mandy"
+      },
+      {
+        name: "Dehierdra"
+      },
+      {
+        name: "Mr Krabs"
+      },
+      {
+        name: "Aids Boi"
+      },
+      {
+        name: "Lol Cats"
+      },
+    ]
+  }
 
 }

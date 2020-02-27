@@ -1,11 +1,44 @@
-<ion-card class="suggestions-card">
-  <img src="/assets/shapes.svg" alt="" />
-  <ion-card-header>
-    <ion-card-subtitle>Venues</ion-card-subtitle>
-    <ion-card-subtitle>Genres</ion-card-subtitle>
-    <ion-card-title>Profile Name </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-  </ion-card-content>
-</ion-card>
+<div class="suggestions" [hidden]="!cards">
+
+  <div class="suggestions--status">
+
+    <div>
+
+    </div>
+
+    <div>
+
+    </div>
+  </div>
+
+  <div class="suggestions--cards">
+
+    <ion-card #suggestionCard class="suggestions--card" *ngFor="let card of cards; let i = index"
+    [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
+      <img src="/assets/shapes.svg" alt="" />
+      <ion-card-header>
+        <ion-card-subtitle>Venues</ion-card-subtitle>
+        <ion-card-subtitle>Genres</ion-card-subtitle>
+        <ion-card-title>{{ card.name }} </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <div class="suggestions--buttons">
+    <ion-button>
+      Like
+    </ion-button>
+
+    <ion-button>
+      Don't Like
+    </ion-button>
+
+  </div>
+
+  
+</div>
+
