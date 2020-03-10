@@ -1,5 +1,4 @@
 <app-page-header title="{{pageTitle}}"></app-page-header>
-<p *ngIf="!cards">No matches in your current radius</p>
 <ion-content>
     <app-suggestion-card (choiceMade)="logChoice($event)" [cards]="cards"></app-suggestion-card>
 </ion-content>
