@@ -43,13 +43,19 @@
   </div>
 
   <div class="suggestions--buttons">
-    <button (click)="userClickedButton($event, false)">
-      <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <svg:path
-              d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"
-              fill="#CDD6DD" />
-      </svg>
-    </button>
+    <ion-fab (click)="userClickedButton($event, true)" horizontal="end">
+      <ion-fab-button>
+        <ion-icon name="happy"></ion-icon>
+      </ion-fab-button>
+
+    </ion-fab>
+    <ion-fab (click)="userClickedButton($event, false)" horizontal="start">
+      <ion-fab-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+
 
   <button (click)="userClickedButton($event, true)">
     <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

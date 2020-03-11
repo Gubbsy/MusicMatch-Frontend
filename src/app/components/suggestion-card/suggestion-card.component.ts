@@ -111,10 +111,11 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
   }
 
   emitChoice(heart, card) {
-    this.choiceMade.emit({
+    const payload: ISuggestionsEvent = {
       liked: heart,
-      payload: card
-    });
+      card: card
+    };
+    this.choiceMade.emit(payload);
   }
 
   ngAfterViewInit() {

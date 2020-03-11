@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import IAccountDetailsResponse from "src/app/models/response/account/IAccountDetailsResponse";
 import SuggestionsAPIService from "src/app/services/api/suggestions/suggestions-api.service";
-import ErrorToastService from 'src/app/services/error-handling/error-toast.service';
+import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 
 @Component({
   selector: "app-sugestions",
@@ -26,9 +26,9 @@ export class SuggestionFeedPage {
         response.errors.forEach(e => {
           this.errorToastService.showMultipleToast(e);
         });
-      
-      this.cards = response.payload;
       }
+      this.cards = response.payload;
+      
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
@@ -36,8 +36,21 @@ export class SuggestionFeedPage {
     console.log(this.cards);
   }
 
-  logChoice(event) { 
-    console.log(event);
+  async sendChoice(event: ISuggestionsEvent) { 
+    console.log(event.liked, event.card);
+    try {
+      const response = await this.suggestionsService.RespondToSuggestion(event.card.id, event.liked);
+
+      if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
+        response.errors.forEach(e => {
+          this.errorToastService.showMultipleToast(e);
+        });
+      }
+      console.log("Did Match: ", response.payload.didMatch);
+
+    } catch {
+      this.errorToastService.showMultipleToast("Oops something went wrong");
+    }
   }
 
 }
