@@ -33,6 +33,24 @@ ion-card-content {
   pointer-events: none;
 }
 
+.suggestions--status ion-icon {
+  position: absolute;
+  width: 100px;
+  margin-left: -50px; 
+  font-size: 100px;
+  border-radius: 50px;
+}
+
+.like ion-icon {
+  color: green;
+}
+
+.dismiss ion-icon {
+  color: red;
+  font-size: 100px;
+  border-radius: 50px;
+}
+
 .suggestions--cards {
   text-align: left;
   display: flex;
@@ -73,12 +91,6 @@ ion-card-content {
   transition: all 0.3s ease-in-out;
 }
 
-.suggestions--status svg {
-  transition: all 0.3s ease-in-out;
-  position: absolute;
-  width: 100px;
-  margin-left: -50px;
-}
 
 .suggestions--buttons {
   position: absolute;
@@ -91,7 +103,9 @@ ion-card-content {
   right: 0;
 }
 
-ion-icon {
+
+
+.suggestions--buttons ion-icon {
   color: white;
   font-size: 40px;
   border-radius: 50px;
