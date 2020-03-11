@@ -18,8 +18,11 @@ export class SuggestionFeedPage {
   }
 
   async loadSuggestionCards() {
-    this.cards =  (await this.suggestionsService.GetSuggestions()).payload;
-    console.log(this.cards.length);
+    const response = await this.suggestionsService.GetSuggestions();
+    //TODO: Error Checking
+
+    this.cards = response.payload;
+    console.log(this.cards);
   }
 
   logChoice(event) { 
