@@ -1,13 +1,4 @@
 <app-page-header title="{{pageTitle}}"></app-page-header>
 <ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle>This will be a suggested profile</ion-card-subtitle>
-        <ion-card-title>Profile Name </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-      </ion-card-content>
-    </ion-card>
+    <app-suggestion-card (choiceMade)="logChoice($event)" [cards]="cards"></app-suggestion-card>
 </ion-content>
