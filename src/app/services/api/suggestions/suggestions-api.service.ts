@@ -15,4 +15,13 @@ export default class SuggestionsAPIService extends APIService {
   async GetSuggestions(): Promise<IAPIResponse<ISuggestionsResponse[]>> {
     return await this.post<ISuggestionsResponse[]>("getsuggestions", null);
   }
+
+  async RespondToSuggestion(suggestedUserId: string, requestMatch: boolean): Promise<IAPIResponse<IRespondToSuggestionResponse>> {
+    const payload: IRespondToSuggestionsRequest = {
+      suggestedUserId: suggestedUserId,
+      requestMatch: requestMatch
+    };
+
+    return await this.post<IRespondToSuggestionResponse>("respondtosuggestion", payload);
+  }
 }
