@@ -1,9 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>account-page</ion-title>
+    <ion-title>{{ profileDetails.name }}</ion-title>
+    <ion-button color="dark" slot="start" fill="clear" (click)="routeBack()" size="large" routerDirection="back">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <img src="/assets/shapes.svg" alt="" />
 
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text color="primary">
+        <h1>{{ profileDetails.distance}} Km Away</h1>
+      </ion-text>
+      <br>
+      <ion-text>
+        <p>{{ profileDetails.bio}}</p>
+      </ion-text>
+      <br>
+      <ion-text color="primary">
+        <h2>Looking For: </h2>
+      </ion-text>
+      <ion-text>
+        <p>{{ profileDetails.lookingFor}}</p>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text color="primary">
+        <h2>Genres: </h2>
+      </ion-text>
+      <ion-badge *ngFor="let genre of profileDetails.genres" color="primary">{{genre}}</ion-badge>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <ion-text color="primary">
+        <h2>Venues: </h2>
+      </ion-text>
+      <ion-badge *ngFor="let venue of profileDetails.venues" color="primary">{{venue}}</ion-badge>
+    </ion-label>
+  </ion-item>
+  
 </ion-content>

@@ -22,7 +22,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private router: Router) { }
 
   userClickedButton(event, heart) {
     event.preventDefault();
@@ -124,6 +124,10 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
     this.suggestionCards.changes.subscribe(() => {
       this.suggestionCardsArray = this.suggestionCards.toArray();
     });
+  }
+
+  viewAccountPage() {
+    this.router.navigate(["/account-page"], {state: {data: this.cards[0]}});
   }
 
   ngOnInit() {}

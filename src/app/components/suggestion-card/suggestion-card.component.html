@@ -18,8 +18,16 @@
       <ion-card >
         <img src="/assets/shapes.svg" alt="" />
         <ion-card-header>
-          <ion-card-title>{{ card.name }} </ion-card-title>
-          <ion-card-subtitle>{{ card.distance }} Killometers Away</ion-card-subtitle>
+          <div>  
+            <ion-card-title>{{ card.name }} </ion-card-title>
+          <ion-card-subtitle>{{ card.distance }} Km Away</ion-card-subtitle>
+          </div>
+          <div>
+            <ion-button size="small" shape="round" (click)="viewAccountPage()" >
+              <ion-icon name="information-circle"></ion-icon>
+            </ion-button>
+          </div>
+          
         </ion-card-header>
         <ion-card-content>{{card.bio}}
           <ion-card-subtitle>Venues</ion-card-subtitle>
