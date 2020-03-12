@@ -29,7 +29,11 @@
           </div>
           
         </ion-card-header>
-        <ion-card-content>{{card.bio}}
+        <ion-card-content>
+          <ion-text>
+            <p class="bio"> {{card.bio}} </p>
+          </ion-text>
+          <br>
           <ion-card-subtitle>Venues</ion-card-subtitle>
           <ion-badge *ngFor="let venue of card.venues" color="primary">{{venue}}</ion-badge>
           <ion-card-subtitle>Genres</ion-card-subtitle>

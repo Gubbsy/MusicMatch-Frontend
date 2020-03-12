@@ -8,6 +8,11 @@
   top: 0;
 }
 
+.bio {
+  overflow: hidden;
+  max-height: 110px;
+}
+
 ion-card-header {
  display: flex;
  align-items: center;
@@ -27,6 +32,10 @@ ion-card-subtitle {
 
 ion-card-content {
   font-size: small;
+}
+
+ion-card {
+  height: 450px;
 }
 
 .suggestions--status {
