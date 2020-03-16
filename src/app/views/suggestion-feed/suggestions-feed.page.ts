@@ -3,9 +3,10 @@ import IAccountDetailsResponse from "src/app/models/response/account/IAccountDet
 import SuggestionsAPIService from "src/app/services/api/suggestions/suggestions-api.service";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 import { ToastController } from "@ionic/angular";
+import { Roles } from "src/app/utils/roles.enum.event";
 
 @Component({
-  selector: "app-sugestions",
+  selector: "app-suggestions",
   templateUrl: "suggestions-feed.page.html",
   styleUrls: ["suggestions-feed.page.scss"]
 })
@@ -32,7 +33,7 @@ export class SuggestionFeedPage {
         });
       }
       this.cards = response.payload;
-      this.currentlyViewedCards = this.cards.filter(x => x.role === this.currentRoleView);
+      this.filterCardsByRole();
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
@@ -74,8 +75,18 @@ export class SuggestionFeedPage {
     matchToast.present();
   }
 
-  toggleViewingRole(ev: any) {
-    this.currentRoleView =  ev.detail.value;
+  toggleViewingRole() {
+    if (this.currentRoleView === Roles.ARTIST) {
+      this.currentRoleView = Roles.EVENTS_MANAGER;
+    } else {
+      this.currentRoleView = Roles.ARTIST;
+    }
+
+    this.filterCardsByRole();
+    
+  }
+
+  filterCardsByRole() {
     this.currentlyViewedCards = this.cards.filter( x => x.role === this.currentRoleView);
   }
 
