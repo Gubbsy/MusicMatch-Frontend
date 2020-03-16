@@ -1,0 +1,132 @@
+.suggestions {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgb(206, 204, 204);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.bio {
+  overflow: hidden;
+  max-height: 108px;
+}
+
+ion-card-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+
+ion-badge {
+  margin-right: 2px;
+  margin-bottom: 2px;
+  padding: 3px;
+}
+
+ion-card-subtitle {
+  font-weight: bold;
+  margin: 3px;
+}
+
+ion-card-content {
+  font-size: small;
+}
+
+ion-card {
+  height: 450px;
+}
+
+.suggestions--status {
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.suggestions--status ion-icon {
+  position: absolute;
+  width: 100px;
+  margin-left: -50px; 
+  font-size: 100px;
+  border-radius: 50px;
+}
+
+.like ion-icon {
+  color: green;
+}
+
+.dismiss ion-icon {
+  color: red;
+  font-size: 100px;
+  border-radius: 50px;
+}
+
+.suggestions--cards {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.suggestions--card {
+  display: inline-block;
+  width: 80%;
+  height: 70%;
+  background: #FFFFFF;
+  padding-bottom: 40px;
+  margin-top: -60px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+.moving.suggestions--card {
+  transition: none;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  cursor: grabbing;
+}
+
+.suggestions--status > div {
+  transition: all 0.3s ease-in-out;
+}
+
+
+.suggestions--buttons {
+  padding-bottom: 50px ;
+  position: absolute;
+  margin: 0 auto;
+  max-width: 40%;
+  flex: 0 0 100px;
+  text-align: center;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+
+.suggestions--buttons ion-icon {
+  color: white;
+  font-size: 40px;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+}
+
+.suggestions--buttons button:focus {
+  outline: 0;
+}

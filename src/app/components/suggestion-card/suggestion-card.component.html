@@ -1,0 +1,63 @@
+<div class="suggestions" [hidden]="!cards">
+  <div class="suggestions--status">
+    <div [style.opacity]="crossVisible? '1':'0'" class="dismiss">
+      <ion-icon name="close" ></ion-icon>
+    </div>
+
+    <div [style.opacity]="heartVisible? '1':'0'" class="like">
+      <ion-icon name="happy"></ion-icon>
+    </div>
+  </div>
+
+  <div class="suggestions--cards" (pan)="handlePan($event)" (panend)="handlePanEnd($event)">
+
+    <div #suggestionCard class="suggestions--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
+      [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
+    
+      <ion-card >
+        <img src="/assets/shapes.svg" alt="" />
+        <ion-card-header>
+          <div>  
+            <ion-card-title>{{ card.name }} </ion-card-title>
+          <ion-card-subtitle>{{ card.distance }} Km Away</ion-card-subtitle>
+          </div>
+          <div>
+            <ion-button size="small" shape="round" (click)="viewAccountPage()" >
+              <ion-icon name="information-circle"></ion-icon>
+            </ion-button>
+          </div>
+          
+        </ion-card-header>
+        <ion-card-content>
+          <ion-text>
+            <p class="bio"> {{card.bio}} </p>
+          </ion-text>
+          <br>
+          <ion-card-subtitle>Venues</ion-card-subtitle>
+          <ion-badge *ngFor="let venue of card.venues" color="primary">{{venue}}</ion-badge>
+          <ion-card-subtitle>Genres</ion-card-subtitle>
+          <ion-badge *ngFor="let genre of card.genres" color="primary">{{genre}}</ion-badge>
+        </ion-card-content>
+       
+      </ion-card>
+    </div>
+    
+
+  </div>
+
+  <div class="suggestions--buttons">
+    <ion-fab (click)="userClickedButton($event, true)" horizontal="end">
+      <ion-fab-button>
+        <ion-icon name="happy"></ion-icon>
+      </ion-fab-button>
+
+    </ion-fab>
+    <ion-fab (click)="userClickedButton($event, false)" horizontal="start">
+      <ion-fab-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+</div>
+

@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: "tabs",
     loadChildren: () => import("./views/tabs/tabs.module").then(m => m.TabsPageModule)
+  },
+  {
+    path: "account-page",
+    loadChildren: () => import("./views/account-page/account-page.module").then( m => m.AccountPagePageModule)
   }
 ];
 
