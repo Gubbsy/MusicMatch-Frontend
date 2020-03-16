@@ -6,4 +6,5 @@ interface ISuggestionsResponse {
   lookingFor: string;
   genres: string[];
   venues: string[];
+  role: string;
 }

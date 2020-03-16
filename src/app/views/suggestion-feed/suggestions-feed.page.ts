@@ -13,7 +13,10 @@ export class SuggestionFeedPage {
 
   private pageTitle = "Suggested Matches";
 
+  private currentRoleView = "artist";
+
   cards: ISuggestionsResponse[];
+  currentlyViewedCards: ISuggestionsResponse[];
 
   constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController) {
     this.loadSuggestionCards();
@@ -29,7 +32,7 @@ export class SuggestionFeedPage {
         });
       }
       this.cards = response.payload;
-      
+      this.currentlyViewedCards = this.cards.filter(x => x.role === this.currentRoleView);
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
@@ -53,6 +56,8 @@ export class SuggestionFeedPage {
         this.displayMatch(event.card.name);
       }
 
+      this.cards = this.cards.filter(x => x.id !== event.card.id);
+
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
@@ -67,6 +72,11 @@ export class SuggestionFeedPage {
       color: "tertiary"
     });
     matchToast.present();
+  }
+
+  toggleViewingRole(ev: any) {
+    this.currentRoleView =  ev.detail.value;
+    this.currentlyViewedCards = this.cards.filter( x => x.role === this.currentRoleView);
   }
 
 }

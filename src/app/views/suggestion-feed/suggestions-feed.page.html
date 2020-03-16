@@ -1,4 +1,14 @@
 <app-page-header title="{{pageTitle}}"></app-page-header>
+
+<ion-segment (ionChange)="toggleViewingRole($event)" value="artist">
+  <ion-segment-button value="artist">
+    <ion-label>Artists</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="events manager">
+    <ion-label>Events <br> Managers</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
 <ion-content>
-    <app-suggestion-card (choiceMade)="sendChoice($event)" [cards]="cards"></app-suggestion-card>
+    <app-suggestion-card (choiceMade)="sendChoice($event)" [cards]="currentlyViewedCards"></app-suggestion-card>
 </ion-content>

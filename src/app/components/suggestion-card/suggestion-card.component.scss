@@ -71,7 +71,6 @@ ion-card {
   display: flex;
   flex-direction: column;
   position: fixed;
-  margin-top: -40px;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -85,6 +84,7 @@ ion-card {
   height: 70%;
   background: #FFFFFF;
   padding-bottom: 40px;
+  margin-top: -60px;
   border-radius: 8px;
   overflow: hidden;
   position: absolute;
