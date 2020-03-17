@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class AccountPagePage implements OnInit {
 
-  profileDetails: ISuggestionsResponse;
+  profileDetails: IReturnedUserResponse;
 
   constructor(private location: Location, private router: Router) { }
 

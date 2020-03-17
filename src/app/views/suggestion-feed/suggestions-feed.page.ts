@@ -16,8 +16,8 @@ export class SuggestionFeedPage {
 
   private currentRoleView = "artist";
 
-  cards: ISuggestionsResponse[];
-  currentlyViewedCards: ISuggestionsResponse[];
+  cards: IReturnedUserResponse[];
+  currentlyViewedCards: IReturnedUserResponse[];
 
   constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController) {
     this.loadSuggestionCards();
