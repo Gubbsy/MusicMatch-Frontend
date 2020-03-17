@@ -5,4 +5,14 @@
       <ion-icon name="person"></ion-icon>
     </ion-button>
   </ion-toolbar>
+
+  <ion-segment (ionChange)="toggleViewingRole()" [value]="currentRoleView">
+    <ion-segment-button value="artist">
+      <ion-label>Artists</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="events manager">
+      <ion-label>Events <br> Managers</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
 </ion-header>

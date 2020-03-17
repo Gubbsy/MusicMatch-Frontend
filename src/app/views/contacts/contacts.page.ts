@@ -1,18 +1,29 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import MatchesAPIService from "src/app/services/api/matches/matches-api.service";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
+import { CurrentRoleViewService } from "src/app/services/observables/current-role-view.service";
+import { Roles } from "src/app/utils/roles.enum.event";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-contacts",
   templateUrl: "contacts.page.html",
   styleUrls: ["contacts.page.scss"]
 })
-export class ContactsPage {
+export class ContactsPage implements OnInit {
 
   private pageTitle = "Contacts";
   matches: IReturnedUserResponse[];
+  currentlyViewedMatches: IReturnedUserResponse[];
+  currentRoleView: Roles;
+  currentRoleViewSubscription: Subscription;
 
-  constructor(private matchesAPIService: MatchesAPIService, private errorToastService: ErrorToastService) {
+  constructor(private matchesAPIService: MatchesAPIService, private errorToastService: ErrorToastService, private currentRoleViewService: CurrentRoleViewService) {
+    this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.roleFilterUpdated(currentRoleView));
+  }
+
+  ngOnInit(): void {
+    this.currentRoleView = this.currentRoleViewService.getCurrentRoleView();
     this.loadMatches();
   }
 
@@ -27,9 +38,19 @@ export class ContactsPage {
       }
 
       this.matches = response.payload;
+      this.filterContactsByRole();
+
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
   }
   
+  filterContactsByRole() {
+    this.currentlyViewedMatches = this.matches.filter( x => x.role === this.currentRoleView);
+  }
+  
+  roleFilterUpdated(newRoleFilter: Roles) {
+    this.currentRoleView = newRoleFilter;
+    this.filterContactsByRole();
+  }
 }
