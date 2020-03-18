@@ -4,13 +4,14 @@
   <ion-list>
 
 
-    <ion-item  *ngFor="let match of currentlyViewedMatches">
+    <ion-item  *ngFor="let match of currentlyViewedMatches" (click)="viewMatchProfile(match)" class="ion-activatable ">
       <ion-avatar slot="start">
         <img src="/assets/shapes.svg">
       </ion-avatar>
       <ion-label>
         <h1>{{ match.name }}</h1>
       </ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
     </ion-item>
 
   

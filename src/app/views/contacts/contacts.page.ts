@@ -4,6 +4,7 @@ import ErrorToastService from "src/app/services/error-handling/error-toast.servi
 import { CurrentRoleViewService } from "src/app/services/observables/current-role-view.service";
 import { Roles } from "src/app/utils/roles.enum.event";
 import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-contacts",
@@ -18,7 +19,8 @@ export class ContactsPage implements OnInit {
   currentRoleView: Roles;
   currentRoleViewSubscription: Subscription;
 
-  constructor(private matchesAPIService: MatchesAPIService, private errorToastService: ErrorToastService, private currentRoleViewService: CurrentRoleViewService) {
+  constructor(private matchesAPIService: MatchesAPIService, private errorToastService: ErrorToastService, 
+    private currentRoleViewService: CurrentRoleViewService, private router: Router) {
     this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.roleFilterUpdated(currentRoleView));
   }
 
@@ -53,5 +55,11 @@ export class ContactsPage implements OnInit {
     this.currentRoleView = newRoleFilter;
     this.loadMatches();
     this.filterContactsByRole();
+  }
+
+  viewMatchProfile(match: IReturnedUserResponse) {
+    setTimeout(() => {
+      this.router.navigate(["/account-page"], {state: {data: match}}); } , 200);
+    
   }
 }
