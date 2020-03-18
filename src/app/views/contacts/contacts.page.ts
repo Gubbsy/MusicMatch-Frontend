@@ -51,6 +51,7 @@ export class ContactsPage implements OnInit {
   
   roleFilterUpdated(newRoleFilter: Roles) {
     this.currentRoleView = newRoleFilter;
+    this.loadMatches();
     this.filterContactsByRole();
   }
 }

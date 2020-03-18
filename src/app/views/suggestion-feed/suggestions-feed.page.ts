@@ -85,6 +85,7 @@ export class SuggestionFeedPage implements OnInit {
 
   roleFilterUpdated(newRoleFilter: Roles) {
     this.currentRoleView = newRoleFilter;
+    this.loadSuggestionCards();
     this.filterCardsByRole();
   }
 
