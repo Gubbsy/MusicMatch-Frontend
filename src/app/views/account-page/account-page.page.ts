@@ -15,7 +15,6 @@ export class AccountPagePage implements OnInit {
 
   ngOnInit() {
     this.profileDetails = history.state.data;
-    console.log("Sent data: ", this.profileDetails);
   }
 
   routeBack() {

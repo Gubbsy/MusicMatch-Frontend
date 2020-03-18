@@ -6,11 +6,11 @@
     </ion-button>
   </ion-toolbar>
 
-  <ion-segment (ionChange)="toggleViewingRole()" [value]="currentRoleView">
-    <ion-segment-button value="artist">
+  <ion-segment value="{{ currentRoleView }}">
+    <ion-segment-button (click)="toggleViewingRole()" value="artist">
       <ion-label>Artists</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="events manager">
+    <ion-segment-button (click)="toggleViewingRole()" value="events manager">
       <ion-label>Events <br> Managers</ion-label>
     </ion-segment-button>
   </ion-segment>

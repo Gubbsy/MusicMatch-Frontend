@@ -14,16 +14,14 @@ export class PageHeaderComponent implements OnInit {
   currentRoleViewSubscription: Subscription;
 
   constructor(private router: Router, private currentRoleViewService: CurrentRoleViewService) { 
-   
+    this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( newRoleView => this.setCurrentRoleView(newRoleView));
   }
   
   @Input()
   private title: string;
 
   ngOnInit() {
-    this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.currentRoleView = currentRoleView);
     this.currentRoleView = this.currentRoleViewService.getCurrentRoleView();
-    console.log("Current role viewing on innit: ", this.currentRoleView);
   }
 
   viewProfile() {
@@ -33,11 +31,14 @@ export class PageHeaderComponent implements OnInit {
   toggleViewingRole() {
     if (this.currentRoleView === Roles.ARTIST) {
       this.currentRoleViewService.setRoleView(Roles.EVENTS_MANAGER);
+      this.currentRoleView = Roles.EVENTS_MANAGER;
     } else {
       this.currentRoleViewService.setRoleView(Roles.ARTIST);
+      this.currentRoleView = Roles.ARTIST;
     }
+  }
 
-    console.log("Current Role View: ", this.currentRoleView);
-    
+  setCurrentRoleView(newRoleView: Roles) {
+    this.currentRoleView = newRoleView;
   }
 }

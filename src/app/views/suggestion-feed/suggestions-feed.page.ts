@@ -45,12 +45,9 @@ export class SuggestionFeedPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
-
-    console.log(this.cards);
   }
 
   async sendChoice(event: ISuggestionsEvent) { 
-    console.log(event.liked, event.card);
     try {
       const response = await this.suggestionsService.RespondToSuggestion(event.card.id, event.liked);
 
@@ -59,7 +56,6 @@ export class SuggestionFeedPage implements OnInit {
           this.errorToastService.showMultipleToast(e);
         });
       }
-      console.log("Did Match: ", response.payload.didMatch);
 
       if (response.payload.didMatch) {
         this.displayMatch(event.card.name);
