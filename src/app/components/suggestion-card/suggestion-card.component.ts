@@ -9,7 +9,7 @@ import IAccountDetailsResponse from "src/app/models/response/account/IAccountDet
 })
 export class SuggestionCardComponent implements OnInit, AfterViewInit {
 
-  @Input() cards: ISuggestionsResponse[];
+  @Input() cards: IReturnedUserResponse[];
 
   @ViewChildren("suggestionCard") suggestionCards: QueryList<ElementRef>;
   suggestionCardsArray: Array<ElementRef>;

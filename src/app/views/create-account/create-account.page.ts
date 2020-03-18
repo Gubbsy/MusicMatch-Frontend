@@ -65,7 +65,6 @@ export class CreateAccountPage implements OnInit {
 
   changeRole(event) {
     this.accountRole = event.target.value;
-    console.log("Role ", this.accountRole);
   }
 
   async submit() {

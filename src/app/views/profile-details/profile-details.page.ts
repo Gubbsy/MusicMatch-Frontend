@@ -17,8 +17,7 @@ export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService) { 
-    }
+    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService) { }
 
   details: IAccountDetailsResponse;
   loading: boolean = true;

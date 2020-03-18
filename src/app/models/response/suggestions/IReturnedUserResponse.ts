@@ -1,4 +1,4 @@
-interface ISuggestionsResponse {
+interface IReturnedUserResponse {
   id: string;
   name: string;
   distance: number;

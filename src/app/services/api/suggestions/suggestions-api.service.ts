@@ -12,8 +12,8 @@ export default class SuggestionsAPIService extends APIService {
     super(http, "suggestions/");
   }
 
-  async GetSuggestions(): Promise<IAPIResponse<ISuggestionsResponse[]>> {
-    return await this.post<ISuggestionsResponse[]>("getsuggestions", null);
+  async GetSuggestions(): Promise<IAPIResponse<IReturnedUserResponse[]>> {
+    return await this.post<IReturnedUserResponse[]>("getsuggestions", null);
   }
 
   async RespondToSuggestion(suggestedUserId: string, requestMatch: boolean): Promise<IAPIResponse<IRespondToSuggestionResponse>> {
