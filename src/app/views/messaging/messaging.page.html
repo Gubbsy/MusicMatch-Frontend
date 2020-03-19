@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>messaging</ion-title>
+    <ion-title>{{ messageRecipient.name }}</ion-title>
+    <ion-button color="dark" slot="start" fill="clear" (click)="routeBack()" size="large" routerDirection="back">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

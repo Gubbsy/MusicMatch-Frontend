@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-messaging",
@@ -7,9 +8,17 @@ import { Component, OnInit } from "@angular/core";
 })
 export class MessagingPage implements OnInit {
 
-  constructor() { }
+  messageRecipient: IReturnedUserResponse;
+
+  constructor(private location: Location) { }
 
   ngOnInit() {
+    this.messageRecipient = history.state.data;
+    console.log("Message Recipent: ", this.messageRecipient);
+  }
+
+  routeBack() {
+    this.location.back();
   }
 
 }

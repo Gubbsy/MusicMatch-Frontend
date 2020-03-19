@@ -62,7 +62,8 @@ export class ContactsPage implements OnInit {
       this.router.navigate(["/account-page"], {state: {data: match}}); } , 200);
   }
 
-  messageMatch() {
-    this.router.navigate(["/messaging"]);
+  messageMatch(match: IReturnedUserResponse) {
+    setTimeout(() => {
+      this.router.navigate(["/messaging"], {state: {data: match}}); } , 200);
   }
 }
