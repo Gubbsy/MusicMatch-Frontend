@@ -6,12 +6,14 @@ import { IonicModule } from "@ionic/angular";
 
 import { MessagingPage } from "./messaging.page";
 import { RouterModule } from "@angular/router";
+import { AutosizeModule } from "ngx-autosize";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AutosizeModule,
     RouterModule.forChild([{ path: "", component: MessagingPage }])
   ],
   declarations: [MessagingPage]
