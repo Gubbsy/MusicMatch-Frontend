@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, NgZone } from "@angular/core";
 import { Location } from "@angular/common";
-import { IonContent } from '@ionic/angular';
+import { IonContent } from "@ionic/angular";
+import IMessage from "src/app/models/chat/IMessage";
+import { ChatService } from "src/app/services/chat/chat.service";
 
 @Component({
   selector: "app-messaging",
@@ -13,29 +15,17 @@ export class MessagingPage implements OnInit {
 
   messageRecipient: IReturnedUserResponse;
 
-  messages = [
-    {
-      user: "Boris",
-      msg: "Lock yourselves in doors! Do not panic buy! Feed on the old lady next door if you must...",
-      createdAt: 1554090856000  
-    },
-    {
-      user: "Simon",
-      msg: "Can we not just kill off the infected, go to the Winchester and wait for this whole thing to just blow over?",
-      createdAt: 1554090956000  
-    },
-    {
-      user: "Boris",
-      msg: "no...",
-      createdAt: 1554091056000  
-    },
-  ];
+  messages: IMessage[] = [];
 
   currentUser = "Simon";
 
-  newMsg: string;
+  newMsg: IMessage;
+  newMsgText: string;
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone) 
+  {
+    this.subscribeToEvents(); 
+  }
 
   ngOnInit() {
     this.messageRecipient = history.state.data;
@@ -46,17 +36,32 @@ export class MessagingPage implements OnInit {
   }
 
   sendMessage() {
-    this.messages.push({
-      user: "Simon",
-      msg: this.newMsg,
-      createdAt: new Date().getTime()
-    });
 
-    this.newMsg = "";
+    this.newMsg = {
+      userId: this.messageRecipient.id,
+      date: new Date().getTime().toString(),
+      message: this.newMsgText,
+      type: "sent"
+    };
+
+    this.chatService.sendMessage(this.newMsg);
+    this.messages.push(this.newMsg);
+    this.newMsgText = "";
 
     setTimeout(() => {
       this.content.scrollToBottom(200);
     });
   }
+
+  private subscribeToEvents(): void {  
+    this.chatService.messageReceived.subscribe((message: IMessage) => {  
+      this.ngZone.run(() => {  
+        if (message.userId === this.messageRecipient.id) {  
+          message.type = "received";  
+          this.messages.push(message);  
+        }  
+      });  
+    });  
+  }  
 
 }
