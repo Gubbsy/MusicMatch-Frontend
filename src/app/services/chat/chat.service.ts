@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from "@angular/core";  
-import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";  
+import { HubConnection, HubConnectionBuilder, HttpTransportType } from "@aspnet/signalr";  
 import IMessage from "src/app/models/chat/IMessage";
   
 @Injectable({
@@ -25,7 +25,10 @@ export class ChatService {
   
   private createConnection() {  
     this.hubConnection = new HubConnectionBuilder()  
-      .withUrl("https://c9ee2643.ngrok.io/api/v1/" + "ChatHub")  
+      .withUrl("https://c9ee2643.ngrok.io/api/v1/ChatHub", {
+        skipNegotiation: true,
+        transport: HttpTransportType.WebSockets
+      })  
       .build();  
   }  
   
@@ -39,7 +42,7 @@ export class ChatService {
       })  
       .catch(err => {  
         console.log("Error while establishing connection, retrying...");  
-        setTimeout(() => { this.startConnection(); }, 5000);  
+        // setTimeout(() => { this.startConnection(); }, 5000);  
       });  
   }  
   
