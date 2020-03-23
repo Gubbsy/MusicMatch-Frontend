@@ -22,8 +22,7 @@ export class MessagingPage implements OnInit {
   newMsg: IMessage;
   newMsgText: string;
 
-  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone) 
-  {
+  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone) {
     this.subscribeToEvents(); 
   }
 
@@ -36,11 +35,11 @@ export class MessagingPage implements OnInit {
   }
 
   sendMessage() {
-
+    console.log("new message text :", this.newMsgText);
     this.newMsg = {
       userId: this.messageRecipient.id,
       date: new Date().getTime().toString(),
-      message: this.newMsgText,
+      msg: this.newMsgText,
       type: "sent"
     };
 
@@ -60,6 +59,7 @@ export class MessagingPage implements OnInit {
           message.type = "received";  
           this.messages.push(message);  
         }  
+        console.log("Received message", message);
       });  
     });  
   }  

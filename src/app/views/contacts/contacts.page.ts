@@ -14,8 +14,8 @@ import { Router } from "@angular/router";
 export class ContactsPage implements OnInit {
 
   private pageTitle = "Contacts";
-  matches: IReturnedUserResponse[];
-  currentlyViewedMatches: IReturnedUserResponse[];
+  matches: IReturnedUserResponse[] = [];
+  currentlyViewedMatches: IReturnedUserResponse[] = [];
   currentRoleView: Roles;
   currentRoleViewSubscription: Subscription;
 

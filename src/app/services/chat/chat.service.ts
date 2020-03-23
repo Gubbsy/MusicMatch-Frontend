@@ -20,12 +20,15 @@ export class ChatService {
   }  
   
   sendMessage(message: IMessage) {  
-    this.hubConnection.invoke("NewMessage", message);  
+    this.hubConnection.invoke("SendMessage", message).catch((err) => {
+      console.error(err.toString());
+    });
+    console.log("Sent message: ", message);  
   }  
   
   private createConnection() {  
     this.hubConnection = new HubConnectionBuilder()  
-      .withUrl("https://c9ee2643.ngrok.io/api/v1/ChatHub", {
+      .withUrl("https://056ffac8.ngrok.io/chatHub", {
         skipNegotiation: true,
         transport: HttpTransportType.WebSockets
       })  
@@ -42,13 +45,13 @@ export class ChatService {
       })  
       .catch(err => {  
         console.log("Error while establishing connection, retrying...");  
-        // setTimeout(() => { this.startConnection(); }, 5000);  
+        setTimeout(() => { this.startConnection(); }, 5000);  
       });  
   }  
   
   private registerOnServerEvents(): void {  
-    this.hubConnection.on("MessageReceived", (data: any) => {  
-      this.messageReceived.emit(data);  
+    this.hubConnection.on("ReceiveMessage", (data: IMessage) => {  
+      this.messageReceived.emit(data); 
     });  
   }  
 }    
