@@ -1,5 +1,5 @@
 export default interface ILoggedInUserResponse {
   userId: string;
-  userName: string;
+  username: string;
   name: string;
 }

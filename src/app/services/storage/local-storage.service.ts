@@ -6,21 +6,24 @@ import ILoggedInUserResponse from "src/app/models/response/account/ILoggedInUser
 })
 export class LocalStorageService {
 
-  constructor() {
+  private userIdKey: string = "UserId";
+  private usernameKey: string = "Username";
+  private nameKey: string = "Name";
 
+  constructor() {
   }
 
-  saveUserCredentials(userId: string, userName: string, name: string) {
-    localStorage.setItem("UserId", userId);
-    localStorage.setItem("UserName", userName);
-    localStorage.setItem("Name", name);
+  saveUserCredentials(userId: string, username: string, name: string) {
+    localStorage.setItem(this.userIdKey, userId);
+    localStorage.setItem(this.usernameKey, username);
+    localStorage.setItem(this.nameKey, name);
   }
 
   retrieveUserCredentials(): ILoggedInUserResponse {
     return {
-      userId: localStorage.getItem("UserId"),
-      userName: localStorage.getItem("UserName"),
-      name: localStorage.getItem("Name")
+      userId: localStorage.getItem(this.userIdKey),
+      username: localStorage.getItem(this.usernameKey),
+      name: localStorage.getItem(this.nameKey)
     };
   }
 }

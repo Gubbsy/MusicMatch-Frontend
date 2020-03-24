@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             this.loginError = e;
           });
         } else {
-          this.localStorageService.saveUserCredentials(result.payload.userId, result.payload.userName, result.payload.name);
+          this.localStorageService.saveUserCredentials(result.payload.userId, result.payload.username, result.payload.name);
           this.router.navigate(["/tabs"]);
         }
       } catch {

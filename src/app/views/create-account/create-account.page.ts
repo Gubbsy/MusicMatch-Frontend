@@ -95,7 +95,7 @@ export class CreateAccountPage implements OnInit {
               this.errorToastService.showMultipleToast(e);
             });
           } else {
-            this.localStorageService.saveUserCredentials(res.payload.userId, res.payload.userName, res.payload.name);
+            this.localStorageService.saveUserCredentials(res.payload.userId, res.payload.username, res.payload.name);
             this.router.navigate(["/tabs"]);
           }
         } catch {
