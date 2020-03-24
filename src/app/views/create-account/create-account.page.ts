@@ -3,6 +3,7 @@ import AccountAPIService from "src/app/services/api/account/account-api.service"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
+import { LocalStorageService } from 'src/app/services/storage/local-storage.service';
 
 @Component({
   selector: "app-create-account",
@@ -11,7 +12,8 @@ import ErrorToastService from "src/app/services/error-handling/error-toast.servi
 })
 export class CreateAccountPage implements OnInit {
 
-  constructor(private router: Router, private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, public errorToastService: ErrorToastService) {}
+  constructor(private router: Router, private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, 
+    private errorToastService: ErrorToastService,  private localStorageService: LocalStorageService) {}
 
   get username() {
     return this.createAccountForm.get("username");
@@ -93,6 +95,7 @@ export class CreateAccountPage implements OnInit {
               this.errorToastService.showMultipleToast(e);
             });
           } else {
+            this.localStorageService.saveUserCredentials(res.payload.userId, res.payload.userName, res.payload.name);
             this.router.navigate(["/tabs"]);
           }
         } catch {

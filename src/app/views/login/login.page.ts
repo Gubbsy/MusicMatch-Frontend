@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import AccountAPIService from 'src/app/services/api/account/account-api.service';
+import AccountAPIService from "src/app/services/api/account/account-api.service";
+import { LocalStorageService } from "src/app/services/storage/local-storage.service";
 
 @Component({
   selector: "app-login",
@@ -9,14 +10,12 @@ import AccountAPIService from 'src/app/services/api/account/account-api.service'
 })
 export class LoginComponent implements OnInit {
 
-
   credential: string;
   password: string;
   loginError: string;
-
   loading: boolean = false;
 
-  constructor(private accountAPIService: AccountAPIService, private router: Router) {
+  constructor(private accountAPIService: AccountAPIService, private router: Router, private localStorageService: LocalStorageService) {
     
   }
 
@@ -41,6 +40,7 @@ export class LoginComponent implements OnInit {
             this.loginError = e;
           });
         } else {
+          this.localStorageService.saveUserCredentials(result.payload.userId, result.payload.userName, result.payload.name);
           this.router.navigate(["/tabs"]);
         }
       } catch {
