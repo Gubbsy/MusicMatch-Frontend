@@ -3,6 +3,8 @@ import { Location } from "@angular/common";
 import { IonContent } from "@ionic/angular";
 import IMessage from "src/app/models/chat/IMessage";
 import { ChatService } from "src/app/services/chat/chat.service";
+import { LocalStorageService } from "src/app/services/storage/local-storage.service";
+import ILoggedInUserResponse from "src/app/models/response/account/ILoggedInUserResponse";
 
 @Component({
   selector: "app-messaging",
@@ -14,6 +16,7 @@ export class MessagingPage implements OnInit {
   @ViewChild(IonContent, {static: true}) content: IonContent;
 
   messageRecipient: IReturnedUserResponse;
+  userCredentials: ILoggedInUserResponse;
 
   messages: IMessage[] = [];
 
@@ -22,8 +25,9 @@ export class MessagingPage implements OnInit {
   newMsg: IMessage;
   newMsgText: string;
 
-  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone) {
+  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone, private localStorageService: LocalStorageService) {
     this.subscribeToEvents(); 
+    this.userCredentials = localStorageService.retrieveUserCredentials();
   }
 
   ngOnInit() {
@@ -36,10 +40,10 @@ export class MessagingPage implements OnInit {
 
   sendMessage() {
     this.newMsg = {
-      userId: this.messageRecipient.id,
+      sender: this.userCredentials.userId,
+      recipient: this.messageRecipient.id,
       date: new Date().getTime(),
       msg: this.newMsgText,
-      type: "sent"
     };
 
     this.chatService.sendMessage(this.newMsg);

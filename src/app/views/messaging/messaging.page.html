@@ -10,7 +10,7 @@
 <ion-content>
   <ion-grid>
     <ion-row *ngFor="let message of messages">
-      <ion-col size="9" *ngIf="message.type === 'received'" class="message received-message">
+      <ion-col size="9" *ngIf="message.recipient === userCredentials.userId" class="message received-message">
         <b>{{ messageRecipient.name }}</b>
         <br>
         <span>{{ message.msg }}</span>
@@ -19,8 +19,8 @@
         </div>
       </ion-col>
 
-      <ion-col size="9" offset="3" *ngIf="message.type === 'sent'" class="message sent-message">
-        <b>{{ message.userId }}</b> 
+      <ion-col size="9" offset="3" *ngIf="message.recipient !== userCredentials.userId" class="message sent-message">
+        <b>{{ userCredentials.name }}</b> 
         <br>
         <span>{{ message.msg }}</span>
         <div class="time" class="ion-text-right"> 

@@ -1,6 +1,6 @@
 export default interface IMessage {
-  userId: string;
-  type: string;
+  sender: string;
+  recipient: string;
   msg: string;
   date: number;
 }
