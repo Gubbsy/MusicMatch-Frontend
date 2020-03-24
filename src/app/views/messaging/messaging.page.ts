@@ -35,10 +35,9 @@ export class MessagingPage implements OnInit {
   }
 
   sendMessage() {
-    console.log("new message text :", this.newMsgText);
     this.newMsg = {
       userId: this.messageRecipient.id,
-      date: new Date().getTime().toString(),
+      date: new Date().getTime(),
       msg: this.newMsgText,
       type: "sent"
     };
@@ -55,10 +54,7 @@ export class MessagingPage implements OnInit {
   private subscribeToEvents(): void {  
     this.chatService.messageReceived.subscribe((message: IMessage) => {  
       this.ngZone.run(() => {  
-        if (message.userId === this.messageRecipient.id) {  
-          message.type = "received";  
-          this.messages.push(message);  
-        }  
+        this.messages.push(message);  
         console.log("Received message", message);
       });  
     });  

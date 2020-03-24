@@ -11,11 +11,11 @@
   <ion-grid>
     <ion-row *ngFor="let message of messages">
       <ion-col size="9" *ngIf="message.type === 'received'" class="message received-message">
-        <b>{{ message.userId }}</b>
+        <b>{{ messageRecipient.name }}</b>
         <br>
         <span>{{ message.msg }}</span>
         <div class="time" class="ion-text-right"> 
-          {{ message.createdAt | date:'short'}}<br>
+          {{ message.date | date:'short'}}<br>
         </div>
       </ion-col>
 
@@ -24,7 +24,7 @@
         <br>
         <span>{{ message.msg }}</span>
         <div class="time" class="ion-text-right"> 
-          {{ message.createdAt | date:'short'}}<br>
+          {{ message.date | date:'short'}}<br>
         </div>
       </ion-col>
 
