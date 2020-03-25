@@ -5,6 +5,8 @@ import IMessage from "src/app/models/chat/IMessage";
 import { ChatService } from "src/app/services/chat/chat.service";
 import { LocalStorageService } from "src/app/services/storage/local-storage.service";
 import ILoggedInUserResponse from "src/app/models/response/account/ILoggedInUserResponse";
+import MessagingAPIService from "src/app/services/api/messaging/messaging-api.service";
+import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 
 @Component({
   selector: "app-messaging",
@@ -20,22 +22,43 @@ export class MessagingPage implements OnInit {
 
   messages: IMessage[] = [];
 
-  currentUser = "Simon";
-
   newMsg: IMessage;
   newMsgText: string;
 
-  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone, private localStorageService: LocalStorageService) {
-    this.subscribeToEvents(); 
-    this.userCredentials = localStorageService.retrieveUserCredentials();
+  constructor(private location: Location, private chatService: ChatService, private ngZone: NgZone, 
+      private localStorageService: LocalStorageService, private messagingAPIService: MessagingAPIService, private errorToastService: ErrorToastService) {
   }
 
   ngOnInit() {
     this.messageRecipient = history.state.data;
+    this.userCredentials = this.localStorageService.retrieveUserCredentials();
+    this.subscribeToEvents(); 
+    this.getPreviousMessages();
   }
 
   routeBack() {
     this.location.back();
+  }
+
+  async getPreviousMessages() {
+    try {
+      const response = await this.messagingAPIService.GetPreviousMessages(this.messageRecipient.id);
+
+      if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
+        response.errors.forEach(e => {
+          this.errorToastService.showMultipleToast(e);
+        });
+      } else {
+         response.payload.forEach(m => {
+          this.messages.push(m);
+        });
+      }
+  
+    } catch {
+      this.errorToastService.showMultipleToast("Oops something went wrong");
+    }
+   
+    this.scrollToBottom();
   }
 
   sendMessage() {
@@ -50,9 +73,8 @@ export class MessagingPage implements OnInit {
     this.messages.push(this.newMsg);
     this.newMsgText = "";
 
-    setTimeout(() => {
-      this.content.scrollToBottom(200);
-    });
+    this.scrollToBottom();
+    
   }
 
   private subscribeToEvents(): void {  
@@ -63,5 +85,11 @@ export class MessagingPage implements OnInit {
       });  
     });  
   }  
+
+  private scrollToBottom() {
+    setTimeout(() => {
+      this.content.scrollToBottom(200);
+    });
+  }
 
 }
