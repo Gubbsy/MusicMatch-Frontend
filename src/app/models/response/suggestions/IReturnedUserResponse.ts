@@ -1,5 +1,6 @@
 interface IReturnedUserResponse {
   id: string;
+  username: string;
   name: string;
   distance: number;
   bio: string;

@@ -14,8 +14,8 @@ import { Router } from "@angular/router";
 export class ContactsPage implements OnInit {
 
   private pageTitle = "Contacts";
-  matches: IReturnedUserResponse[];
-  currentlyViewedMatches: IReturnedUserResponse[];
+  matches: IReturnedUserResponse[] = [];
+  currentlyViewedMatches: IReturnedUserResponse[] = [];
   currentRoleView: Roles;
   currentRoleViewSubscription: Subscription;
 
@@ -60,6 +60,10 @@ export class ContactsPage implements OnInit {
   viewMatchProfile(match: IReturnedUserResponse) {
     setTimeout(() => {
       this.router.navigate(["/account-page"], {state: {data: match}}); } , 200);
-    
+  }
+
+  messageMatch(match: IReturnedUserResponse) {
+    setTimeout(() => {
+      this.router.navigate(["/messaging"], {state: {data: match}}); } , 200);
   }
 }

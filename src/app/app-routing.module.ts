@@ -21,7 +21,12 @@ const routes: Routes = [
   {
     path: "account-page",
     loadChildren: () => import("./views/account-page/account-page.module").then( m => m.AccountPagePageModule)
+  },
+  {
+    path: "messaging",
+    loadChildren: () => import("./views/messaging/messaging.module").then( m => m.MessagingPageModule)
   }
+
 ];
 
 @NgModule({
