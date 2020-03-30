@@ -9,20 +9,25 @@
 
 <ion-content>
   <div *ngIf="!loading">
+
+    <div class="profile-pic">
+      <ion-avatar>
+        <img src= "{{ profilePic }}">
+      </ion-avatar>
+  
+      <div class="btn-set-pic">
+        <ion-button  shape="round" (click)="setProfilePic()"> 
+          <ion-icon name="camera"></ion-icon>
+        </ion-button>
+      </div>
+      
+    </div>
+
     <ion-item-divider color="primary">
       <ion-label>
         About You
       </ion-label>
     </ion-item-divider>
-
-    <ion-avatar>
-      <img src="{{ profilePic }}">
-    </ion-avatar>
-
-    <ion-button shape="round" expand="block" (click)="setProfilePic()"> 
-      Set profile pic
-    </ion-button>
-
 
     <div class="Tags">
       <ion-label color="dark" position="floating" class="TageHeader">Associated Genres</ion-label>

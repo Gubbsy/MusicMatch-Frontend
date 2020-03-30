@@ -49,7 +49,8 @@ export class ProfileDetailsPage implements OnInit {
     encodingType: this.camera.EncodingType.PNG,
     mediaType: this.camera.MediaType.PICTURE,
     targetWidth: 400,
-    targetHeight: 400
+    targetHeight: 400,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   };
 
   profilePic: string = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
@@ -138,5 +139,4 @@ export class ProfileDetailsPage implements OnInit {
       console.error("Error getting pic");
      });
   }
-  
 }
