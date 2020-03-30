@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from "@angular/core";  
 import { HubConnection, HubConnectionBuilder, HttpTransportType } from "@aspnet/signalr";  
 import IMessage from "src/app/models/chat/IMessage";
+import { environment } from "src/environments/environment";
   
 @Injectable({
   providedIn: "root"
@@ -10,10 +11,12 @@ export class ChatService {
   messageReceived = new EventEmitter<IMessage>();  
   connectionEstablished = new EventEmitter<boolean>();  
   private hubConnection: HubConnection;
+  private apiEndPoint: string;
   
   private connectionIsEstablished = false;  
   
   constructor() {  
+    this.apiEndPoint = environment.apiEndPoint;
     this.createConnection();  
     this.registerOnServerEvents();  
     this.startConnection();  
@@ -28,7 +31,7 @@ export class ChatService {
   
   private createConnection() {  
     this.hubConnection = new HubConnectionBuilder()  
-      .withUrl("https://056ffac8.ngrok.io/chatHub", {
+      .withUrl(this.apiEndPoint + "/chatHub", {
         skipNegotiation: true,
         transport: HttpTransportType.WebSockets
       })  
