@@ -54,7 +54,7 @@ export class ProfileDetailsPage implements OnInit {
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   };
 
-  profilePic: string = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
+  profilePic: string = "";
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
@@ -92,6 +92,7 @@ export class ProfileDetailsPage implements OnInit {
     }
   
     this.postCodeFromLatLon();
+    this.profilePic = "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name=" + this.name;
   }
 
   routeBack() {
