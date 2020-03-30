@@ -8,6 +8,7 @@ import IAccountDetailsResponse from "src/app/models/response/account/IAccountDet
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 import VenuesAPIService from "src/app/services/api/venues/venues-api.service";
 import GenresAPIService from "src/app/services/api/genres/genres-api.service";
+import { ActionSheetController } from "@ionic/angular";
 
 @Component({
   selector: "app-profile-details",
@@ -57,7 +58,7 @@ export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera) { }
+    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, private addPicActionSheet: ActionSheetController) { }
 
   async ngOnInit() {
     
@@ -138,5 +139,28 @@ export class ProfileDetailsPage implements OnInit {
      }, (err) => {
       console.error("Error getting pic");
      });
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.addPicActionSheet.create({
+      header: "Update Profile Picture",
+      buttons: [
+      {
+        text: "From Album",
+        icon: "albums",
+        handler: () => {
+          this.camOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
+          this.setProfilePic();
+        }
+      }, {
+        text: "From Camera",
+        icon: "camera",
+        handler: () => {
+          this.camOptions.sourceType = this.camera.PictureSourceType.CAMERA;
+          this.setProfilePic();
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }
