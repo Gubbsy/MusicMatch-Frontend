@@ -41,13 +41,9 @@ export class ProfileDetailsPage implements OnInit {
     maxResults: 5
   };
 
-  profilePic: string = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
-
-  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
-    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera) { }
-
   camOptions: CameraOptions = {
+    allowEdit: true,
+    correctOrientation: true,
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.PNG,
@@ -55,6 +51,12 @@ export class ProfileDetailsPage implements OnInit {
     targetWidth: 400,
     targetHeight: 400
   };
+
+  profilePic: string = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
+
+  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
+    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
+    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera) { }
 
   async ngOnInit() {
     
@@ -114,7 +116,6 @@ export class ProfileDetailsPage implements OnInit {
 
   async saveChanges() {
     this.saving = true;
-
     try {
       const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
 
@@ -126,17 +127,12 @@ export class ProfileDetailsPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
-
     this.saving = false;
-    
   }
 
   setProfilePic() {
     this.camera.getPicture(this.camOptions).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it"s base64 (DATA_URL):
-      let base64Image = "data:image/jpeg;base64," + imageData;
-      
+      const base64Image = "data:image/jpeg;base64," + imageData;
       this.profilePic = base64Image;
      }, (err) => {
       console.error("Error getting pic");
