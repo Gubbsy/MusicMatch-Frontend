@@ -81,7 +81,7 @@ export class MessagingPage implements OnInit {
     this.chatService.messageReceived.subscribe((message: IMessage) => {  
       this.ngZone.run(() => {  
         this.messages.push(message);  
-        console.log("Received message", message);
+        this.scrollToBottom();
       });  
     });  
   }  
@@ -91,5 +91,4 @@ export class MessagingPage implements OnInit {
       this.content.scrollToBottom(200);
     });
   }
-
 }
