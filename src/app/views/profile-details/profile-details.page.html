@@ -15,6 +15,14 @@
       </ion-label>
     </ion-item-divider>
 
+    <ion-avatar>
+      <img src="{{ profilePic }}">
+    </ion-avatar>
+
+    <ion-button shape="round" expand="block" (click)="setProfilePic()"> 
+      Set profile pic
+    </ion-button>
+
 
     <div class="Tags">
       <ion-label color="dark" position="floating" class="TageHeader">Associated Genres</ion-label>

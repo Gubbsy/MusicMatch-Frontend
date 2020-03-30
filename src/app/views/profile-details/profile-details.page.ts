@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import AccountAPIService from "src/app/services/api/account/account-api.service";
 import IAccountDetailsResponse from "src/app/models/response/account/IAccountDetailsResponse";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
@@ -15,32 +16,16 @@ import GenresAPIService from "src/app/services/api/genres/genres-api.service";
 })
 export class ProfileDetailsPage implements OnInit {
 
-  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
-    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService) { }
-
   details: IAccountDetailsResponse;
   loading: boolean = true;
   locationLoading: boolean = false;
   saving: boolean = false;
 
   genres: string[] = [] ;
-  existingGenres: string[] = [
-    "Rock",
-    "Reggea",
-    "Rasta",
-    "Metal",
-    "Punk",
-    "Screamo"
-  ];
+  existingGenres: string[] = [];
 
   venues: string[] = [];
-  existingVenues: string[] = [
-    "The Cavern - Exeter",
-    "New Quay Inn - Teignmouth",
-    "The Pigs Nose",
-    "Blue Anchor",
-  ];
+  existingVenues: string[] = [];
 
   lat: number = 10.123;
   lon: number = 100.123;
@@ -51,9 +36,24 @@ export class ProfileDetailsPage implements OnInit {
 
   postcode: string;
 
-  options: NativeGeocoderOptions = {
+  geoOptions: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
+  };
+
+  profilePic: string = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
+
+  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
+    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
+    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera) { }
+
+  camOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.PNG,
+    mediaType: this.camera.MediaType.PICTURE,
+    targetWidth: 400,
+    targetHeight: 400
   };
 
   async ngOnInit() {
@@ -107,7 +107,7 @@ export class ProfileDetailsPage implements OnInit {
   }
 
   postCodeFromLatLon() {
-    this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.options)
+    this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.geoOptions)
     .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
       .catch((error: any) => console.log(error));
   }
@@ -129,6 +129,18 @@ export class ProfileDetailsPage implements OnInit {
 
     this.saving = false;
     
+  }
+
+  setProfilePic() {
+    this.camera.getPicture(this.camOptions).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it"s base64 (DATA_URL):
+      let base64Image = "data:image/jpeg;base64," + imageData;
+      
+      this.profilePic = base64Image;
+     }, (err) => {
+      console.error("Error getting pic");
+     });
   }
   
 }

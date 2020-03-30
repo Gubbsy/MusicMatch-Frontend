@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
     "@aspnet/signalr": "^1.1.4",
+    "@ionic-native/camera": "^5.23.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/geolocation": "^5.21.6",
     "@ionic-native/native-geocoder": "^5.21.6",
@@ -41,7 +42,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "^0.803.23",
+    "@angular-devkit/build-angular": "^0.803.24",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "~8.1.2",
@@ -81,7 +82,8 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-nativegeocoder": {}
+      "cordova-plugin-nativegeocoder": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "browser",
