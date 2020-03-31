@@ -15,7 +15,10 @@
       [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
     
       <ion-card >
-        <img src="/assets/shapes.svg" alt="" />
+        <ion-avatar>
+          <img *ngIf="card.picture != ''" src= "{{ 'data:image/jpeg;base64,' + card.picture }}">
+          <img *ngIf="card.picture == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ card.name }}">
+        </ion-avatar>
         <ion-card-header>
           <div>  
             <ion-card-title>{{ card.name }} </ion-card-title>
