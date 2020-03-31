@@ -45,7 +45,7 @@ export class ProfileDetailsPage implements OnInit {
   camOptions: CameraOptions = {
     allowEdit: true,
     correctOrientation: true,
-    quality: 100,
+    quality: 0,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.PNG,
     mediaType: this.camera.MediaType.PICTURE,
@@ -142,19 +142,27 @@ export class ProfileDetailsPage implements OnInit {
     const actionSheet = await this.addPicActionSheet.create({
       header: "Update Profile Picture",
       buttons: [
-      {
-        text: "From Album",
-        icon: "albums",
-        handler: () => {
-          this.camOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
-          this.setProfilePic();
-        }
-      }, {
-        text: "From Camera",
-        icon: "camera",
-        handler: () => {
-          this.camOptions.sourceType = this.camera.PictureSourceType.CAMERA;
-          this.setProfilePic();
+        {
+          text: "Remove Picture",
+          role: "destructive",
+          icon: "close",
+          handler: () => {
+            this.profilePic = "";
+          }
+        },
+        {
+          text: "From Album",
+          icon: "albums",
+          handler: () => {
+            this.camOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
+            this.setProfilePic();
+          }
+        }, {
+          text: "From Camera",
+          icon: "camera",
+          handler: () => {
+            this.camOptions.sourceType = this.camera.PictureSourceType.CAMERA;
+            this.setProfilePic();
         }
       }]
     });
