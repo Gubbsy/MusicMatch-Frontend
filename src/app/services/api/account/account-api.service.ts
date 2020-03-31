@@ -43,12 +43,13 @@ export default class AccountAPIService extends APIService {
     return await this.post<IAccountDetailsResponse>("getaccountdetails", null);
   }
 
-  async updateAccountDetails(genres: string[], venues: string[], name: string,
+  async updateAccountDetails(genres: string[], venues: string[], name: string, picture: string,
     bio: string, lookingFor: string, matchRadius: number, lat: number, lon: number): Promise<IAPIResponse<IEmptyResponse>> {
     const payload: IUpdateAccountDetailsRequest = {
       genres: genres,
       venues: venues,
       name: name,
+      picture: picture,
       bio: bio,
       lookingFor: lookingFor,
       matchRadius: matchRadius,

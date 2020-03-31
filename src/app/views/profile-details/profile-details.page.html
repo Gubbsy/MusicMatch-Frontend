@@ -12,7 +12,8 @@
 
     <div class="profile-pic">
       <ion-avatar>
-        <img src= "{{ profilePic }}">
+        <img *ngIf="profilePic != ''" src= "{{ 'data:image/jpeg;base64,' + profilePic }}">
+        <img *ngIf="profilePic == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ name }}">
       </ion-avatar>
   
       <div class="btn-set-pic">

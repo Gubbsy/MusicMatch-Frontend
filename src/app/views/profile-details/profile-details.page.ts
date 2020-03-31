@@ -34,7 +34,7 @@ export class ProfileDetailsPage implements OnInit {
   bio: string;
   lookingFor: string;
   matchRadius: number;
-
+  profilePic: string = "";
   postcode: string;
 
   geoOptions: NativeGeocoderOptions = {
@@ -53,8 +53,6 @@ export class ProfileDetailsPage implements OnInit {
     targetHeight: 400,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   };
-
-  profilePic: string = "";
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
@@ -79,6 +77,7 @@ export class ProfileDetailsPage implements OnInit {
         this.lat = details.payload.lat;
         this.lon = details.payload.lon;
         this.name = details.payload.name;
+        this.profilePic = details.payload.picture;
         this.bio = details.payload.bio;
         this.lookingFor = details.payload.lookingFor;
         this.matchRadius = details.payload.matchRadius;
@@ -90,9 +89,7 @@ export class ProfileDetailsPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
-  
     this.postCodeFromLatLon();
-    this.profilePic = "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name=" + this.name;
   }
 
   routeBack() {
@@ -120,7 +117,7 @@ export class ProfileDetailsPage implements OnInit {
   async saveChanges() {
     this.saving = true;
     try {
-      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
 
       if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
         response.errors.forEach(e => {
@@ -135,8 +132,7 @@ export class ProfileDetailsPage implements OnInit {
 
   setProfilePic() {
     this.camera.getPicture(this.camOptions).then((imageData) => {
-      const base64Image = "data:image/jpeg;base64," + imageData;
-      this.profilePic = base64Image;
+      this.profilePic = imageData;
      }, (err) => {
       console.error("Error getting pic");
      });
