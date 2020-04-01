@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <img src="/assets/shapes.svg" alt="" />
+  <ion-avatar>
+    <img *ngIf="profileDetails.picture != ''" src= "{{ 'data:image/jpeg;base64,' + profileDetails.picture }}">
+    <img *ngIf="profileDetails.picture == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ profileDetails.name }}">
+  </ion-avatar>
 
   <ion-item>
     <ion-label class="ion-text-wrap">

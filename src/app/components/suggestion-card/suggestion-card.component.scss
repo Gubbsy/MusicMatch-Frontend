@@ -95,6 +95,15 @@ ion-card {
   cursor: grab;
 }
 
+ion-avatar {
+  width: 150px;
+  height: auto;
+  border: 3px solid var(--ion-color-primary);
+  margin: 20px auto;
+  position: relative;
+  border-radius: 100%;
+}
+
 .moving.suggestions--card {
   transition: none;
   cursor: -webkit-grabbing;

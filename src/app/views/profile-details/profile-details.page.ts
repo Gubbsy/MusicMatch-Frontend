@@ -2,11 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from "@ionic-native/native-geocoder/ngx";
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import AccountAPIService from "src/app/services/api/account/account-api.service";
 import IAccountDetailsResponse from "src/app/models/response/account/IAccountDetailsResponse";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
 import VenuesAPIService from "src/app/services/api/venues/venues-api.service";
 import GenresAPIService from "src/app/services/api/genres/genres-api.service";
+import { ActionSheetController } from "@ionic/angular";
 
 @Component({
   selector: "app-profile-details",
@@ -15,32 +17,16 @@ import GenresAPIService from "src/app/services/api/genres/genres-api.service";
 })
 export class ProfileDetailsPage implements OnInit {
 
-  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
-    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService) { }
-
   details: IAccountDetailsResponse;
   loading: boolean = true;
   locationLoading: boolean = false;
   saving: boolean = false;
 
   genres: string[] = [] ;
-  existingGenres: string[] = [
-    "Rock",
-    "Reggea",
-    "Rasta",
-    "Metal",
-    "Punk",
-    "Screamo"
-  ];
+  existingGenres: string[] = [];
 
   venues: string[] = [];
-  existingVenues: string[] = [
-    "The Cavern - Exeter",
-    "New Quay Inn - Teignmouth",
-    "The Pigs Nose",
-    "Blue Anchor",
-  ];
+  existingVenues: string[] = [];
 
   lat: number = 10.123;
   lon: number = 100.123;
@@ -48,20 +34,36 @@ export class ProfileDetailsPage implements OnInit {
   bio: string;
   lookingFor: string;
   matchRadius: number;
-
+  profilePic: string = "";
   postcode: string;
 
-  options: NativeGeocoderOptions = {
+  geoOptions: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
   };
+
+  camOptions: CameraOptions = {
+    allowEdit: true,
+    correctOrientation: true,
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    targetWidth: 400,
+    targetHeight: 400,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+  };
+
+  constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
+    NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
+    private genreAPIService: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, private addPicActionSheet: ActionSheetController) { }
 
   async ngOnInit() {
     
     try {
 
-      const details = await this.accountAPIService.getAcountDetails();
-      const existingGenresRes = await this.genreAPIServce.GetAllGenres();
+      const details = await this.accountAPIService.getAccountDetails();
+      const existingGenresRes = await this.genreAPIService.GetAllGenres();
       const existingVenuesRes = await this.venuesAPIService.GetAllGenres();
 
       this.existingGenres = existingGenresRes.payload.genres;
@@ -75,6 +77,7 @@ export class ProfileDetailsPage implements OnInit {
         this.lat = details.payload.lat;
         this.lon = details.payload.lon;
         this.name = details.payload.name;
+        this.profilePic = details.payload.picture;
         this.bio = details.payload.bio;
         this.lookingFor = details.payload.lookingFor;
         this.matchRadius = details.payload.matchRadius;
@@ -86,7 +89,6 @@ export class ProfileDetailsPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
-  
     this.postCodeFromLatLon();
   }
 
@@ -107,16 +109,15 @@ export class ProfileDetailsPage implements OnInit {
   }
 
   postCodeFromLatLon() {
-    this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.options)
+    this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.geoOptions)
     .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
       .catch((error: any) => console.log(error));
   }
 
   async saveChanges() {
     this.saving = true;
-
     try {
-      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+      const response = await this.accountAPIService.updateAccountDetails(this.genres.map(x => this.sanitizeTag(x)), this.venues.map(x => this.sanitizeTag(x)), this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
 
       if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
         response.errors.forEach(e => {
@@ -126,9 +127,52 @@ export class ProfileDetailsPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
-
     this.saving = false;
-    
   }
-  
+
+  setProfilePic() {
+    this.camera.getPicture(this.camOptions).then((imageData) => {
+      this.profilePic = imageData;
+     }, (err) => {
+      console.error("Error getting pic");
+     });
+  }
+
+  private sanitizeTag(tag: any) {
+    if (tag.name != null) {
+      return tag.name;
+    }
+    return tag;
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.addPicActionSheet.create({
+      header: "Update Profile Picture",
+      buttons: [
+        {
+          text: "Remove Picture",
+          role: "destructive",
+          icon: "close",
+          handler: () => {
+            this.profilePic = "";
+          }
+        },
+        {
+          text: "From Album",
+          icon: "albums",
+          handler: () => {
+            this.camOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
+            this.setProfilePic();
+          }
+        }, {
+          text: "From Camera",
+          icon: "camera",
+          handler: () => {
+            this.camOptions.sourceType = this.camera.PictureSourceType.CAMERA;
+            this.setProfilePic();
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
 }

@@ -80,7 +80,7 @@ export class CreateAccountPage implements OnInit {
     if (pswd !== confPswd) {
       this.errorToastService.showMultipleToast("Passwords must match");
     } else {
-      const result = await this.accountAPIService.createAccont(this.accountRole, usrn, eml, pswd);
+      const result = await this.accountAPIService.createAccount(this.accountRole, usrn, eml, pswd);
       
       if ((result.errors !== null || result !== undefined) &&  result.errors.length > 0 ) {
         result.errors.forEach(e => {
