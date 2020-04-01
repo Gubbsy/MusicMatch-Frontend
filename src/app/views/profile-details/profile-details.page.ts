@@ -117,7 +117,7 @@ export class ProfileDetailsPage implements OnInit {
   async saveChanges() {
     this.saving = true;
     try {
-      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+      const response = await this.accountAPIService.updateAccountDetails(this.genres.map(x => this.sanitizeTag(x)), this.venues.map(x => this.sanitizeTag(x)), this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
 
       if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
         response.errors.forEach(e => {
@@ -136,6 +136,13 @@ export class ProfileDetailsPage implements OnInit {
      }, (err) => {
       console.error("Error getting pic");
      });
+  }
+
+  private sanitizeTag(tag: any) {
+    if (tag.name != null) {
+      return tag.name;
+    }
+    return tag;
   }
 
   async presentActionSheet() {
