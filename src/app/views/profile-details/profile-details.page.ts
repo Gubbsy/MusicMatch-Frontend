@@ -45,9 +45,9 @@ export class ProfileDetailsPage implements OnInit {
   camOptions: CameraOptions = {
     allowEdit: true,
     correctOrientation: true,
-    quality: 0,
+    quality: 50,
     destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.PNG,
+    encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     targetWidth: 400,
     targetHeight: 400,
@@ -56,14 +56,14 @@ export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIServce: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, private addPicActionSheet: ActionSheetController) { }
+    private genreAPIService: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, private addPicActionSheet: ActionSheetController) { }
 
   async ngOnInit() {
     
     try {
 
-      const details = await this.accountAPIService.getAcountDetails();
-      const existingGenresRes = await this.genreAPIServce.GetAllGenres();
+      const details = await this.accountAPIService.getAccountDetails();
+      const existingGenresRes = await this.genreAPIService.GetAllGenres();
       const existingVenuesRes = await this.venuesAPIService.GetAllGenres();
 
       this.existingGenres = existingGenresRes.payload.genres;

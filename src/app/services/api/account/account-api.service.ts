@@ -19,7 +19,7 @@ export default class AccountAPIService extends APIService {
     super(http, "account/");
   }
 
-  async createAccont(accountRole: string, username: string, email: string, password: string): Promise<IAPIResponse<IEmptyResponse>> {
+  async createAccount(accountRole: string, username: string, email: string, password: string): Promise<IAPIResponse<IEmptyResponse>> {
       const payload: ICreateAccountRequest = {
         accountRole: accountRole,
         username: username,
@@ -38,7 +38,7 @@ export default class AccountAPIService extends APIService {
     return await this.post<ILoggedInUserResponse>("signin", payload);
   }
 
-  async getAcountDetails(): Promise<IAPIResponse<IAccountDetailsResponse>> {
+  async getAccountDetails(): Promise<IAPIResponse<IAccountDetailsResponse>> {
     
     return await this.post<IAccountDetailsResponse>("getaccountdetails", null);
   }
