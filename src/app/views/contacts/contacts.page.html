@@ -1,9 +1,13 @@
 <app-page-header title="{{pageTitle}}"></app-page-header>
 
 <ion-content fullscreen>
+  <div *ngIf="loading">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+  
   <ion-list>
 
-    <ion-item  *ngFor="let match of currentlyViewedMatches"  class="ion-activatable ">
+    <ion-item *ngFor="let match of currentlyViewedMatches"  class="ion-activatable ">
       <ion-avatar slot="start" (click)="viewMatchProfile(match)">
           <img *ngIf="match.picture != ''" src= "{{ 'data:image/jpeg;base64,' + match.picture }}">
           <img *ngIf="match.picture == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ match.name }}">
@@ -16,6 +20,13 @@
         <ion-icon name="mail"></ion-icon>
       </ion-button>
     </ion-item>
+
+    
+    <div *ngIf="currentlyViewedMatches.length <= 0 && !loading" class="no-contacts-text"> 
+      <ion-label>
+        <p> You have no {{ currentRoleView }} contacts... </p>
+      </ion-label>
+    </div>
 
   </ion-list>
 

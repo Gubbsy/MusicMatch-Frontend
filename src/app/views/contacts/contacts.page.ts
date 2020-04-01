@@ -14,6 +14,7 @@ import { Router } from "@angular/router";
 export class ContactsPage implements OnInit {
 
   private pageTitle = "Contacts";
+  loading: boolean = true;
   matches: IReturnedUserResponse[] = [];
   currentlyViewedMatches: IReturnedUserResponse[] = [];
   currentRoleView: Roles;
@@ -45,6 +46,8 @@ export class ContactsPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
+
+    this.loading = false;
   }
   
   filterContactsByRole() {
