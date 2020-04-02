@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import SuggestionsAPIService from "src/app/services/api/suggestions/suggestions-api.service";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
-import { ToastController } from "@ionic/angular";
+import { ToastController, LoadingController } from "@ionic/angular";
 import { OnInit } from "@angular/core";
 import { Roles } from "src/app/utils/roles.enum.event";
 import { Subscription } from "rxjs";
@@ -15,6 +15,7 @@ import { CurrentRoleViewService } from "src/app/services/observables/current-rol
 export class SuggestionFeedPage implements OnInit {
 
   private pageTitle = "Suggested Matches";
+  private loading: boolean = true;
 
   private currentRoleView: Roles;
   private currentRoleViewSubscription: Subscription;
@@ -22,16 +23,18 @@ export class SuggestionFeedPage implements OnInit {
   cards: IReturnedUserResponse[];
   currentlyViewedCards: IReturnedUserResponse[];
 
-  constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, private currentRoleViewService: CurrentRoleViewService) {
+  constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, 
+    private currentRoleViewService: CurrentRoleViewService, private loadingController: LoadingController) {
     this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.roleFilterUpdated(currentRoleView));
+    this.loadSuggestionCards();
   }
 
   ngOnInit() {
     this.currentRoleView = this.currentRoleViewService.getCurrentRoleView();
-    this.loadSuggestionCards();
   }
 
   async loadSuggestionCards() {
+    this.present();
     try {
       const response = await this.suggestionsService.GetSuggestions();
 
@@ -45,6 +48,8 @@ export class SuggestionFeedPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
+    
+    this.dismiss();
   }
 
   async sendChoice(event: ISuggestionsEvent) { 
@@ -87,6 +92,24 @@ export class SuggestionFeedPage implements OnInit {
     this.currentRoleView = newRoleFilter;
     this.loadSuggestionCards();
     this.filterCardsByRole();
+  }
+
+  async present() {
+    this.loading = true;
+    return await this.loadingController.create({
+      message: "Loading suggestions...",
+    }).then(a => {
+      a.present().then(() => {
+        if (!this.loading) {
+          a.dismiss();
+        }
+      });
+    });
+  }
+
+  async dismiss() {
+    this.loading = false;
+    return await this.loadingController.dismiss();
   }
 
 }

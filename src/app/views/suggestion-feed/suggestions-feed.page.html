@@ -1,5 +1,5 @@
 <app-page-header title="{{pageTitle}}"></app-page-header>
 
 <ion-content>
-    <app-suggestion-card (choiceMade)="sendChoice($event)" [cards]="currentlyViewedCards"></app-suggestion-card>
+    <app-suggestion-card (choiceMade)="sendChoice($event)" [cards]="currentlyViewedCards" [hidden]="!currentlyViewedCards || currentlyViewedCards.length === 0"></app-suggestion-card>
 </ion-content>
