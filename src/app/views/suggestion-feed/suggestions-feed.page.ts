@@ -15,7 +15,6 @@ import { CurrentRoleViewService } from "src/app/services/observables/current-rol
 export class SuggestionFeedPage implements OnInit {
 
   private pageTitle = "Suggested Matches";
-  private loading: boolean = true;
 
   private currentRoleView: Roles;
   private currentRoleViewSubscription: Subscription;
@@ -26,15 +25,15 @@ export class SuggestionFeedPage implements OnInit {
   constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, 
     private currentRoleViewService: CurrentRoleViewService, private loadingController: LoadingController) {
     this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.roleFilterUpdated(currentRoleView));
-    this.loadSuggestionCards();
   }
 
   ngOnInit() {
     this.currentRoleView = this.currentRoleViewService.getCurrentRoleView();
+    this.loadSuggestionCards();
   }
 
   async loadSuggestionCards() {
-    this.present();
+    this.presentLoading();
     try {
       const response = await this.suggestionsService.GetSuggestions();
 
@@ -49,7 +48,7 @@ export class SuggestionFeedPage implements OnInit {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
     
-    this.dismiss();
+    this.dismissLoading();
   }
 
   async sendChoice(event: ISuggestionsEvent) { 
@@ -90,25 +89,18 @@ export class SuggestionFeedPage implements OnInit {
 
   roleFilterUpdated(newRoleFilter: Roles) {
     this.currentRoleView = newRoleFilter;
-    this.loadSuggestionCards();
     this.filterCardsByRole();
   }
 
-  async present() {
-    this.loading = true;
+  async presentLoading() {
     return await this.loadingController.create({
       message: "Loading suggestions...",
     }).then(a => {
-      a.present().then(() => {
-        if (!this.loading) {
-          a.dismiss();
-        }
+      a.present();
       });
-    });
   }
 
-  async dismiss() {
-    this.loading = false;
+  async dismissLoading() {
     return await this.loadingController.dismiss();
   }
 
