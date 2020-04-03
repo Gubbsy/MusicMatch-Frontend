@@ -17,6 +17,7 @@ export class MessagingPage implements OnInit {
 
   @ViewChild(IonContent, {static: true}) content: IonContent;
 
+  loading: boolean = true;
   messageRecipient: IReturnedUserResponse;
   userCredentials: ILoggedInUserResponse;
 
@@ -59,6 +60,7 @@ export class MessagingPage implements OnInit {
     }
    
     this.scrollToBottom();
+    this.loading = false;
   }
 
   sendMessage() {

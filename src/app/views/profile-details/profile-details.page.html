@@ -17,7 +17,7 @@
       </ion-avatar>
   
       <div class="btn-set-pic">
-        <ion-button  shape="round" (click)="presentActionSheet()"> 
+        <ion-button  shape="round" (click)="presentActionSheet()" disabled={{saving}}> 
           <ion-icon name="camera"></ion-icon>
         </ion-button>
       </div>
@@ -33,31 +33,31 @@
     <div class="Tags">
       <ion-label color="dark" position="floating" class="TageHeader">Associated Genres</ion-label>
       <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Click to Add a Genre" [autocomplete]="true" 
-      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" id="no-shadow">
+      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" id="no-shadow" disabled={{saving}}>
       </angular-tag-input>
     </div>
     
     <div class="Tags"> 
       <ion-label color="dark" position="floating" class="TageHeader">Associated Venues</ion-label>
       <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Click to Add Venue" [autocomplete]="true" 
-      [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" id="no-shadow">
+      [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" id="no-shadow" disabled={{saving}}>
       </angular-tag-input>
     </div>
 
 
     <ion-item lines="inset">
       <ion-label color="dark" position="stacked">Name</ion-label>
-      <ion-input  clear-input="true" [(ngModel)]="name" placeholder="Alias"></ion-input>
+      <ion-input  clear-input="true" [(ngModel)]="name" placeholder="Alias" disabled={{saving}}></ion-input>
     </ion-item>
 
     <ion-item lines="inset"> 
       <ion-label color="dark" position="floating">Bio</ion-label>
-      <ion-textarea auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio"></ion-textarea>
+      <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio" disabled={{saving}}></ion-textarea>
     </ion-item>
 
     <ion-item lines="inset">
       <ion-label color="dark" position="floating">Looking for: </ion-label>
-      <ion-textarea auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor"></ion-textarea>
+      <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor" disabled={{saving}}></ion-textarea>
     </ion-item>
 
     <ion-item-divider color="primary">
@@ -67,7 +67,7 @@
     </ion-item-divider>
 
     <ion-item>
-      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius' pin="true">
+      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius' pin="true" disabled={{saving}}>
         <ion-label slot="start">0km</ion-label>
         <ion-label slot="end">100km</ion-label>
       </ion-range>
@@ -75,12 +75,12 @@
 
     <ion-item>
       <div *ngIf="locationLoading === false" id="button-text">
-        <ion-input  clear-input="true" [(ngModel)]="postcode" placeholder="Postcode"></ion-input>
+        <ion-input  clear-input="true" [(ngModel)]="postcode" placeholder="Postcode" disabled={{saving}}  clear-input="true"></ion-input>
       </div>
       <div *ngIf="locationLoading === true" id="button-spinner">
           <ion-spinner></ion-spinner>
       </div>
-      <ion-button color="dark" slot="start" fill="clear" (click)="getCurrentLocation()" size="large">
+      <ion-button color="dark" slot="start" fill="clear" (click)="getCurrentLocation()" size="large" disabled={{saving}}>
         <ion-icon name="pin"></ion-icon>
       </ion-button>
     </ion-item>

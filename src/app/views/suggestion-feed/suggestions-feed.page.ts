@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import SuggestionsAPIService from "src/app/services/api/suggestions/suggestions-api.service";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
-import { ToastController } from "@ionic/angular";
+import { ToastController, LoadingController } from "@ionic/angular";
 import { OnInit } from "@angular/core";
 import { Roles } from "src/app/utils/roles.enum.event";
 import { Subscription } from "rxjs";
@@ -22,7 +22,8 @@ export class SuggestionFeedPage implements OnInit {
   cards: IReturnedUserResponse[];
   currentlyViewedCards: IReturnedUserResponse[];
 
-  constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, private currentRoleViewService: CurrentRoleViewService) {
+  constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, 
+    private currentRoleViewService: CurrentRoleViewService, private loadingController: LoadingController) {
     this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.roleFilterUpdated(currentRoleView));
   }
 
@@ -32,6 +33,7 @@ export class SuggestionFeedPage implements OnInit {
   }
 
   async loadSuggestionCards() {
+    this.presentLoading();
     try {
       const response = await this.suggestionsService.GetSuggestions();
 
@@ -45,6 +47,8 @@ export class SuggestionFeedPage implements OnInit {
     } catch {
       this.errorToastService.showMultipleToast("Oops something went wrong");
     }
+    
+    this.dismissLoading();
   }
 
   async sendChoice(event: ISuggestionsEvent) { 
@@ -85,8 +89,19 @@ export class SuggestionFeedPage implements OnInit {
 
   roleFilterUpdated(newRoleFilter: Roles) {
     this.currentRoleView = newRoleFilter;
-    this.loadSuggestionCards();
     this.filterCardsByRole();
+  }
+
+  async presentLoading() {
+    return await this.loadingController.create({
+      message: "Loading suggestions...",
+    }).then(a => {
+      a.present();
+      });
+  }
+
+  async dismissLoading() {
+    return await this.loadingController.dismiss();
   }
 
 }
