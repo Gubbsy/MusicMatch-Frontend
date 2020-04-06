@@ -8,34 +8,41 @@
   top: 0;
 }
 
-.bio {
-  overflow: hidden;
-  max-height: 108px;
-}
+// .bio {
+//   overflow: hidden;
+//   max-height: 108px;
+// }
 
-ion-card-header {
- display: flex;
- align-items: center;
- justify-content: space-between;
-}
+// ion-card-header {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+// }
 
-ion-badge {
-  margin-right: 2px;
-  margin-bottom: 2px;
-  padding: 3px;
-}
+// ion-badge {
+//   margin-right: 2px;
+//   margin-bottom: 2px;
+//   padding: 3px;
+// }
 
-ion-card-subtitle {
-  font-weight: bold;
-  margin: 3px;
-}
+// ion-card-subtitle {
+//   font-weight: bold;
+//   margin: 3px;
+// }
 
-ion-card-content {
-  font-size: small;
-}
+// ion-card-content {
+//   font-size: small;
+// }
 
-ion-card {
-  height: 450px;
+// ion-card {
+//   height: 450px;
+// }
+
+ion-avatar {
+  width: 45%;
+  height: auto;
+  align-self: flex-end;
+  padding: 10px;
 }
 
 .suggestions--status {
@@ -79,11 +86,10 @@ ion-card {
 }
 
 .suggestions--card {
-  display: inline-block;
+  display: flex;
   width: 80%;
   height: 70%;
   background: #FFFFFF;
-  padding-bottom: 40px;
   margin-top: -60px;
   border-radius: 8px;
   overflow: hidden;
@@ -93,15 +99,6 @@ ion-card {
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
-}
-
-ion-avatar {
-  width: 150px;
-  height: auto;
-  border: 3px solid var(--ion-color-primary);
-  margin: 20px auto;
-  position: relative;
-  border-radius: 100%;
 }
 
 .moving.suggestions--card {
@@ -115,7 +112,6 @@ ion-avatar {
   transition: all 0.3s ease-in-out;
 }
 
-
 .suggestions--buttons {
   padding-bottom: 50px ;
   position: absolute;
@@ -123,7 +119,7 @@ ion-avatar {
   max-width: 40%;
   flex: 0 0 100px;
   text-align: center;
-  bottom: 20px;
+  bottom: 15px;
   left: 0;
   right: 0;
 }
@@ -139,3 +135,56 @@ ion-avatar {
 .suggestions--buttons button:focus {
   outline: 0;
 }
+
+.card-content {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+  ;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;  
+}
+
+.header-subtitles {
+  flex-grow: 1;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 2;
+}
+
+.card-bio {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.card-tags {
+  display: flex;
+  flex-direction: column;
+}
+
+.tags {
+  margin-top: 3px;
+  max-height: 28%;
+  overflow: hidden;
+}
+
+ion-badge {
+  margin-right: 2px;
+  margin-bottom: 2px;
+  padding: 3px;
+}
+
+
+

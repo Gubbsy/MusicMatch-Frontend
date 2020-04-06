@@ -13,12 +13,50 @@
 
     <div #suggestionCard class="suggestions--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
       [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
-    
-      <ion-card >
-        <ion-avatar>
-          <img *ngIf="card.picture != ''" src= "{{ 'data:image/jpeg;base64,' + card.picture }}">
-          <img *ngIf="card.picture == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ card.name }}">
-        </ion-avatar>
+      
+      <div class="card-content">
+        <div class="card-header">
+            
+          <ion-avatar>
+            <img *ngIf="card.picture != ''" src= "{{ 'data:image/jpeg;base64,' + card.picture }}">
+            <img *ngIf="card.picture == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ card.name }}">
+          </ion-avatar>
+          <div class="header-subtitles">
+            <ion-text color="primary">
+              <h1>{{ card.name }}</h1>
+              <h4>{{ card.distance }} km away</h4>
+              <ion-button size="small" shape="round" (click)="viewAccountPage()" >
+                <ion-icon name="information-circle"></ion-icon>
+              </ion-button>
+            </ion-text> 
+          </div>
+        </div>
+        <div class="card-details">
+          <ion-label color="secondary"> About </ion-label>
+          <div class="card-bio">
+            <ion-text>
+              <p> {{card.bio}} </p>
+            </ion-text>
+          </div>
+          <div class="card-tags">
+            <ion-label color="secondary"> Genres </ion-label>
+            <div class="tags">
+              <ion-badge *ngFor="let genre of card.genres" color="primary">{{genre}}</ion-badge>
+            </div>
+            <ion-label color="secondary"> Venues </ion-label>
+            <div class="tags" >
+              <ion-badge *ngFor="let venue of card.venues" color="primary">{{venue}}</ion-badge>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+     
+    </div>
+  </div>
+
+  <!-- <ion-card >
+        
         <ion-card-header>
           <div>  
             <ion-card-title>{{ card.name }} </ion-card-title>
@@ -41,10 +79,7 @@
           <ion-card-subtitle>Genres</ion-card-subtitle>
           <ion-badge *ngFor="let genre of card.genres" color="primary">{{genre}}</ion-badge>
         </ion-card-content>
-       
-      </ion-card>
-    </div>
-  </div>
+      </ion-card> -->
 
   <div class="suggestions--buttons">
     <ion-fab (click)="userClickedButton($event, true)" horizontal="end">
