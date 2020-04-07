@@ -25,8 +25,9 @@
             <ion-text color="primary">
               <h1>{{ card.name }}</h1>
               <h4>{{ card.distance }} km away</h4>
-              <ion-button size="small" shape="round" (click)="viewAccountPage()" >
+              <ion-button size="small" shape="round" (click)="viewAccountPage()">
                 <ion-icon name="information-circle"></ion-icon>
+                View Profile
               </ion-button>
             </ion-text> 
           </div>
@@ -54,32 +55,6 @@
      
     </div>
   </div>
-
-  <!-- <ion-card >
-        
-        <ion-card-header>
-          <div>  
-            <ion-card-title>{{ card.name }} </ion-card-title>
-          <ion-card-subtitle>{{ card.distance }} Km Away</ion-card-subtitle>
-          </div>
-          <div>
-            <ion-button size="small" shape="round" (click)="viewAccountPage()" >
-              <ion-icon name="information-circle"></ion-icon>
-            </ion-button>
-          </div>
-          
-        </ion-card-header>
-        <ion-card-content>
-          <ion-text>
-            <p class="bio"> {{card.bio}} </p>
-          </ion-text>
-          <br>
-          <ion-card-subtitle>Venues</ion-card-subtitle>
-          <ion-badge *ngFor="let venue of card.venues" color="primary">{{venue}}</ion-badge>
-          <ion-card-subtitle>Genres</ion-card-subtitle>
-          <ion-badge *ngFor="let genre of card.genres" color="primary">{{genre}}</ion-badge>
-        </ion-card-content>
-      </ion-card> -->
 
   <div class="suggestions--buttons">
     <ion-fab (click)="userClickedButton($event, true)" horizontal="end">

@@ -8,36 +8,6 @@
   top: 0;
 }
 
-// .bio {
-//   overflow: hidden;
-//   max-height: 108px;
-// }
-
-// ion-card-header {
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-// }
-
-// ion-badge {
-//   margin-right: 2px;
-//   margin-bottom: 2px;
-//   padding: 3px;
-// }
-
-// ion-card-subtitle {
-//   font-weight: bold;
-//   margin: 3px;
-// }
-
-// ion-card-content {
-//   font-size: small;
-// }
-
-// ion-card {
-//   height: 450px;
-// }
-
 ion-avatar {
   width: 45%;
   height: auto;
@@ -96,6 +66,7 @@ ion-avatar {
   position: absolute;
   will-change: transform;
   transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 20px #000;
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
@@ -156,14 +127,13 @@ ion-avatar {
 .card-details {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   flex-grow: 2;
 }
 
 .card-bio {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: var(--line-clamp);
   -webkit-box-orient: vertical;
   margin-bottom: 10px;
   margin-top: -10px;
@@ -176,7 +146,8 @@ ion-avatar {
 
 .tags {
   margin-top: 3px;
-  max-height: 28%;
+  margin-bottom: 2px;
+  max-height: var(--tags-max-height);
   overflow: hidden;
 }
 
@@ -186,5 +157,16 @@ ion-badge {
   padding: 3px;
 }
 
+ion-fab-button {
+  width: var(--fab-radius);
+  height: var(--fab-radius);
+}
 
+p {
+  font-size: var(-font-size);
+}
+
+ion-label{ 
+  margin-bottom: 5px;
+}
 
