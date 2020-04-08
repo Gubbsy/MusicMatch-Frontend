@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Profile</ion-title>
-    <ion-button color="dark" slot="start" fill="clear" (click)="routeBack()" size="large">
+    <ion-button color="light" slot="start" fill="clear" (click)="routeBack()" size="large">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -17,28 +17,28 @@
       </ion-avatar>
   
       <div class="btn-set-pic">
-        <ion-button  shape="round" (click)="presentActionSheet()" disabled={{saving}}> 
+        <ion-button  shape="round" (click)="presentActionSheet()" disabled={{saving}} color="tertiary"> 
           <ion-icon name="camera"></ion-icon>
         </ion-button>
       </div>
       
     </div>
 
-    <ion-item-divider color="primary">
+    <ion-item-divider color="secondary">
       <ion-label>
         About You
       </ion-label>
     </ion-item-divider>
 
     <div class="Tags">
-      <ion-label color="dark" position="floating" class="TageHeader">Associated Genres</ion-label>
+      <ion-label color="secondary" position="floating" class="TagHeader">Associated Genres</ion-label>
       <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Click to Add a Genre" [autocomplete]="true" 
       [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" id="no-shadow" disabled={{saving}}>
       </angular-tag-input>
     </div>
     
     <div class="Tags"> 
-      <ion-label color="dark" position="floating" class="TageHeader">Associated Venues</ion-label>
+      <ion-label color="secondary" position="floating" class="TagHeader">Associated Venues</ion-label>
       <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Click to Add Venue" [autocomplete]="true" 
       [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" id="no-shadow" disabled={{saving}}>
       </angular-tag-input>
@@ -46,21 +46,21 @@
 
 
     <ion-item lines="inset">
-      <ion-label color="dark" position="stacked">Name</ion-label>
+      <ion-label color="secondary" position="stacked">Name</ion-label>
       <ion-input  clear-input="true" [(ngModel)]="name" placeholder="Alias" disabled={{saving}}></ion-input>
     </ion-item>
 
     <ion-item lines="inset"> 
-      <ion-label color="dark" position="floating">Bio</ion-label>
+      <ion-label color="secondary" position="floating">Bio</ion-label>
       <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio" disabled={{saving}}></ion-textarea>
     </ion-item>
 
     <ion-item lines="inset">
-      <ion-label color="dark" position="floating">Looking for: </ion-label>
+      <ion-label color="secondary" position="floating">Looking for: </ion-label>
       <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor" disabled={{saving}}></ion-textarea>
     </ion-item>
 
-    <ion-item-divider color="primary">
+    <ion-item-divider color="secondary">
       <ion-label>
         Match Location and Radius
       </ion-label>
@@ -85,7 +85,7 @@
       </ion-button>
     </ion-item>
 
-    <ion-button shape="round" expand="block" (click)="saveChanges()">
+    <ion-button shape="round" expand="block" (click)="saveChanges()" color="tertiary">
       <div *ngIf="saving === false" id="button-text">
         Save Changes  
         <ion-icon name="brush"></ion-icon>
