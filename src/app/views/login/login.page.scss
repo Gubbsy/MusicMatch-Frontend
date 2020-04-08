@@ -47,3 +47,7 @@ ion-button {
 ion-note {
   font-size: 13pt;
 }
+
+.item-has-focus ion-label.ion-color {  
+  color: var(--ion-color-secondary) !important;
+}
