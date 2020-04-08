@@ -2,7 +2,7 @@
 
 <ion-content fullscreen>
   <div *ngIf="loading">
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    <ion-progress-bar type="indeterminate" color="secondarys"></ion-progress-bar>
   </div>
   
   <ion-list>
@@ -16,7 +16,7 @@
         <h1>{{ match.name }}</h1>
       </ion-label>
       <ion-ripple-effect></ion-ripple-effect>
-      <ion-button slot="end" size="medium" (click)="messageMatch(match)">
+      <ion-button slot="end" size="medium" (click)="messageMatch(match)" color="tertiary">
         <ion-icon name="mail"></ion-icon>
       </ion-button>
     </ion-item>
