@@ -23,7 +23,9 @@
           </ion-avatar>
           <div class="header-subtitles">
             <ion-text color="primary">
-              <h1>{{ card.name }}</h1>
+              <div class="name">
+                <h1>{{ card.name }}</h1>
+              </div>
               <h4>{{ card.distance }} km away</h4>
               <ion-button size="small" shape="round" (click)="viewAccountPage()">
                 <ion-icon name="information-circle"></ion-icon>

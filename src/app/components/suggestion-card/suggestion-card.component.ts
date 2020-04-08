@@ -32,7 +32,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
     if (height <= 660) {
       this.fabRadius = "50px";
       this.tagsMaxHeight = "21px";
-      this.fontSize = "0.8em";
+      this.fontSize = "0.78em";
       this.lineClamp = "4";
     }
 
