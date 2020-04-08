@@ -22,12 +22,12 @@
             <img *ngIf="card.picture == ''" src= "https://eu.ui-avatars.com/api/?background=000&color=FFF&bold=true&size=128&name={{ card.name }}">
           </ion-avatar>
           <div class="header-subtitles">
-            <ion-text color="primary">
+            <ion-text>
               <div class="name">
                 <h1>{{ card.name }}</h1>
               </div>
               <h4>{{ card.distance }} km away</h4>
-              <ion-button size="small" shape="round" (click)="viewAccountPage()">
+              <ion-button size="small" shape="round" (click)="viewAccountPage()" color="tertiary">
                 <ion-icon name="information-circle"></ion-icon>
                 View Profile
               </ion-button>
@@ -44,11 +44,11 @@
           <div class="card-tags">
             <ion-label color="secondary"> Genres </ion-label>
             <div class="tags">
-              <ion-badge *ngFor="let genre of card.genres" color="primary">{{genre}}</ion-badge>
+              <ion-badge *ngFor="let genre of card.genres" color="secondary">{{genre}}</ion-badge>
             </div>
             <ion-label color="secondary"> Venues </ion-label>
-            <div class="tags" >
-              <ion-badge *ngFor="let venue of card.venues" color="primary">{{venue}}</ion-badge>
+            <div class="tags">
+              <ion-badge *ngFor="let venue of card.venues" color="secondary">{{venue}}</ion-badge>
             </div>
           </div>
         

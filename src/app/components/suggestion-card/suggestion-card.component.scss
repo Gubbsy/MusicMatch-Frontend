@@ -17,9 +17,9 @@ ion-avatar {
 } 
 
 ion-avatar  img {
-  border: 3px solid var(--ion-color-primary);
+  border: 3px solid var(--ion-color-secondary);
+  border-radius: 100%;
 }
-
 
 
 .suggestions--status {
@@ -64,9 +64,9 @@ ion-avatar  img {
 
 .suggestions--card {
   display: flex;
-  width: 80%;
+  width: 85%;
   height: 70%;
-  background: #FFFFFF;
+  background: var(--ion-color-primary);
   margin-top: -60px;
   border-radius: 8px;
   overflow: hidden;
@@ -175,6 +175,11 @@ ion-badge {
 ion-fab-button {
   width: var(--fab-radius);
   height: var(--fab-radius);
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 2px;
+  border-color: var(--ion-color-tertiary);
+  box-shadow: 0 0 20px #000;
 }
 
 p {
