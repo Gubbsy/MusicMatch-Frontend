@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Create Account</ion-title>
+    <ion-button color="light" slot="start" fill="clear" (click)="routeBack()" size="large">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   
-  <ion-item-divider color="primary">
+  <ion-item-divider color="secondary">
     <ion-label>
       Select Account Type
     </ion-label>
@@ -24,7 +27,7 @@
     </ion-item>
   </ion-radio-group>
 
-  <ion-item-divider color="primary">
+  <ion-item-divider color="secondary">
     <ion-label>
       Enter Account Details
     </ion-label>
@@ -33,7 +36,7 @@
   <form [formGroup]="createAccountForm" (ngSubmit)="submit()">
     <ion-list>
       <ion-item lines="inset">
-        <ion-label color="dark" position="floating">Username</ion-label>
+        <ion-label color="secondary" position="floating">Username</ion-label>
         <ion-input inputmode="text" type="text" formControlName="username"></ion-input>
       </ion-item>
       <div *ngFor="let error of errorMessages.username">
@@ -42,7 +45,7 @@
         </ng-container>
       </div>
       <ion-item lines="inset">
-        <ion-label color="dark" position="floating">Email</ion-label>
+        <ion-label color="secondary" position="floating">Email</ion-label>
         <ion-input inputmode="email" formControlName="email"></ion-input>
       </ion-item>
       <div *ngFor="let error of errorMessages.email">
@@ -51,7 +54,7 @@
         </ng-container>
       </div>
       <ion-item lines="inset">
-        <ion-label color="dark" position="floating">Password</ion-label>
+        <ion-label color="secondary" position="floating">Password</ion-label>
         <ion-input inputmode="password" type="password" formControlName="password"></ion-input>
       </ion-item>
       <div *ngFor="let error of errorMessages.password">
@@ -60,7 +63,7 @@
         </ng-container>
       </div>
       <ion-item lines="inset">
-        <ion-label color="dark" position="floating">Confrim Password</ion-label>
+        <ion-label color="secondary" position="floating">Confrim Password</ion-label>
         <ion-input inputmode="password" type="password" formControlName="confirmedPassword"></ion-input>
       </ion-item>
       <div *ngFor="let error of errorMessages.confirmedPassword">
@@ -69,7 +72,7 @@
         </ng-container>
       </div>
     </ion-list>
-    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block"> 
+    <ion-button [disabled]="!createAccountForm.valid" type="submit" expand="block" color="tertiary" shape="round"> 
       <div *ngIf="loading === false" id="button-text">
         Submit
         <ion-icon slot="end" name="create"></ion-icon>

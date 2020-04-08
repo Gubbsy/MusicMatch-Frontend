@@ -2,3 +2,11 @@
   color: var(--ion-color-danger);
   padding-left: 15px;
 }
+
+ion-radio {
+  --color-checked: var(--ion-color-secondary);
+}
+
+.item-has-focus ion-label.ion-color {  
+  color: var(--ion-color-secondary) !important;
+}

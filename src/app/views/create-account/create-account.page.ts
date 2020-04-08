@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import AccountAPIService from "src/app/services/api/account/account-api.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import ErrorToastService from "src/app/services/error-handling/error-toast.service";
-import { LocalStorageService } from 'src/app/services/storage/local-storage.service';
+import { LocalStorageService } from "src/app/services/storage/local-storage.service";
 
 @Component({
   selector: "app-create-account",
@@ -13,7 +14,7 @@ import { LocalStorageService } from 'src/app/services/storage/local-storage.serv
 export class CreateAccountPage implements OnInit {
 
   constructor(private router: Router, private accountAPIService: AccountAPIService, private formBuilder: FormBuilder, 
-    private errorToastService: ErrorToastService,  private localStorageService: LocalStorageService) {}
+    private errorToastService: ErrorToastService,  private localStorageService: LocalStorageService, private location: Location) {}
 
   get username() {
     return this.createAccountForm.get("username");
@@ -108,4 +109,7 @@ export class CreateAccountPage implements OnInit {
     this.loading = false;
   }
 
+  routeBack() {
+    this.location.back();
+  }
 }
