@@ -28,13 +28,11 @@ export class PageHeaderComponent implements OnInit {
     this.router.navigate(["profile-details"]);
   }
 
-  toggleViewingRole() {
-    if (this.currentRoleView === Roles.ARTIST) {
-      this.currentRoleViewService.setRoleView(Roles.EVENTS_MANAGER);
-      this.currentRoleView = Roles.EVENTS_MANAGER;
-    } else {
+  toggleViewingRole(role: string) {
+    if (role === Roles.ARTIST) {
       this.currentRoleViewService.setRoleView(Roles.ARTIST);
-      this.currentRoleView = Roles.ARTIST;
+    } else if(role === Roles.EVENTS_MANAGER){
+      this.currentRoleViewService.setRoleView(Roles.EVENTS_MANAGER);
     }
   }
 
