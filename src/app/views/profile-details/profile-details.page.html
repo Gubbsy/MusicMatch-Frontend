@@ -32,18 +32,13 @@
 
     <div class="Tags">
       <ion-label color="secondary" position="floating" class="TagHeader">Associated Genres</ion-label>
-      <angular-tag-input [(ngModel)] = "genres" [addOnBlur] = "false" placeholder = "Click to Add a Genre" [autocomplete]="true" 
-      [autocompleteItems]="existingGenres" [autocompleteMustMatch]="false" lines="inset" id="no-shadow" disabled={{saving}}>
-      </angular-tag-input>
+      <tag-input [(ngModel)]="genres" [theme]="'foundation-theme'" [placeholder]="' + Add Genre'" [modelAsStrings]="true"></tag-input>
     </div>
     
     <div class="Tags"> 
       <ion-label color="secondary" position="floating" class="TagHeader">Associated Venues</ion-label>
-      <angular-tag-input [(ngModel)] = "venues" [addOnBlur] = "false" placeholder = "Click to Add Venue" [autocomplete]="true" 
-      [autocompleteItems]="existingVenues" [autocompleteMustMatch]="false" id="no-shadow" disabled={{saving}}>
-      </angular-tag-input>
+      <tag-input [(ngModel)]="venues" [theme]="'foundation-theme'" [placeholder]="'Add Venue'" [modelAsStrings]="true"></tag-input>
     </div>
-
 
     <ion-item lines="inset">
       <ion-label color="secondary" position="stacked">Name</ion-label>
