@@ -22,7 +22,27 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  constructor(private renderer: Renderer2, private router: Router) { }
+  fabRadius: string = "60px";
+  fontSize: string = "1.1em";
+  tagsMaxHeight: string = "45px";
+  lineClamp: string = "5";
+
+  constructor(private renderer: Renderer2, private router: Router) { 
+    const height = window.innerHeight;
+    if (height <= 660) {
+      this.fabRadius = "50px";
+      this.tagsMaxHeight = "21px";
+      this.fontSize = "0.9em";
+      this.lineClamp = "3";
+    }
+
+    document.body.style.setProperty("--fab-radius", this.fabRadius);
+    document.body.style.setProperty("--tags-max-height", this.tagsMaxHeight);
+    document.body.style.setProperty("--font-size", this.fontSize);
+    document.body.style.setProperty("--line-clamp", this.lineClamp);
+
+    console.log(height);
+  }
 
   userClickedButton(event, heart) {
     event.preventDefault();

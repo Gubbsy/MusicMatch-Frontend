@@ -21,6 +21,7 @@ export class SuggestionFeedPage implements OnInit {
 
   cards: IReturnedUserResponse[];
   currentlyViewedCards: IReturnedUserResponse[];
+  loading: boolean = true;
 
   constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, 
     private currentRoleViewService: CurrentRoleViewService, private loadingController: LoadingController) {
@@ -33,6 +34,7 @@ export class SuggestionFeedPage implements OnInit {
   }
 
   async loadSuggestionCards() {
+    this.loading = true;
     this.presentLoading();
     try {
       const response = await this.suggestionsService.GetSuggestions();
@@ -95,12 +97,17 @@ export class SuggestionFeedPage implements OnInit {
   async presentLoading() {
     return await this.loadingController.create({
       message: "Loading suggestions...",
+      cssClass: "custom-loader"
     }).then(a => {
-      a.present();
+      a.present().then(() => {
+        if (!this.loading) {
+          a.dismiss();
+        }});
       });
   }
 
   async dismissLoading() {
+    this.loading = false;
     return await this.loadingController.dismiss();
   }
 

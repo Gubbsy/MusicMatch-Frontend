@@ -6,13 +6,13 @@
 }
 
 .received-message {
-  background-color: var(--ion-color-tertiary);
+  background-color: var(--ion-color-secondary);
   color: #fff;
 }
 
 .sent-message {
-  background-color: var(--ion-color-secondary);
-  color: #fff;
+  background-color: var(--ion-color-primary);
+  color: var(--ion-color-secondary);
 }
 
 .time {
@@ -23,7 +23,6 @@
 
 .message-input {
  width: 100%;
- border: 1px solid var(--ion-color-medium);
  border-radius: 10px;
  background-color: #fff;
  resize: none;
