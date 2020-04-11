@@ -32,12 +32,16 @@
 
     <div class="Tags">
       <ion-label color="secondary" position="floating" class="TagHeader">Associated Genres</ion-label>
-      <tag-input [(ngModel)]="genres" [theme]="'foundation-theme'" [placeholder]="' + Add Genre'" [modelAsStrings]="true"></tag-input>
+      <tag-input [(ngModel)]="genres" [theme]="'foundation-theme'" [placeholder]="' + Add Genre'" [modelAsStrings]="true">
+        <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="existingGenres"></tag-input-dropdown>
+      </tag-input>
     </div>
     
     <div class="Tags"> 
       <ion-label color="secondary" position="floating" class="TagHeader">Associated Venues</ion-label>
-      <tag-input [(ngModel)]="venues" [theme]="'foundation-theme'" [placeholder]="'Add Venue'" [modelAsStrings]="true"></tag-input>
+      <tag-input [(ngModel)]="venues" [theme]="'foundation-theme'" [placeholder]="' + Add Venue'" [modelAsStrings]="true">
+        <tag-input-dropdown [style.background]="'grey'" class="drop-down" [showDropdownIfEmpty]="false" [autocompleteItems]="existingVenues"></tag-input-dropdown>
+      </tag-input>
     </div>
 
     <ion-item lines="inset">

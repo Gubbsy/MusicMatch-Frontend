@@ -104,3 +104,11 @@ $foundation-tag-input-theme: (color: #000,
 ::ng-deep tag-input .ng2-tag-input.foundation-theme input::placeholder {
   color: whitesmoke;
 }
+
+.drop-down {
+  background-color: var(--ion-color-primary);
+}
+
+ng2-dropdown {
+  background-color: var(--ion-color-primary);
+}
