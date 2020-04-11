@@ -97,6 +97,7 @@ export class SuggestionFeedPage implements OnInit {
   async presentLoading() {
     return await this.loadingController.create({
       message: "Loading suggestions...",
+      cssClass: "custom-loader"
     }).then(a => {
       a.present().then(() => {
         if (!this.loading) {
