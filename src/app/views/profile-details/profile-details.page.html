@@ -74,12 +74,12 @@
 
     <ion-item>
       <div *ngIf="locationLoading === false" id="button-text">
-        <ion-input  clear-input="true" [(ngModel)]="postcode" placeholder="Postcode" disabled={{saving}}  clear-input="true"></ion-input>
+        <ion-input [(ngModel)]="postcode" placeholder="Postcode" disabled={{saving}}  clear-input="true"></ion-input>
       </div>
       <div *ngIf="locationLoading === true" id="button-spinner">
           <ion-spinner></ion-spinner>
       </div>
-      <ion-button color="dark" slot="start" fill="clear" (click)="getCurrentLocation()" size="large" disabled={{saving}}>
+      <ion-button color="tertiary" slot="start" (click)="getCurrentLocation()" size="medium" disabled={{saving}}>
         <ion-icon name="pin"></ion-icon>
       </ion-button>
     </ion-item>
