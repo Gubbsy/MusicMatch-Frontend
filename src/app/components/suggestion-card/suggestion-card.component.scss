@@ -40,11 +40,13 @@ ion-avatar  img {
 }
 
 .like ion-icon {
-  color: green;
+  color: var(--ion-color-secondary);
+  font-size: 100px;
+  border-radius: 50px;
 }
 
 .dismiss ion-icon {
-  color: red;
+  color: var(--ion-color-tertiary);
   font-size: 100px;
   border-radius: 50px;
 }
