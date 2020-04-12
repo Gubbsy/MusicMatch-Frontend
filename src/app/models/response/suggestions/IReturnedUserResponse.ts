@@ -1,6 +1,8 @@
-interface ISuggestionsResponse {
+interface IReturnedUserResponse {
   id: string;
+  username: string;
   name: string;
+  picture: string;
   distance: number;
   bio: string;
   lookingFor: string;

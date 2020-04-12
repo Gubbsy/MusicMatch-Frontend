@@ -9,13 +9,12 @@ import { Router } from "@angular/router";
 })
 export class AccountPagePage implements OnInit {
 
-  profileDetails: ISuggestionsResponse;
+  profileDetails: IReturnedUserResponse;
 
   constructor(private location: Location, private router: Router) { }
 
   ngOnInit() {
     this.profileDetails = history.state.data;
-    console.log("Sent data: ", this.profileDetails);
   }
 
   routeBack() {

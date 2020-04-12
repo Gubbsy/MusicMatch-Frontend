@@ -1,14 +1,16 @@
 <app-page-header title="{{pageTitle}}"></app-page-header>
 
-<ion-segment (ionChange)="toggleViewingRole()" value="artist">
-  <ion-segment-button value="artist">
-    <ion-label>Artists</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="events manager">
-    <ion-label>Events <br> Managers</ion-label>
-  </ion-segment-button>
-</ion-segment>
-
 <ion-content>
-    <app-suggestion-card (choiceMade)="sendChoice($event)" [cards]="currentlyViewedCards"></app-suggestion-card>
+  <app-suggestion-card (choiceMade)="sendChoice($event)" [cards]="currentlyViewedCards" *ngIf="currentlyViewedCards || currentlyViewedCards.length > 0"></app-suggestion-card>
+
+  <div *ngIf="!currentlyViewedCards || currentlyViewedCards.length == 0" class="no-suggestions">
+    
+    <ion-text color="medium">
+      <h5>You've run out of {{ currentRoleView }} suggestions -- <br> try adjusting your location or match radius.</h5>
+    </ion-text>
+
+    <ion-button color="tertiary" size="small" shape="round" (click)="loadSuggestionCards()"> Search for more...</ion-button>
+
+  </div>
+
 </ion-content>

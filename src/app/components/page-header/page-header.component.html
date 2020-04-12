@@ -5,4 +5,14 @@
       <ion-icon name="person"></ion-icon>
     </ion-button>
   </ion-toolbar>
+
+  <ion-segment color="tertiary"value="{{ currentRoleView }}">
+    <ion-segment-button (click)="toggleViewingRole('artist')" value="artist">
+      <ion-label>Artists</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="toggleViewingRole('events manager')" value="events manager">
+      <ion-label>Events <br> Managers</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
 </ion-header>

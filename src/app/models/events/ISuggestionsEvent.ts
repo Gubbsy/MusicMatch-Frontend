@@ -1,4 +1,4 @@
 interface ISuggestionsEvent {
   liked: boolean;
-  card: ISuggestionsResponse;
+  card: IReturnedUserResponse;
 }
