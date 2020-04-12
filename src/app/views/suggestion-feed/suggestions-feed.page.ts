@@ -19,8 +19,8 @@ export class SuggestionFeedPage implements OnInit {
   private currentRoleView: Roles;
   private currentRoleViewSubscription: Subscription;
 
-  cards: IReturnedUserResponse[];
-  currentlyViewedCards: IReturnedUserResponse[];
+  cards: IReturnedUserResponse[] = [];
+  currentlyViewedCards: IReturnedUserResponse[] = [];
   loading: boolean = true;
 
   constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, 
