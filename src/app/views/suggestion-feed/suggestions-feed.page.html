@@ -6,7 +6,7 @@
   <div *ngIf="!currentlyViewedCards || currentlyViewedCards.length == 0" class="no-suggestions">
     
     <ion-text color="medium">
-      <h5>You've run out of {{ currentRoleView }} suggestions -- <br> try expanding your match radius.</h5>
+      <h5>You've run out of {{ currentRoleView }} suggestions -- <br> try adjusting your location or match radius.</h5>
     </ion-text>
 
     <ion-button color="tertiary" size="small" shape="round" (click)="loadSuggestionCards()"> Search for more...</ion-button>
