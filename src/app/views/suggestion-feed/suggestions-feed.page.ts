@@ -6,6 +6,7 @@ import { OnInit } from "@angular/core";
 import { Roles } from "src/app/utils/roles.enum.event";
 import { Subscription } from "rxjs";
 import { CurrentRoleViewService } from "src/app/services/observables/current-role-view.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-suggestions",
@@ -24,7 +25,7 @@ export class SuggestionFeedPage implements OnInit {
   loading: boolean = true;
 
   constructor(private suggestionsService: SuggestionsAPIService,  private errorToastService: ErrorToastService, private toastController: ToastController, 
-    private currentRoleViewService: CurrentRoleViewService, private loadingController: LoadingController) {
+    private currentRoleViewService: CurrentRoleViewService, private loadingController: LoadingController, private router: Router) {
     this.currentRoleViewSubscription = this.currentRoleViewService.getSubject().subscribe( currentRoleView => this.roleFilterUpdated(currentRoleView));
   }
 
@@ -64,7 +65,7 @@ export class SuggestionFeedPage implements OnInit {
       }
 
       if (response.payload.didMatch) {
-        this.displayMatch(event.card.name);
+        this.displayMatch(event.card);
       }
 
       this.cards = this.cards.filter(x => x.id !== event.card.id);
@@ -74,13 +75,22 @@ export class SuggestionFeedPage implements OnInit {
     }
   }
 
-  async displayMatch(matchName: string) {
+  async displayMatch(match: IReturnedUserResponse) {
     const matchToast = await this.toastController.create({
-      message: "You've matched with " + matchName + "!",
-      duration: 4000,
-      showCloseButton: true,
+      duration: 6000,
       position: "middle",
-      color: "tertiary"
+      color: "tertiary",
+      showCloseButton: true,
+      header: "New match: " + match.name + "!",
+      buttons: [
+        {
+          side: "end",
+          text: "View Profile",
+          handler: () => {
+            this.router.navigate(["/account-page"], {state: {data: match}});
+          }
+        }
+      ]
     });
     matchToast.present();
   }
