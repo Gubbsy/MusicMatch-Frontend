@@ -39,7 +39,7 @@ export class ProfileDetailsPage implements OnInit {
 
   geoOptions: NativeGeocoderOptions = {
     useLocale: true,
-    maxResults: 5
+    maxResults: 1
   };
 
   camOptions: CameraOptions = {
@@ -114,8 +114,26 @@ export class ProfileDetailsPage implements OnInit {
       .catch((error: any) => console.log(error));
   }
 
+  async latLonFromPostCode() {
+
+    return new Promise((resolve, reject) => {
+      this.nativeGeocoder.forwardGeocode(this.postcode, { useLocale: true, maxResults: 1 })
+        .then((details: NativeGeocoderResult[]) => {
+          this.lat = Number(details[0].latitude);
+          this.lon = Number(details[0].longitude);
+          console.log(details);
+          resolve(); 
+        })
+        .catch((error: any) => { 
+          console.log(error);
+          reject();
+        });
+    });
+  }
+
   async saveChanges() {
     this.saving = true;
+    await this.latLonFromPostCode();
     try {
       const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
 
