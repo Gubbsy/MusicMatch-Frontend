@@ -31,6 +31,9 @@ export class SuggestionFeedPage implements OnInit {
 
   ngOnInit() {
     this.currentRoleView = this.currentRoleViewService.getCurrentRoleView();
+  }
+
+  ionViewWillEnter() {
     this.loadSuggestionCards();
   }
 
