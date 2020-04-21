@@ -92,10 +92,6 @@ export class ProfileDetailsPage implements OnInit {
     this.postCodeFromLatLon();
   }
 
-  routeBack() {
-    this.location.back();
-  }
-
   getCurrentLocation() {
     this.locationLoading = true;
     this.geolocation.getCurrentPosition().then((resp) => {
