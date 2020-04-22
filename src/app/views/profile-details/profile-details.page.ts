@@ -39,7 +39,8 @@ export class ProfileDetailsPage implements OnInit {
 
   geoOptions: NativeGeocoderOptions = {
     useLocale: true,
-    maxResults: 1
+    maxResults: 1,
+    defaultLocale: "gb_GB"
   };
 
   camOptions: CameraOptions = {
@@ -109,7 +110,7 @@ export class ProfileDetailsPage implements OnInit {
   postCodeFromLatLon() {
     this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.geoOptions)
     .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
-      .catch((error: any) => console.log(error));
+      .catch((error: any) => this.errorToastService.showMultipleToast(error));
   }
 
   async latLonFromPostCode() {
@@ -123,7 +124,8 @@ export class ProfileDetailsPage implements OnInit {
           resolve(); 
         })
         .catch((error: any) => { 
-          console.log(error);
+          this.errorToastService.showMultipleToast("Postcode is not valid");
+          this.saving = false;
           reject();
         });
     });
