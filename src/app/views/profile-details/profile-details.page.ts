@@ -94,13 +94,15 @@ export class ProfileDetailsPage implements OnInit {
 
   getCurrentLocation() {
     this.locationLoading = true;
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition({timeout: 20000}).then((resp) => {
       this.lat = resp.coords.latitude;
       this.lon = resp.coords.longitude;
       this.postCodeFromLatLon();
       this.locationLoading = false;
      }).catch((error) => {
        console.log("Error getting location", error);
+       this.errorToastService.showMultipleToast("Unable to retrieve location. Please manually enter your postcode.");
+       this.locationLoading = false;
      });
   }
 
