@@ -116,7 +116,7 @@ export class ProfileDetailsPage implements OnInit {
   async latLonFromPostCode() {
 
     return new Promise((resolve, reject) => {
-      this.nativeGeocoder.forwardGeocode(this.postcode, { useLocale: true, maxResults: 1 })
+      this.nativeGeocoder.forwardGeocode(this.postcode.trim(), { useLocale: true, maxResults: 1 })
         .then((details: NativeGeocoderResult[]) => {
           this.lat = Number(details[0].latitude);
           this.lon = Number(details[0].longitude);
@@ -135,7 +135,7 @@ export class ProfileDetailsPage implements OnInit {
     this.saving = true;
     await this.latLonFromPostCode();
     try {
-      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name.trim(), this.profilePic, this.bio.trim(), this.lookingFor.trim(), this.matchRadius, this.lat, this.lon);
 
       if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
         response.errors.forEach(e => {
