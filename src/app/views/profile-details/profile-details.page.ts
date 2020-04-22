@@ -39,7 +39,8 @@ export class ProfileDetailsPage implements OnInit {
 
   geoOptions: NativeGeocoderOptions = {
     useLocale: true,
-    maxResults: 1
+    maxResults: 1,
+    defaultLocale: "gb_GB"
   };
 
   camOptions: CameraOptions = {
@@ -94,26 +95,28 @@ export class ProfileDetailsPage implements OnInit {
 
   getCurrentLocation() {
     this.locationLoading = true;
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition({timeout: 20000}).then((resp) => {
       this.lat = resp.coords.latitude;
       this.lon = resp.coords.longitude;
       this.postCodeFromLatLon();
       this.locationLoading = false;
      }).catch((error) => {
        console.log("Error getting location", error);
+       this.errorToastService.showMultipleToast("Unable to retrieve location. Please manually enter your postcode.");
+       this.locationLoading = false;
      });
   }
 
   postCodeFromLatLon() {
     this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.geoOptions)
     .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
-      .catch((error: any) => console.log(error));
+      .catch((error: any) => this.errorToastService.showMultipleToast(error));
   }
 
   async latLonFromPostCode() {
 
     return new Promise((resolve, reject) => {
-      this.nativeGeocoder.forwardGeocode(this.postcode, { useLocale: true, maxResults: 1 })
+      this.nativeGeocoder.forwardGeocode(this.postcode.trim(), { useLocale: true, maxResults: 1 })
         .then((details: NativeGeocoderResult[]) => {
           this.lat = Number(details[0].latitude);
           this.lon = Number(details[0].longitude);
@@ -121,7 +124,8 @@ export class ProfileDetailsPage implements OnInit {
           resolve(); 
         })
         .catch((error: any) => { 
-          console.log(error);
+          this.errorToastService.showMultipleToast("Postcode is not valid");
+          this.saving = false;
           reject();
         });
     });
@@ -131,7 +135,7 @@ export class ProfileDetailsPage implements OnInit {
     this.saving = true;
     await this.latLonFromPostCode();
     try {
-      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name.trim(), this.profilePic, this.bio.trim(), this.lookingFor.trim(), this.matchRadius, this.lat, this.lon);
 
       if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
         response.errors.forEach(e => {
