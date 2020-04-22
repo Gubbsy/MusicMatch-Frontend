@@ -120,7 +120,6 @@ export class ProfileDetailsPage implements OnInit {
         .then((details: NativeGeocoderResult[]) => {
           this.lat = Number(details[0].latitude);
           this.lon = Number(details[0].longitude);
-          console.log(details);
           resolve(); 
         })
         .catch((error: any) => { 
@@ -152,7 +151,7 @@ export class ProfileDetailsPage implements OnInit {
     this.camera.getPicture(this.camOptions).then((imageData) => {
       this.profilePic = imageData;
      }, (err) => {
-      console.error("Error getting pic");
+      this.errorToastService.showMultipleToast("Could not set profile picture, please try again later");
      });
   }
 
