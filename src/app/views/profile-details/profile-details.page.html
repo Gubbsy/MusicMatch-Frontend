@@ -78,7 +78,7 @@
     </ion-item-divider>
 
     <ion-item>
-      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius' pin="true" disabled={{saving}}>
+      <ion-range min="0" max="100" step="10" color="tertiary" snaps="true" [(ngModel)]='matchRadius' pin="true" disabled={{saving}}>
         <ion-label slot="start">0km</ion-label>
         <ion-label slot="end">100km</ion-label>
       </ion-range>
@@ -114,48 +114,57 @@
 <div *ngIf="loading">
 
   <ion-list>
-    <ion-list-header>
-      <ion-label>
-        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
-      </ion-label>
-    </ion-list-header>
     <ion-item>
-    
+      <ion-avatar style="width: 150px; height: 150px; border: none">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+    </ion-item>
+
+    <ion-item>
       <ion-label>
         <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
         </h3>
+        <br>
         <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>  
         </p>
         <p>
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 80%; height: 15px"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>  
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 70%; height: 15px"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>
+          <ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text>  
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 75%; height: 15px"></ion-skeleton-text>
         </p>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
         <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
         </h3>
+        <br>
         <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>  
         </p>
         <p>
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 80%; height: 15px"></ion-skeleton-text>
         </p>
       </ion-label>
     </ion-item>
