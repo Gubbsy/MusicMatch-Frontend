@@ -168,9 +168,9 @@ ion-avatar  img {
 }
 
 ion-badge {
-  margin-right: 2px;
+  margin-right: 3px;
   margin-bottom: 2px;
-  padding: 3px;
+  padding: 4px;
 }
 
 ion-fab-button {
@@ -179,7 +179,7 @@ ion-fab-button {
   border-style: solid;
   border-radius: 50%;
   border-width: 3px;
-  border-color: var(--ion-color-tertiary);
+  border-color: var(--ion-color-tertiary-tint);
   box-shadow: 0 0 20px var(--ion-color-medium);
 }
 
