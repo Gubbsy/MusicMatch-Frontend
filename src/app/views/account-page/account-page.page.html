@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Viewing Profile</ion-title>
-    <ion-button color="dark" slot="start" fill="clear" (click)="routeBack()" size="large" routerDirection="back">
+    <ion-button color="primary" slot="start" fill="clear" (click)="routeBack()" size="large" routerDirection="back">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -15,7 +15,7 @@
 
   <ion-item>
     <ion-label class="ion-text-wrap">
-      <ion-text color="secondary">
+      <ion-text color="Primary">
         <h1>{{ profileDetails.name}}</h1>
         <h2>{{ profileDetails.distance}} Km Away</h2>
       </ion-text>
@@ -24,7 +24,7 @@
         <p>{{ profileDetails.bio}}</p>
       </ion-text>
       <br>
-      <ion-text color="secondary">
+      <ion-text color="Primary">
         <h2>Looking For: </h2>
       </ion-text>
       <ion-text>
@@ -35,19 +35,19 @@
 
   <ion-item>
     <ion-label class="ion-text-wrap">
-      <ion-text color="secondary">
+      <ion-text color="Primary">
         <h2>Genres: </h2>
       </ion-text>
-      <ion-badge *ngFor="let genre of profileDetails.genres" color="tertiary">{{genre}}</ion-badge>
+      <ion-badge *ngFor="let genre of profileDetails.genres" color="secondary">{{genre}}</ion-badge>
     </ion-label>
   </ion-item>
 
   <ion-item>
     <ion-label class="ion-text-wrap">
-      <ion-text color="secondary">
+      <ion-text color="Primary">
         <h2>Venues: </h2>
       </ion-text>
-      <ion-badge *ngFor="let venue of profileDetails.venues" color="tertiary">{{venue}}</ion-badge>
+      <ion-badge *ngFor="let venue of profileDetails.venues" color="secondary">{{venue}}</ion-badge>
     </ion-label>
   </ion-item>
   
