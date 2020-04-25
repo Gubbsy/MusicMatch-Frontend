@@ -24,7 +24,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit {
 
   fabRadius: string = "60px";
   fontSize: string = "1.1em";
-  tagsMaxHeight: string = "45px";
+  tagsMaxHeight: string = "48px";
   lineClamp: string = "5";
 
   constructor(private renderer: Renderer2, private router: Router) { 

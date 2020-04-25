@@ -22,12 +22,13 @@
 }
 
 .message-input {
- width: 100%;
- border-radius: 10px;
- background-color: #fff;
- resize: none;
- padding-left: 10px;
- padding-right: 10px;
+  outline: none;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #fff;
+  resize: none;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .message-button {

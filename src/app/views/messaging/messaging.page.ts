@@ -64,6 +64,7 @@ export class MessagingPage implements OnInit {
   }
 
   sendMessage() {
+    this.newMsgText = this.newMsgText.trim();
     this.newMsg = {
       sender: this.userCredentials.userId,
       recipient: this.messageRecipient.id,
@@ -76,7 +77,6 @@ export class MessagingPage implements OnInit {
     this.newMsgText = "";
 
     this.scrollToBottom();
-    
   }
 
   private subscribeToEvents(): void {  

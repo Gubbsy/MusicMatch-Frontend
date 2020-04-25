@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Messaging {{ messageRecipient.name }} </ion-title>
+    <ion-title>{{ messageRecipient.name }} </ion-title>
     <ion-button color="primary" slot="start" fill="clear" (click)="routeBack()" size="large" routerDirection="back">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button>
@@ -40,10 +40,10 @@
   <ion-toolbar color="light">
     <ion-row  class="ion-align-items-center ion-no-padding">
       <ion-col size="10">
-        <textarea autosize maxRows="3" [(ngModel)]="newMsgText" class="message-input"></textarea>
+        <textarea autosize maxRows="3" [(ngModel)]="newMsgText" class="message-input" maxlength="250" placeholder="Enter your message..."></textarea>
       </ion-col>
       <ion-col size="2">
-        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="message-btn" (click)="sendMessage()">
+        <ion-button expand="block" fill="clear" color="tertiary" [disabled]="newMsg === ''" class="message-btn" (click)="sendMessage()">
           <ion-icon name="send" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-col>
