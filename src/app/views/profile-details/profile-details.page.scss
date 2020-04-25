@@ -51,7 +51,7 @@ tag-input input {
 
 @import "~node_modules/ngx-chips/core/styles/core/_core.scss";
 
-$foundation-primary: #E01A4F;
+$foundation-primary: #0039cb;
 $foundation-primary-dark: darken($foundation-primary, 10%);
 
 // this is the container's theme
@@ -98,11 +98,11 @@ $foundation-tag-input-theme: (color: #000,
 // apply theme to the input
 ::ng-deep tag-input .ng2-tag-input.foundation-theme input {
   background: none;
-  color: white;
+  color: black;
 }
 
 ::ng-deep tag-input .ng2-tag-input.foundation-theme input::placeholder {
-  color: whitesmoke;
+  color: black;
 }
 
 .drop-down {

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Profile</ion-title>
-    <ion-button color="light" slot="start" fill="clear" size="large">
+    <ion-button slot="start" fill="clear" size="large">
       <ion-back-button defaultHref="tabs/suggestion-feed"></ion-back-button>
     </ion-button>
   </ion-toolbar>
@@ -24,11 +24,13 @@
       
     </div>
 
-    <ion-item-divider color="secondary">
+    <ion-item-divider color="primary">
       <ion-label>
         About You
       </ion-label>
     </ion-item-divider>
+
+    <br>
 
     <div class="Tags">
       <ion-label color="secondary" position="floating" class="TagHeader">Associated Genres</ion-label>
@@ -36,6 +38,8 @@
         <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="existingGenres"></tag-input-dropdown>
       </tag-input>
     </div>
+
+    <br>
     
     <div class="Tags"> 
       <ion-label color="secondary" position="floating" class="TagHeader">Associated Venues</ion-label>
@@ -44,29 +48,37 @@
       </tag-input>
     </div>
 
+    <br>
+
     <ion-item lines="inset">
       <ion-label color="secondary" position="stacked">Name</ion-label>
       <ion-input  clear-input="true" [(ngModel)]="name" placeholder="Alias" disabled={{saving}}></ion-input>
     </ion-item>
+
+    <br>
 
     <ion-item lines="inset"> 
       <ion-label color="secondary" position="floating">Bio</ion-label>
       <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio" disabled={{saving}}></ion-textarea>
     </ion-item>
 
+    <br>
+
     <ion-item lines="inset">
       <ion-label color="secondary" position="floating">Looking for: </ion-label>
       <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor" disabled={{saving}}></ion-textarea>
     </ion-item>
 
-    <ion-item-divider color="secondary">
+    <br>
+
+    <ion-item-divider color="primary">
       <ion-label>
         Match Location and Radius
       </ion-label>
     </ion-item-divider>
 
     <ion-item>
-      <ion-range min="0" max="100" step="10" color="secondary" snaps="true" [(ngModel)]='matchRadius' pin="true" disabled={{saving}}>
+      <ion-range min="0" max="100" step="10" color="tertiary" snaps="true" [(ngModel)]='matchRadius' pin="true" disabled={{saving}}>
         <ion-label slot="start">0km</ion-label>
         <ion-label slot="end">100km</ion-label>
       </ion-range>
@@ -82,8 +94,10 @@
       <ion-button color="tertiary" slot="start" (click)="getCurrentLocation()" size="medium" disabled={{saving}}>
         <ion-icon name="pin"></ion-icon>
       </ion-button>
+      <br>
     </ion-item>
 
+    <br>
     <ion-button shape="round" expand="block" (click)="saveChanges()" color="tertiary">
       <div *ngIf="saving === false" id="button-text">
         Save Changes  
@@ -93,54 +107,64 @@
           <ion-spinner></ion-spinner>
       </div>
     </ion-button>
+    <br>
   </div>
 
   <!-- Skeleton screen -->
 <div *ngIf="loading">
 
   <ion-list>
-    <ion-list-header>
-      <ion-label>
-        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
-      </ion-label>
-    </ion-list-header>
     <ion-item>
-    
+      <ion-avatar style="width: 150px; height: 150px; border: none">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+    </ion-item>
+
+    <ion-item>
       <ion-label>
         <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
         </h3>
+        <br>
         <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>  
         </p>
         <p>
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 80%; height: 15px"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>  
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 70%; height: 15px"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>
+          <ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text>  
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 75%; height: 15px"></ion-skeleton-text>
         </p>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
         <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
         </h3>
+        <br>
         <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>  
         </p>
         <p>
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 80%; height: 15px"></ion-skeleton-text>
         </p>
       </ion-label>
     </ion-item>
