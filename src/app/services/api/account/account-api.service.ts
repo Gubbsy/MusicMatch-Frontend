@@ -61,7 +61,7 @@ export default class AccountAPIService extends APIService {
       lon: lon,
     };
 
-    return await this.post<IAccountDetailsResponse>("updateaccountdetails", payload);
+    return await this.post<IEmptyResponse>("updateaccountdetails", payload);
   }
 
 }
