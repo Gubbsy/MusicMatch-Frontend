@@ -9,6 +9,7 @@ import ErrorToastService from "src/app/services/error-handling/error-toast.servi
 import VenuesAPIService from "src/app/services/api/venues/venues-api.service";
 import GenresAPIService from "src/app/services/api/genres/genres-api.service";
 import { ActionSheetController } from "@ionic/angular";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile-details",
@@ -57,7 +58,8 @@ export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIService: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, private addPicActionSheet: ActionSheetController) { }
+      private genreAPIService: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, 
+        private addPicActionSheet: ActionSheetController, private router: Router) { }
 
   async ngOnInit() {
     
@@ -65,7 +67,7 @@ export class ProfileDetailsPage implements OnInit {
 
       const details = await this.accountAPIService.getAccountDetails();
       const existingGenresRes = await this.genreAPIService.GetAllGenres();
-      const existingVenuesRes = await this.venuesAPIService.GetAllGenres();
+      const existingVenuesRes = await this.venuesAPIService.GetAllVenues();
 
       this.existingGenres = existingGenresRes.payload.genres;
       this.existingVenues = existingVenuesRes.payload.venues;
@@ -153,6 +155,11 @@ export class ProfileDetailsPage implements OnInit {
      }, (err) => {
       this.errorToastService.showMultipleToast("Could not set profile picture, please try again later");
      });
+  }
+
+  async signOut() {
+    await this.accountAPIService.signOut();
+    this.router.navigate(["/"]);
   }
 
   async presentActionSheet() {
