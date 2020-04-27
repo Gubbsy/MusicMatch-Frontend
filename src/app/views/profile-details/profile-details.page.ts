@@ -110,7 +110,7 @@ export class ProfileDetailsPage implements OnInit {
   postCodeFromLatLon() {
     this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.geoOptions)
     .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
-      .catch((error: any) => this.errorToastService.showMultipleToast(error));
+      .catch((error: any) => this.errorToastService.showMultipleToast("Please set your location"));
   }
 
   async latLonFromPostCode() {
@@ -123,7 +123,7 @@ export class ProfileDetailsPage implements OnInit {
           resolve(); 
         })
         .catch((error: any) => { 
-          this.errorToastService.showMultipleToast("Postcode is not valid");
+          this.errorToastService.showMultipleToast("Postcode entered is not valid");
           this.saving = false;
           reject();
         });
