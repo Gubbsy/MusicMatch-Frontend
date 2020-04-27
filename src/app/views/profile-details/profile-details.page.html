@@ -51,21 +51,21 @@
 
     <ion-item lines="inset">
       <ion-label color="secondary" position="stacked">Name</ion-label>
-      <ion-input  clear-input="true" [(ngModel)]="name" placeholder="Alias" disabled={{saving}}></ion-input>
+      <ion-input  clear-input="true" [(ngModel)]="name" placeholder="Alias" disabled={{saving}} maxlength="35"></ion-input>
     </ion-item>
 
     <br>
 
     <ion-item lines="inset"> 
       <ion-label color="secondary" position="floating">Bio</ion-label>
-      <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio" disabled={{saving}}></ion-textarea>
+      <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us a bit about you..." type="text" [(ngModel)]="bio" disabled={{saving}} maxlength="400"></ion-textarea>
     </ion-item>
 
     <br>
 
     <ion-item lines="inset">
       <ion-label color="secondary" position="floating">Looking for: </ion-label>
-      <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor" disabled={{saving}}></ion-textarea>
+      <ion-textarea  clear-input="true" auto-grow="true" placeholder="Tell us what your looking for..." type="text" [(ngModel)]="lookingFor" disabled={{saving}} maxlength="400"></ion-textarea>
     </ion-item>
 
     <br>
