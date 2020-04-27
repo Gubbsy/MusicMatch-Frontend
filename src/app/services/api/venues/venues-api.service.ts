@@ -12,7 +12,7 @@ export default class VenuesAPIService extends APIService {
     super(http, "venues/");
   }
 
-  async GetAllGenres(): Promise<IAPIResponse<IVenuesResponse>> {
+  async GetAllVenues(): Promise<IAPIResponse<IVenuesResponse>> {
 
     return await this.post<IVenuesResponse>("getallvenues", null);
   }
