@@ -67,14 +67,14 @@ ion-avatar  img {
   display: flex;
   width: 85%;
   height: 70%;
-  background: var(--ion-color-primary);
+  background: var(--ion-color-primary-contrast);
   margin-top: -60px;
   border-radius: 8px;
   overflow: hidden;
   position: absolute;
   will-change: transform;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 20px #000;
+  box-shadow: 0 0 20px var(--ion-color-medium);
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
@@ -168,9 +168,9 @@ ion-avatar  img {
 }
 
 ion-badge {
-  margin-right: 2px;
+  margin-right: 3px;
   margin-bottom: 2px;
-  padding: 3px;
+  padding: 4px;
 }
 
 ion-fab-button {
@@ -178,9 +178,9 @@ ion-fab-button {
   height: var(--fab-radius);
   border-style: solid;
   border-radius: 50%;
-  border-width: 2px;
-  border-color: var(--ion-color-tertiary);
-  box-shadow: 0 0 20px #000;
+  border-width: 3px;
+  border-color: var(--ion-color-tertiary-tint);
+  box-shadow: 0 0 20px var(--ion-color-medium);
 }
 
 p {

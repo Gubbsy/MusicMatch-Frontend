@@ -38,6 +38,10 @@ export default class AccountAPIService extends APIService {
     return await this.post<ILoggedInUserResponse>("signin", payload);
   }
 
+  async signOut(): Promise<IAPIResponse<IEmptyResponse>> {
+    return await this.post<IEmptyResponse>("signout", null);
+  }
+
   async getAccountDetails(): Promise<IAPIResponse<IAccountDetailsResponse>> {
     
     return await this.post<IAccountDetailsResponse>("getaccountdetails", null);
@@ -57,7 +61,7 @@ export default class AccountAPIService extends APIService {
       lon: lon,
     };
 
-    return await this.post<IAccountDetailsResponse>("updateaccountdetails", payload);
+    return await this.post<IEmptyResponse>("updateaccountdetails", payload);
   }
 
 }

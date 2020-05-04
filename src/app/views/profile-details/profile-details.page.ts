@@ -9,6 +9,7 @@ import ErrorToastService from "src/app/services/error-handling/error-toast.servi
 import VenuesAPIService from "src/app/services/api/venues/venues-api.service";
 import GenresAPIService from "src/app/services/api/genres/genres-api.service";
 import { ActionSheetController } from "@ionic/angular";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile-details",
@@ -39,7 +40,8 @@ export class ProfileDetailsPage implements OnInit {
 
   geoOptions: NativeGeocoderOptions = {
     useLocale: true,
-    maxResults: 1
+    maxResults: 1,
+    defaultLocale: "gb_GB"
   };
 
   camOptions: CameraOptions = {
@@ -56,7 +58,8 @@ export class ProfileDetailsPage implements OnInit {
 
   constructor(private location: Location, private geolocation: Geolocation, private nativeGeocoder: 
     NativeGeocoder, private accountAPIService: AccountAPIService, private errorToastService: ErrorToastService,
-    private genreAPIService: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, private addPicActionSheet: ActionSheetController) { }
+      private genreAPIService: GenresAPIService, private venuesAPIService: VenuesAPIService, private camera: Camera, 
+        private addPicActionSheet: ActionSheetController, private router: Router) { }
 
   async ngOnInit() {
     
@@ -64,7 +67,7 @@ export class ProfileDetailsPage implements OnInit {
 
       const details = await this.accountAPIService.getAccountDetails();
       const existingGenresRes = await this.genreAPIService.GetAllGenres();
-      const existingVenuesRes = await this.venuesAPIService.GetAllGenres();
+      const existingVenuesRes = await this.venuesAPIService.GetAllVenues();
 
       this.existingGenres = existingGenresRes.payload.genres;
       this.existingVenues = existingVenuesRes.payload.venues;
@@ -92,40 +95,38 @@ export class ProfileDetailsPage implements OnInit {
     this.postCodeFromLatLon();
   }
 
-  routeBack() {
-    this.location.back();
-  }
-
   getCurrentLocation() {
     this.locationLoading = true;
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition({timeout: 20000}).then((resp) => {
       this.lat = resp.coords.latitude;
       this.lon = resp.coords.longitude;
       this.postCodeFromLatLon();
       this.locationLoading = false;
      }).catch((error) => {
        console.log("Error getting location", error);
+       this.errorToastService.showMultipleToast("Unable to retrieve location. Please manually enter your postcode.");
+       this.locationLoading = false;
      });
   }
 
   postCodeFromLatLon() {
     this.nativeGeocoder.reverseGeocode(this.lat, this.lon, this.geoOptions)
     .then((details: NativeGeocoderResult[]) => this.postcode = details[0].postalCode)
-      .catch((error: any) => console.log(error));
+      .catch((error: any) => this.errorToastService.showMultipleToast("Please set your location"));
   }
 
   async latLonFromPostCode() {
 
     return new Promise((resolve, reject) => {
-      this.nativeGeocoder.forwardGeocode(this.postcode, { useLocale: true, maxResults: 1 })
+      this.nativeGeocoder.forwardGeocode(this.postcode.trim(), { useLocale: true, maxResults: 1 })
         .then((details: NativeGeocoderResult[]) => {
           this.lat = Number(details[0].latitude);
           this.lon = Number(details[0].longitude);
-          console.log(details);
           resolve(); 
         })
         .catch((error: any) => { 
-          console.log(error);
+          this.errorToastService.showMultipleToast("Postcode entered is not valid");
+          this.saving = false;
           reject();
         });
     });
@@ -135,7 +136,7 @@ export class ProfileDetailsPage implements OnInit {
     this.saving = true;
     await this.latLonFromPostCode();
     try {
-      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name, this.profilePic, this.bio, this.lookingFor, this.matchRadius, this.lat, this.lon);
+      const response = await this.accountAPIService.updateAccountDetails(this.genres, this.venues, this.name.trim(), this.profilePic, this.bio.trim(), this.lookingFor.trim(), this.matchRadius, this.lat, this.lon);
 
       if ((response.errors !== null || response !== undefined) &&  response.errors.length > 0 ) {
         response.errors.forEach(e => {
@@ -152,8 +153,13 @@ export class ProfileDetailsPage implements OnInit {
     this.camera.getPicture(this.camOptions).then((imageData) => {
       this.profilePic = imageData;
      }, (err) => {
-      console.error("Error getting pic");
+      this.errorToastService.showMultipleToast("Could not set profile picture, please try again later");
      });
+  }
+
+  async signOut() {
+    await this.accountAPIService.signOut();
+    this.router.navigate(["/"]);
   }
 
   async presentActionSheet() {

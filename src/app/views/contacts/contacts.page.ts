@@ -27,6 +27,9 @@ export class ContactsPage implements OnInit {
 
   ngOnInit(): void {
     this.currentRoleView = this.currentRoleViewService.getCurrentRoleView();
+  }
+
+  ionViewWillEnter() {
     this.loadMatches();
   }
 
